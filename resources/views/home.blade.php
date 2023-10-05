@@ -37,8 +37,7 @@
     <header id="header" class="fixed-top d-flex align-items-center">
         <div class="d-flex align-items-center container">
 
-            <h1 class="logo me-auto"><a href="{{ url('index.html') }}">Service Tools</a></h1>
-            <!-- <a href="{{ url('index.html') }}" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+            <h1 class="logo me-auto"><a href="{{ route('home') }}">Service Tools</a></h1>
 
             <nav id="navbar" class="navbar">
                 <ul>
@@ -46,7 +45,7 @@
                     <li><a href="#about">About</a></li>
                     <li><a href="#portfolio">Portfolio</a></li>
                     <li><a href="#contact">Contact</a></li>
-                    <li><a href="" class="getstarted">Login</a></li>
+                    <li><a href="{{ route('login') }}" class="getstarted">Login</a></li>
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav><!-- .navbar -->

@@ -21,12 +21,7 @@
 
     <!-- Vendor CSS Files -->
     <link href="{{ asset('user/assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('user/assets/vendor/bootstrap-icons/bootstrap-icons.min.css') }}" rel="stylesheet">
     <link href="{{ asset('user/assets/vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('admin/assets/vendor/quill/quill.snow.css') }}" rel="stylesheet">
-    <link href="{{ asset('admin/assets/vendor/quill/quill.bubble.css') }}" rel="stylesheet">
-    <link href="{{ asset('user/assets/vendor/remixicon/remixicon.css') }}" rel="stylesheet">
-    <link href="{{ asset('admin/assets/vendor/simple-datatables/style.css') }}" rel="stylesheet">
 
     <!-- Template Main CSS File -->
     <link href="{{ asset('admin/assets/css/style.css') }}" rel="stylesheet">
@@ -41,13 +36,14 @@
                 class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
                 <div class="container">
                     <div class="row justify-content-center">
-                        <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
+                        <div
+                            class="col-xl-4 col-lg-6 col-md-8 d-flex flex-column align-items-center justify-content-center">
 
                             <div class="d-flex justify-content-center py-4">
-                                <a href="{{ url('index.html') }}" class="logo d-flex align-items-center w-auto">
+                                <a href="{{ route('home') }}" class="logo d-flex align-items-center w-auto">
                                     <span class="d-none d-lg-block">Service Tools</span>
                                 </a>
-                            </div><!-- End Logo -->
+                            </div>
 
                             <div class="card mb-3">
 
@@ -57,16 +53,20 @@
                                         <h5 class="card-title fs-4 pb-0 text-center">Create an Account</h5>
                                     </div>
 
-                                    <form class="row g-3 needs-validation" novalidate>
+                                    <form class="row g-3" method="POST" action="{{ route('register') }}">
+                                        @csrf
 
                                         <div class="col-12">
                                             <label for="yourName" class="form-label">Name</label>
                                             <div class="input-group has-validation">
                                                 <span class="input-group-text" id="inputGroupPrepend"><i
                                                         class="bx bxs-user"></i></span>
-                                                <input type="name" name="name" class="form-control" id="yourName"
-                                                    required>
-                                                <div class="invalid-feedback">Please enter your name.</div>
+                                                <input type="name" name="name"
+                                                    class="form-control @error('name') is-invalid @enderror"
+                                                    id="yourName" value="{{ old('name') }}">
+                                                @error('name')
+                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="col-12">
@@ -74,9 +74,12 @@
                                             <div class="input-group has-validation">
                                                 <span class="input-group-text" id="inputGroupPrepend"><i
                                                         class="bx bx-envelope"></i></span>
-                                                <input type="email" name="email" class="form-control" id="yourEmail"
-                                                    required>
-                                                <div class="invalid-feedback">Please enter your email.</div>
+                                                <input type="email" name="email"
+                                                    class="form-control @error('email') is-invalid @enderror"
+                                                    id="yourEmail" value="{{ old('email') }}">
+                                                @error('email')
+                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="col-12">
@@ -84,9 +87,12 @@
                                             <div class="input-group has-validation">
                                                 <span class="input-group-text" id="inputGroupPrepend"><i
                                                         class='bx bxs-lock'></i></span>
-                                                <input type="password" name="password" class="form-control"
-                                                    id="yourPassword" required>
-                                                <div class="invalid-feedback">Please enter your password.</div>
+                                                <input type="password" name="password"
+                                                    class="form-control @error('password') is-invalid @enderror"
+                                                    id="yourPassword">
+                                                @error('password')
+                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                         </div>
 
@@ -98,7 +104,6 @@
                                                     href="{{ route('login') }}">Log in</a></p>
                                         </div>
                                     </form>
-
                                 </div>
                             </div>
                         </div>
@@ -108,7 +113,7 @@
             </section>
 
         </div>
-    </main><!-- End #main -->
+    </main>
 
     <a href="{{ url('#') }}" class="back-to-top d-flex align-items-center justify-content-center"><i
             class="bi bi-arrow-up-short"></i></a>

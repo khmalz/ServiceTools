@@ -101,13 +101,13 @@
                                             <td>
                                                 <div class="fw-semibold">Nama</div>
                                             </td>
-                                            <td>Test</td>
+                                            <td>{{ $user->name }}</td>
                                         </tr>
                                         <tr>
                                             <td>
                                                 <div class="fw-semibold">Email</div>
                                             </td>
-                                            <td>Test</td>
+                                            <td>{{ $user->email }}</td>
                                         </tr>
                                         <tr>
                                             <td>

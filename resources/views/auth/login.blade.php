@@ -21,12 +21,7 @@
 
     <!-- Vendor CSS Files -->
     <link href="{{ asset('user/assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('user/assets/vendor/bootstrap-icons/bootstrap-icons.min.css') }}" rel="stylesheet">
     <link href="{{ asset('user/assets/vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('admin/assets/vendor/quill/quill.snow.css') }}" rel="stylesheet">
-    <link href="{{ asset('admin/assets/vendor/quill/quill.bubble.css') }}" rel="stylesheet">
-    <link href="{{ asset('user/assets/vendor/remixicon/remixicon.css') }}" rel="stylesheet">
-    <link href="{{ asset('admin/assets/vendor/simple-datatables/style.css') }}" rel="stylesheet">
 
     <!-- Template Main CSS File -->
     <link href="{{ asset('admin/assets/css/style.css') }}" rel="stylesheet">
@@ -41,13 +36,14 @@
                 class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
                 <div class="container">
                     <div class="row justify-content-center">
-                        <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
+                        <div
+                            class="col-xl-4 col-lg-6 col-md-8 d-flex flex-column align-items-center justify-content-center">
 
                             <div class="d-flex justify-content-center py-4">
-                                <a href="{{ url('index.html') }}" class="logo d-flex align-items-center w-auto">
+                                <a href="{{ route('home') }}" class="logo d-flex align-items-center w-auto">
                                     <span class="d-none d-lg-block">Service Tools</span>
                                 </a>
-                            </div><!-- End Logo -->
+                            </div>
 
                             <div class="card mb-3">
 
@@ -55,10 +51,13 @@
 
                                     <div class="pb-2 pt-4">
                                         <h5 class="card-title fs-4 pb-0 text-center">Login to Your Account</h5>
-                                        {{-- <p class="small text-center">Enter your username & password to login</p> --}}
+                                        @if ($errors->any())
+                                            <p class="small text-danger text-center">Email/Password salah</p>
+                                        @endif
                                     </div>
 
-                                    <form class="row g-3 needs-validation" novalidate>
+                                    <form class="row g-3" action="{{ route('login') }}" method="POST">
+                                        @csrf
 
                                         <div class="col-12">
                                             <label for="yourEmail" class="form-label">Email</label>
