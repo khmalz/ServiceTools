@@ -11,7 +11,7 @@
 
     <!-- Favicons -->
     <link href="{{ asset('user/assets/img/favicon.png') }}" rel="icon">
-    <link href="{{ asset('user/assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
+    <link href="{{ asset('user/assets/img/workle-touch-icon.png') }}" rel="workle-touch-icon">
 
     <!-- Google Fonts -->
     <link
@@ -44,7 +44,6 @@
                 <ul>
                     <li><a href="#hero" class="active">Home</a></li>
                     <li><a href="#about">About</a></li>
-                    <li><a href="#services">Services</a></li>
                     <li><a href="#portfolio">Portfolio</a></li>
                     <li><a href="#contact">Contact</a></li>
                     <li><a href="" class="getstarted">Login</a></li>
@@ -68,11 +67,10 @@
                     style="background-image: url({{ asset('user/assets/img/slide/slide-1.jpg') }})">
                     <div class="carousel-container">
                         <div class="container">
-                            <h2 class="animate__animated animate__fadeInDown">Welcome to <span>Sailor</span></h2>
-                            <p class="animate__animated animate__fadeInUp">Ut velit est quam dolor ad a aliquid qui
-                                aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem
-                                mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti
-                                vel. Minus et tempore modi architecto.</p>
+                            <h2 class="animate__animated animate__fadeInDown">Pelayanan Servis Terpercaya</h2>
+                            <p class="animate__animated animate__fadeInUp">Kami memberikan layanan servis alat
+                                elektronik yang dapat Anda andalkan. Dengan tim teknisi berkualitas, kami siap
+                                memperbaiki perangkat Anda dengan cepat dan efisienz.</p>
                             <a href="{{ url('#about') }}"
                                 class="btn-get-started animate__animated animate__fadeInUp scrollto">Read More</a>
                         </div>
@@ -84,11 +82,10 @@
                     style="background-image: url({{ asset('user/assets/img/slide/slide-2.jpg') }})">
                     <div class="carousel-container">
                         <div class="container">
-                            <h2 class="animate__animated animate__fadeInDown">Lorem Ipsum Dolor</h2>
-                            <p class="animate__animated animate__fadeInUp">Ut velit est quam dolor ad a aliquid qui
-                                aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem
-                                mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti
-                                vel. Minus et tempore modi architecto.</p>
+                            <h2 class="animate__animated animate__fadeInDown">Solusi Servis Komprehensif</h2>
+                            <p class="animate__animated animate__fadeInUp">Dari perbaikan hingga pemeliharaan berkala,
+                                kami menyediakan beragam solusi servis untuk semua jenis alat elektronik. Percayakan
+                                perangkat Anda kepada kami untuk kinerja yang optimal.</p>
                             <a href="{{ url('#about') }}"
                                 class="btn-get-started animate__animated animate__fadeInUp scrollto">Read More</a>
                         </div>
@@ -100,11 +97,10 @@
                     style="background-image: url({{ asset('user/assets/img/slide/slide-3.jpg') }})">
                     <div class="carousel-container">
                         <div class="container">
-                            <h2 class="animate__animated animate__fadeInDown">Sequi ea ut et est quaerat</h2>
-                            <p class="animate__animated animate__fadeInUp">Ut velit est quam dolor ad a aliquid qui
-                                aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem
-                                mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti
-                                vel. Minus et tempore modi architecto.</p>
+                            <h2 class="animate__animated animate__fadeInDown">Pelayanan Pelanggan Utama</h2>
+                            <p class="animate__animated animate__fadeInUp">Kepuasan pelanggan adalah prioritas utama
+                                kami. Kami memberikan servis yang ramah pelanggan, transparan, dan berorientasi pada
+                                kebutuhan Anda. Lihatlah apa yang bisa kami lakukan untuk Anda.</p>
                             <a href="{{ url('#about') }}"
                                 class="btn-get-started animate__animated animate__fadeInUp scrollto">Read More</a>
                         </div>
@@ -132,138 +128,30 @@
 
                 <div class="row content">
                     <div class="col-lg-6">
-                        <h2>Eum ipsam laborum deleniti velitena</h2>
-                        <h3>Voluptatem dignissimos provident quasi corporis voluptates sit assum perenda sruen jonee
-                            trave</h3>
+                        <h2>Tentang Kami</h2>
+                        <h3>Platform Layanan Servis Alat Elektronik</h3>
                     </div>
                     <div class="col-lg-6 pt-lg-0 pt-4">
                         <p>
-                            Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-                            reprehenderit in voluptate
-                            velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                            proident, sunt in
-                            culpa qui officia deserunt mollit anim id est laborum
+                            Solusi terpercaya untuk kebutuhan servis alat elektronik Anda. Kami berkomitmen untuk
+                            memberikan pelayanan servis yang berkualitas tinggi dengan teknisi berpengalaman, sehingga
+                            Anda dapat memperoleh alat elektronik dalam kondisi optimal secepat mungkin. Kami menawarkan
+                            beragam layanan servis elektronik, yang bahkan bisa dilakukan di rumah anda!. Dengan layanan
+                            pelanggan terbaik dan fokus pada kepuasan
+                            Anda, Service Tools hadir untuk memudahkan Anda dalam menjaga kinerja alat elektronik Anda.
                         </p>
                         <ul>
-                            <li><i class="ri-check-double-line"></i> Ullamco laboris nisi ut aliquip ex ea commodo
-                                consequa</li>
-                            <li><i class="ri-check-double-line"></i> Duis aute irure dolor in reprehenderit in
-                                voluptate velit</li>
-                            <li><i class="ri-check-double-line"></i> Ullamco laboris nisi ut aliquip ex ea commodo
-                                consequat. Duis aute irure dolor in reprehenderit in</li>
+                            <li><i class="ri-check-double-line"></i>Membuat Permintaan Layanan</li>
+                            <li><i class="ri-check-double-line"></i>Penjadwalan dan Konfirmasi</li>
+                            <li><i class="ri-check-double-line"></i>Layanan Profesional</li>
+                            <li><i class="ri-check-double-line"></i>Pembayaran Mudah</li>
                         </ul>
-                        <p class="fst-italic">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                            labore et dolore
-                            magna aliqua.
-                        </p>
                     </div>
                 </div>
 
             </div>
         </section>
         <!-- End About Section -->
-
-        <!-- ======= Clients Section ======= -->
-        <section id="clients" class="clients section-bg">
-            <div class="container">
-
-                <div class="row">
-
-                    <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
-                        <img src="{{ asset('user/assets/img/clients/client-1.png') }}" class="img-fluid"
-                            alt="">
-                    </div>
-
-                    <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
-                        <img src="{{ asset('user/assets/img/clients/client-2.png') }}" class="img-fluid"
-                            alt="">
-                    </div>
-
-                    <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
-                        <img src="{{ asset('user/assets/img/clients/client-3.png') }}" class="img-fluid"
-                            alt="">
-                    </div>
-
-                    <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
-                        <img src="{{ asset('user/assets/img/clients/client-4.png') }}" class="img-fluid"
-                            alt="">
-                    </div>
-
-                    <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
-                        <img src="{{ asset('user/assets/img/clients/client-5.png') }}" class="img-fluid"
-                            alt="">
-                    </div>
-
-                    <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
-                        <img src="{{ asset('user/assets/img/clients/client-6.png') }}" class="img-fluid"
-                            alt="">
-                    </div>
-
-                </div>
-
-            </div>
-        </section>
-        <!-- End Clients Section -->
-
-        <!-- ======= Services Section ======= -->
-        <section id="services" class="services">
-            <div class="container">
-
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="icon-box">
-                            <i class="bi bi-briefcase"></i>
-                            <h4><a href="{{ url('#') }}">Lorem Ipsum</a></h4>
-                            <p>Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint
-                                occaecati cupiditate non provident</p>
-                        </div>
-                    </div>
-                    <div class="col-md-6 mt-md-0 mt-4">
-                        <div class="icon-box">
-                            <i class="bi bi-card-checklist"></i>
-                            <h4><a href="{{ url('#') }}">Dolor Sitema</a></h4>
-                            <p>Minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                consequat tarad limino ata</p>
-                        </div>
-                    </div>
-                    <div class="col-md-6 mt-md-0 mt-4">
-                        <div class="icon-box">
-                            <i class="bi bi-bar-chart"></i>
-                            <h4><a href="{{ url('#') }}">Sed ut perspiciatis</a></h4>
-                            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                                nulla pariatur</p>
-                        </div>
-                    </div>
-                    <div class="col-md-6 mt-md-0 mt-4">
-                        <div class="icon-box">
-                            <i class="bi bi-binoculars"></i>
-                            <h4><a href="{{ url('#') }}">Nemo Enim</a></h4>
-                            <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
-                                anim id est laborum</p>
-                        </div>
-                    </div>
-                    <div class="col-md-6 mt-md-0 mt-4">
-                        <div class="icon-box">
-                            <i class="bi bi-brightness-high"></i>
-                            <h4><a href="{{ url('#') }}">Magni Dolore</a></h4>
-                            <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium
-                                voluptatum deleniti atque</p>
-                        </div>
-                    </div>
-                    <div class="col-md-6 mt-md-0 mt-4">
-                        <div class="icon-box">
-                            <i class="bi bi-calendar4-week"></i>
-                            <h4><a href="{{ url('#') }}">Eiusmod Tempor</a></h4>
-                            <p>Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta
-                                nobis est eligendi</p>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-        <!-- End Services Section -->
 
         <!-- ======= Portfolio Section ======= -->
         <section id="portfolio" class="portfolio">
@@ -273,25 +161,24 @@
                     <div class="col-lg-12 d-flex justify-content-center">
                         <ul id="portfolio-flters">
                             <li data-filter="*" class="filter-active">All</li>
-                            <li data-filter=".filter-app">App</li>
-                            <li data-filter=".filter-card">Card</li>
-                            <li data-filter=".filter-web">Web</li>
+                            <li data-filter=".filter-work">Work</li>
+                            <li data-filter=".filter-home">Home</li>
                         </ul>
                     </div>
                 </div>
 
                 <div class="row portfolio-container">
 
-                    <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+                    <div class="col-lg-4 col-md-6 portfolio-item filter-work">
                         <div class="portfolio-wrap">
                             <img src="{{ asset('user/assets/img/portfolio/portfolio-1.jpg') }}" class="img-fluid"
                                 alt="">
                             <div class="portfolio-info">
-                                <h4>App 1</h4>
-                                <p>App</p>
+                                <h4>Work 1</h4>
+                                <p>Work</p>
                                 <div class="portfolio-links">
                                     <a href="{{ url('assets/img/portfolio/portfolio-1.jpg') }}"
-                                        data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 1"><i
+                                        data-gallery="portfolioGallery" class="portfolio-lightbox" title="Work 1"><i
                                             class="bx bx-plus"></i></a>
                                     <a href="{{ url('portfolio-details.html') }}" class="portfolio-details-lightbox"
                                         data-glightbox="type: external" title="Portfolio Details"><i
@@ -301,16 +188,16 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+                    <div class="col-lg-4 col-md-6 portfolio-item filter-work">
                         <div class="portfolio-wrap">
                             <img src="{{ asset('user/assets/img/portfolio/portfolio-2.jpg') }}" class="img-fluid"
                                 alt="">
                             <div class="portfolio-info">
-                                <h4>Web 3</h4>
-                                <p>Web</p>
+                                <h4>Work 2</h4>
+                                <p>Work</p>
                                 <div class="portfolio-links">
                                     <a href="{{ url('assets/img/portfolio/portfolio-2.jpg') }}"
-                                        data-gallery="portfolioGallery" class="portfolio-lightbox" title="Web 3"><i
+                                        data-gallery="portfolioGallery" class="portfolio-lightbox" title="Work 2"><i
                                             class="bx bx-plus"></i></a>
                                     <a href="{{ url('portfolio-details.html') }}" class="portfolio-details-lightbox"
                                         data-glightbox="type: external" title="Portfolio Details"><i
@@ -320,16 +207,16 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+                    <div class="col-lg-4 col-md-6 portfolio-item filter-work">
                         <div class="portfolio-wrap">
                             <img src="{{ asset('user/assets/img/portfolio/portfolio-3.jpg') }}" class="img-fluid"
                                 alt="">
                             <div class="portfolio-info">
-                                <h4>App 2</h4>
-                                <p>App</p>
+                                <h4>Work 3</h4>
+                                <p>Work</p>
                                 <div class="portfolio-links">
                                     <a href="{{ url('assets/img/portfolio/portfolio-3.jpg') }}"
-                                        data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 2"><i
+                                        data-gallery="portfolioGallery" class="portfolio-lightbox" title="Work 3"><i
                                             class="bx bx-plus"></i></a>
                                     <a href="{{ url('portfolio-details.html') }}" class="portfolio-details-lightbox"
                                         data-glightbox="type: external" title="Portfolio Details"><i
@@ -339,16 +226,16 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-4 col-md-6 portfolio-item filter-card">
+                    <div class="col-lg-4 col-md-6 portfolio-item filter-home">
                         <div class="portfolio-wrap">
                             <img src="{{ asset('user/assets/img/portfolio/portfolio-4.jpg') }}" class="img-fluid"
                                 alt="">
                             <div class="portfolio-info">
-                                <h4>Card 2</h4>
-                                <p>Card</p>
+                                <h4>Home 1</h4>
+                                <p>Home</p>
                                 <div class="portfolio-links">
                                     <a href="{{ url('assets/img/portfolio/portfolio-4.jpg') }}"
-                                        data-gallery="portfolioGallery" class="portfolio-lightbox" title="Card 2"><i
+                                        data-gallery="portfolioGallery" class="portfolio-lightbox" title="Home 1"><i
                                             class="bx bx-plus"></i></a>
                                     <a href="{{ url('portfolio-details.html') }}" class="portfolio-details-lightbox"
                                         data-glightbox="type: external" title="Portfolio Details"><i
@@ -358,16 +245,16 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+                    <div class="col-lg-4 col-md-6 portfolio-item filter-home">
                         <div class="portfolio-wrap">
                             <img src="{{ asset('user/assets/img/portfolio/portfolio-5.jpg') }}" class="img-fluid"
                                 alt="">
                             <div class="portfolio-info">
-                                <h4>Web 2</h4>
-                                <p>Web</p>
+                                <h4>Home 2</h4>
+                                <p>Home</p>
                                 <div class="portfolio-links">
                                     <a href="{{ url('assets/img/portfolio/portfolio-5.jpg') }}"
-                                        data-gallery="portfolioGallery" class="portfolio-lightbox" title="Web 2"><i
+                                        data-gallery="portfolioGallery" class="portfolio-lightbox" title="Home 2"><i
                                             class="bx bx-plus"></i></a>
                                     <a href="{{ url('portfolio-details.html') }}" class="portfolio-details-lightbox"
                                         data-glightbox="type: external" title="Portfolio Details"><i
@@ -377,16 +264,16 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+                    <div class="col-lg-4 col-md-6 portfolio-item filter-home">
                         <div class="portfolio-wrap">
                             <img src="{{ asset('user/assets/img/portfolio/portfolio-6.jpg') }}" class="img-fluid"
                                 alt="">
                             <div class="portfolio-info">
-                                <h4>App 3</h4>
-                                <p>App</p>
+                                <h4>Home 3</h4>
+                                <p>Home</p>
                                 <div class="portfolio-links">
                                     <a href="{{ url('assets/img/portfolio/portfolio-6.jpg') }}"
-                                        data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 3"><i
+                                        data-gallery="portfolioGallery" class="portfolio-lightbox" title="Home 3"><i
                                             class="bx bx-plus"></i></a>
                                     <a href="{{ url('portfolio-details.html') }}" class="portfolio-details-lightbox"
                                         data-glightbox="type: external" title="Portfolio Details"><i
@@ -396,16 +283,16 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-4 col-md-6 portfolio-item filter-card">
+                    <div class="col-lg-4 col-md-6 portfolio-item filter-home">
                         <div class="portfolio-wrap">
                             <img src="{{ asset('user/assets/img/portfolio/portfolio-7.jpg') }}" class="img-fluid"
                                 alt="">
                             <div class="portfolio-info">
-                                <h4>Card 1</h4>
-                                <p>Card</p>
+                                <h4>Home 4</h4>
+                                <p>Home</p>
                                 <div class="portfolio-links">
                                     <a href="{{ url('assets/img/portfolio/portfolio-7.jpg') }}"
-                                        data-gallery="portfolioGallery" class="portfolio-lightbox" title="Card 1"><i
+                                        data-gallery="portfolioGallery" class="portfolio-lightbox" title="Home 4"><i
                                             class="bx bx-plus"></i></a>
                                     <a href="{{ url('portfolio-details.html') }}" class="portfolio-details-lightbox"
                                         data-glightbox="type: external" title="Portfolio Details"><i
@@ -415,16 +302,16 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-4 col-md-6 portfolio-item filter-card">
+                    <div class="col-lg-4 col-md-6 portfolio-item filter-work">
                         <div class="portfolio-wrap">
                             <img src="{{ asset('user/assets/img/portfolio/portfolio-8.jpg') }}" class="img-fluid"
                                 alt="">
                             <div class="portfolio-info">
-                                <h4>Card 3</h4>
-                                <p>Card</p>
+                                <h4>Work 4</h4>
+                                <p>Work</p>
                                 <div class="portfolio-links">
                                     <a href="{{ url('assets/img/portfolio/portfolio-8.jpg') }}"
-                                        data-gallery="portfolioGallery" class="portfolio-lightbox" title="Card 3"><i
+                                        data-gallery="portfolioGallery" class="portfolio-lightbox" title="Work 4"><i
                                             class="bx bx-plus"></i></a>
                                     <a href="{{ url('portfolio-details.html') }}" class="portfolio-details-lightbox"
                                         data-glightbox="type: external" title="Portfolio Details"><i
@@ -434,16 +321,16 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+                    <div class="col-lg-4 col-md-6 portfolio-item filter-work">
                         <div class="portfolio-wrap">
                             <img src="{{ asset('user/assets/img/portfolio/portfolio-9.jpg') }}" class="img-fluid"
                                 alt="">
                             <div class="portfolio-info">
-                                <h4>Web 3</h4>
-                                <p>Web</p>
+                                <h4>Work 5</h4>
+                                <p>Work</p>
                                 <div class="portfolio-links">
                                     <a href="{{ url('assets/img/portfolio/portfolio-9.jpg') }}"
-                                        data-gallery="portfolioGallery" class="portfolio-lightbox" title="Web 3"><i
+                                        data-gallery="portfolioGallery" class="portfolio-lightbox" title="Work 5"><i
                                             class="bx bx-plus"></i></a>
                                     <a href="{{ url('portfolio-details.html') }}" class="portfolio-details-lightbox"
                                         data-glightbox="type: external" title="Portfolio Details"><i
@@ -469,19 +356,19 @@
                             <div class="address">
                                 <i class="bi bi-geo-alt"></i>
                                 <h4>Location:</h4>
-                                <p>A108 Adam Street, New York, NY 535022</p>
+                                <p>Jalan Pemuda Raya, Jakarta Timur, DKI Jakarta</p>
                             </div>
 
                             <div class="email">
                                 <i class="bi bi-envelope"></i>
                                 <h4>Email:</h4>
-                                <p>info@example.com</p>
+                                <p>servicetools.work@gmail.com</p>
                             </div>
 
                             <div class="phone">
                                 <i class="bi bi-phone"></i>
                                 <h4>Call:</h4>
-                                <p>+1 5589 55488 55s</p>
+                                <p>+62 878 8125 4931</p>
                             </div>
 
                         </div>
@@ -508,11 +395,6 @@
                             <div class="form-group mt-3">
                                 <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
                             </div>
-                            <div class="my-3">
-                                <div class="loading">Loading</div>
-                                <div class="error-message"></div>
-                                <div class="sent-message">Your message has been sent. Thank you!</div>
-                            </div>
                             <div class="text-center"><button type="submit">Send Message</button></div>
                         </form>
 
@@ -534,12 +416,11 @@
 
                     <div class="col-lg-4 col-md-6">
                         <div class="footer-info">
-                            <h3>Sailor</h3>
-                            <p>
-                                A108 Adam Street <br>
-                                NY 535022, USA<br><br>
-                                <strong>Phone:</strong> +1 5589 55488 55<br>
-                                <strong>Email:</strong> info@example.com<br>
+                            <h3>Service Tools</h3>
+                            <p class="d-flex flex-column">
+                                <span class="mb-2">Jalan Pemuda Raya <br> Jakarta Timur, DKI Jakarta</span>
+                                <span><strong>Phone:</strong> +62 878 8125 4931</span>
+                                <span><strong>Email:</strong> servicetools.work@gmail.com</span>
                             </p>
                             <div class="social-links mt-3">
                                 <a href="{{ url('#') }}" class="twitter"><i class="bx bxl-twitter"></i></a>
@@ -554,7 +435,6 @@
                         <ul>
                             <li><i class="bx bx-chevron-right"></i> <a href="{{ url('#') }}">Home</a></li>
                             <li><i class="bx bx-chevron-right"></i> <a href="{{ url('#') }}">About us</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="{{ url('#') }}">Services</a></li>
                             <li><i class="bx bx-chevron-right"></i> <a href="{{ url('#') }}">Terms of
                                     service</a></li>
                             <li><i class="bx bx-chevron-right"></i> <a href="{{ url('#') }}">Privacy policy</a>
@@ -565,13 +445,12 @@
                     <div class="col-lg-4 col-md-6 footer-links">
                         <h4>Our Services</h4>
                         <ul>
-                            <li><i class="bx bx-chevron-right"></i> <a href="{{ url('#') }}">Web Design</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="{{ url('#') }}">Web Development</a>
+                            <li><i class="bx bx-chevron-right"></i> <a href="{{ url('#') }}">TV</a>
                             </li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="{{ url('#') }}">Product
-                                    Management</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="{{ url('#') }}">Marketing</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="{{ url('#') }}">Graphic Design</a>
+                            <li><i class="bx bx-chevron-right"></i> <a href="{{ url('#') }}">Kulkas</a>
+                            </li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="{{ url('#') }}">Setrika</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="{{ url('#') }}">AC</a></li>
                             </li>
                         </ul>
                     </div>
