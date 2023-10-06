@@ -79,7 +79,7 @@
          <li class="nav-heading">Account</li>
 
          <li class="nav-item">
-             <a class="nav-link collapsed" href="{{ url('users-profile.html') }}">
+             <a class="nav-link collapsed" href="{{ route('technician.index') }}">
                  <i class="bi bi-person"></i>
                  <span>Technician</span>
              </a>

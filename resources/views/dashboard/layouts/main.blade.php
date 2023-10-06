@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Service Tools | Dashboard</title>
+    <title>Service Tools - Dashboard</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -23,7 +23,8 @@
     <link href="{{ asset('user/assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('user/assets/vendor/bootstrap-icons/bootstrap-icons.min.css') }}" rel="stylesheet">
     <link href="{{ asset('user/assets/vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('admin/assets/vendor/simple-datatables/style.css') }}" rel="stylesheet">
+
+    @stack('styles')
 
     <!-- Template Main CSS File -->
     <link href="{{ asset('admin/assets/css/style.css') }}" rel="stylesheet">
@@ -47,8 +48,11 @@
             class="bi bi-arrow-up-short"></i></a>
 
     <!-- Vendor JS Files -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="{{ asset('user/assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('admin/assets/vendor/simple-datatables/simple-datatables.js') }}"></script>
+
+    @stack('scripts')
 
     <!-- Template Main JS File -->
     <script src="{{ asset('admin/assets/js/main.js') }}"></script>
