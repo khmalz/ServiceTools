@@ -1416,15 +1416,6 @@ section {
   border-radius: 4px;
 }
 
-.contact .php-email-form input:focus,
-.contact .php-email-form textarea:focus {
-  border-color: #d9232d;
-}
-
-.contact .php-email-form input {
-  height: 44px;
-}
-
 .contact .php-email-form textarea {
   padding: 10px 12px;
 }

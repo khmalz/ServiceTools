@@ -190,6 +190,86 @@
         </section>
         <!-- End About Section -->
 
+        @hasanyrole('admin|technician')
+        @else
+            <!-- ======= Layanan Section ======= -->
+            <section id="contact" class="contact mt-0 pt-0">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col">
+                            <h2>Form Layanan</h2>
+
+                            <form action="" method="post" class="php-email-form mt-3">
+                                @auth
+                                    <div class="row">
+                                        <div class="col-md-6 form-group">
+                                            <input type="text" class="form-control" id="name"
+                                                placeholder="Your Name" value="{{ auth()->user()->name }}" required>
+                                        </div>
+                                        <div class="col-md-6 form-group mt-md-0 mt-3">
+                                            <input type="email" class="form-control" id="email"
+                                                placeholder="Your Email" value="{{ auth()->user()->email }}" required>
+                                        </div>
+                                    </div>
+                                @endauth
+                                <div class="form-group mt-3">
+                                    <select class="form-select" name="type" id="type"
+                                        onchange="selectType(this)">
+                                        <option selected disabled>Pilih Jenis Elektronik</option>
+                                        <option value="tv">TV</option>
+                                        <option value="kulkas">Kulkas</option>
+                                        <option value="ac">AC</option>
+                                        <option value="kamera">Kamera</option>
+                                        <option value="speaker">Speaker</option>
+                                        <option value="oven">Oven</option>
+                                        <option value="mesin cuci">Mesin cuci</option>
+                                        <option value="drone">Drone</option>
+                                        <option value="radio">Radio</option>
+                                        <option value="hp/tablet">Hp/Tablet</option>
+                                        <option value="laptop">Laptop</option>
+                                        <option value="komputer">Komputer</option>
+                                        <option value="playstation">Playstation</option>
+                                        <option value="lainnya">Lainnya</option>
+                                    </select>
+                                </div>
+                                <div class="form-group mt-3">
+                                    <select class="form-select" name="work" id="work">
+                                        <option selected disabled>Pilih Tempat Perbaikan</option>
+                                        <option value="home">Rumah</option>
+                                        <option value="office">Kantor</option>
+                                    </select>
+                                </div>
+                                <div id="typeOtherContainer"></div>
+                                <div class="form-group mt-3">
+                                    <textarea class="form-control" name="description" rows="5" placeholder="Description" required></textarea>
+                                </div>
+                                <div class="mt-3">
+                                    <label for="formFileMultiple" class="form-label">Image (optional)</label>
+                                    <input onchange="previewImageMultiple()" name="images[]" class="form-control"
+                                        type="file" id="multipleFiles" multiple>
+                                </div>
+                                <div class="mt-3">
+                                    <div class="row" style="row-gap: 13px" id="image-container">
+                                    </div>
+                                </div>
+                                @if (auth()->check())
+                                    <div class="mt-3 text-center"><button type="submit">Send</button></div>
+                                @else
+                                    <div class="mt-3 text-center"><button disabled type="submit">Login Terlebih
+                                            Dahulu!</button></div>
+                                @endif
+                            </form>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </section>
+            <!-- End Layanan Section -->
+        @endhasanyrole
+
         <!-- ======= Portfolio Section ======= -->
         <section id="portfolio" class="portfolio">
             <div class="container">
@@ -443,7 +523,8 @@
         </section>
         <!-- End Contact Section -->
 
-    </main><!-- End #main -->
+    </main>
+    <!-- End #main -->
 
     <!-- ======= Footer ======= -->
     <footer id="footer">
@@ -468,7 +549,7 @@
                     </div>
 
                     <div class="col-lg-4 col-md-6 footer-links">
-                        <h4>Useful Links</h4>
+                        <h4>Section Links</h4>
                         <ul>
                             <li><i class="bx bx-chevron-right"></i> <a href="{{ url('#') }}">Home</a></li>
                             <li><i class="bx bx-chevron-right"></i> <a href="{{ url('#') }}">About us</a></li>
@@ -488,6 +569,7 @@
                             </li>
                             <li><i class="bx bx-chevron-right"></i> <a href="{{ url('#') }}">Setrika</a></li>
                             <li><i class="bx bx-chevron-right"></i> <a href="{{ url('#') }}">AC</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="{{ url('#') }}">Lainnya</a></li>
                             </li>
                         </ul>
                     </div>
@@ -508,11 +590,59 @@
             class="bi bi-arrow-up-short"></i></a>
 
     <!-- Vendor JS Files -->
+    <script src="{{ asset('user/assets/vendor/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('user/assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('user/assets/vendor/glightbox/js/glightbox.min.js') }}"></script>
     <script src="{{ asset('user/assets/vendor/isotope-layout/isotope.pkgd.min.js') }}"></script>
     <script src="{{ asset('user/assets/vendor/swiper/swiper-bundle.min.js') }}"></script>
     <script src="{{ asset('user/assets/vendor/waypoints/noframework.waypoints.js') }}"></script>
+
+    <script>
+        const imageInput = document.querySelector("#multipleFiles");
+        const imageContainer = document.querySelector("#image-container");
+
+        function previewImageMultiple() {
+            // Bersihkan semua elemen gambar yang ada sebelumnya
+            imageContainer.innerHTML = "";
+
+            const files = imageInput.files;
+
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                if (file) {
+                    const blob = URL.createObjectURL(file);
+
+                    // Buat div dan elemen gambar dengan template literal
+                    const imageHTML = `
+                        <div class="col-md-6 col-lg-3" id="image-${i + 1}">
+                            <img src="${blob}" alt="image-${i + 1}" class="img-fluid w-100 border rounded" style="height: 200px; object-fit: cover">
+                        </div>
+                    `;
+
+                    // Tambahkan div dan elemen gambar ke dalam container
+                    imageContainer.innerHTML += imageHTML;
+                }
+            }
+        };
+
+        function selectType(selectElement) {
+            const selectedValue = $(selectElement).val();
+            const typeOtherInput = $('#typeOtherContainer');
+
+            if (selectedValue === 'lainnya') {
+                // Jika yang dipilih adalah "lainnya", tambahkan input
+                const inputHtml = `
+                    <div class="form-group mt-3">
+                        <input type="text" class="form-control" id="typeOther" name="type" placeholder="Ketikkan jenis" required>
+                    </div>
+                `;
+                typeOtherInput.html(inputHtml); // Tambahkan input ke dalam kontainer
+            } else {
+                // Jika yang dipilih bukan "lainnya", hapus input
+                typeOtherInput.empty(); // Hapus konten dari kontainer
+            }
+        }
+    </script>
 
     <!-- Template Main JS File -->
     <script src="{{ asset('user/assets/js/main.js') }}"></script>
