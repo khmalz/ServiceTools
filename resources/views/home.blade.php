@@ -33,6 +33,29 @@
 
 <body>
 
+    @auth
+        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    </div>
+                    <div class="modal-body">Select "Logout" below if you are ready to end your
+                        current
+                        session.</div>
+                    <form action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        <div class="modal-footer">
+                            <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Logout</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    @endauth
+
     <!-- ======= Header ======= -->
     <header id="header" class="fixed-top d-flex align-items-center">
         <div class="d-flex align-items-center container">
@@ -45,7 +68,22 @@
                     <li><a href="#about">About</a></li>
                     <li><a href="#portfolio">Portfolio</a></li>
                     <li><a href="#contact">Contact</a></li>
-                    <li><a href="{{ route('login') }}" class="getstarted">Login</a></li>
+                    @auth
+                        <li class="dropdown"><a href="#"><span>Welcome</span> <i class="bi bi-chevron-down"></i></a>
+                            <ul>
+                                <li>
+                                    <a href="{{ route('dashboard') }}">{{ auth()->user()->name }}</a>
+                                </li>
+                                <li>
+                                    <a role="button" data-bs-toggle="modal" data-bs-target="#logoutModal">
+                                        Logout
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    @else
+                        <li><a href="{{ route('login') }}" class="getstarted">Login</a></li>
+                    @endauth
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav><!-- .navbar -->

@@ -2,7 +2,7 @@
 <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-        <a href="{{ url('index.html') }}" class="logo d-flex align-items-center">
+        <a href="{{ route('home') }}" class="logo d-flex align-items-center">
             <span class="d-none d-lg-block">Service Tools</span>
         </a>
         <i class="bi bi-list toggle-sidebar-btn"></i>
@@ -76,7 +76,7 @@
             <form action="{{ route('logout') }}" method="POST">
                 @csrf
                 <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Cancel</button>
                     <button type="submit" class="btn btn-primary">Logout</button>
                 </div>
             </form>
