@@ -26,6 +26,7 @@
     <link href="{{ asset('user/assets/vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
     <link href="{{ asset('user/assets/vendor/remixicon/remixicon.css') }}" rel="stylesheet">
     <link href="{{ asset('user/assets/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('user/assets/vendor/toastify/toastify.css') }}" rel="stylesheet">
 
     <!-- Template Main CSS File -->
     <link href="{{ asset('user/assets/css/style.css') }}" rel="stylesheet">
@@ -193,22 +194,25 @@
         @hasanyrole('admin|technician')
         @else
             <!-- ======= Layanan Section ======= -->
-            <section id="contact" class="contact mt-0 pt-0">
+            <section id="service" class="contact mt-0 pt-0" data-message="{{ session('success') }}">
                 <div class="container">
                     <div class="row">
 
                         <div class="col">
                             <h2>Form Layanan</h2>
 
-                            <form action="" method="post" class="php-email-form mt-3">
+                            <form action="{{ route('service.store') }}" method="post" class="php-email-form mt-3"
+                                enctype="multipart/form-data">
+                                @csrf
+
                                 @auth
                                     <div class="row">
                                         <div class="col-md-6 form-group">
-                                            <input type="text" class="form-control" id="name"
+                                            <input type="text" readonly class="form-control" id="name"
                                                 placeholder="Your Name" value="{{ auth()->user()->name }}" required>
                                         </div>
                                         <div class="col-md-6 form-group mt-md-0 mt-3">
-                                            <input type="email" class="form-control" id="email"
+                                            <input type="email" readonly class="form-control" id="email"
                                                 placeholder="Your Email" value="{{ auth()->user()->email }}" required>
                                         </div>
                                     </div>
@@ -233,6 +237,7 @@
                                         <option value="lainnya">Lainnya</option>
                                     </select>
                                 </div>
+                                <div id="typeOtherContainer"></div>
                                 <div class="form-group mt-3">
                                     <select class="form-select" name="work" id="work">
                                         <option selected disabled>Pilih Tempat Perbaikan</option>
@@ -240,7 +245,6 @@
                                         <option value="office">Kantor</option>
                                     </select>
                                 </div>
-                                <div id="typeOtherContainer"></div>
                                 <div class="form-group mt-3">
                                     <textarea class="form-control" name="description" rows="5" placeholder="Description" required></textarea>
                                 </div>
@@ -256,7 +260,7 @@
                                 @if (auth()->check())
                                     <div class="mt-3 text-center"><button type="submit">Send</button></div>
                                 @else
-                                    <div class="mt-3 text-center"><button disabled type="submit">Login Terlebih
+                                    <div class="mt-3 text-center"><button disabled type="button">Login Terlebih
                                             Dahulu!</button></div>
                                 @endif
                             </form>
@@ -596,6 +600,7 @@
     <script src="{{ asset('user/assets/vendor/isotope-layout/isotope.pkgd.min.js') }}"></script>
     <script src="{{ asset('user/assets/vendor/swiper/swiper-bundle.min.js') }}"></script>
     <script src="{{ asset('user/assets/vendor/waypoints/noframework.waypoints.js') }}"></script>
+    <script src="{{ asset('user/assets/vendor/toastify/toastify.js') }}"></script>
 
     <script>
         const imageInput = document.querySelector("#multipleFiles");
@@ -625,6 +630,21 @@
             }
         };
 
+        function showToast(message) {
+            Toastify({
+                text: message,
+                duration: 2500,
+                newWindow: true,
+                close: true,
+                gravity: "top",
+                position: "right",
+                stopOnFocus: true,
+                style: {
+                    background: "#28a745",
+                },
+            }).showToast();
+        }
+
         function selectType(selectElement) {
             const selectedValue = $(selectElement).val();
             const typeOtherInput = $('#typeOtherContainer');
@@ -642,6 +662,14 @@
                 typeOtherInput.empty(); // Hapus konten dari kontainer
             }
         }
+
+        $(document).ready(function() {
+            let message = $('#service').data('message');
+
+            if (message) {
+                showToast(message)
+            }
+        })
     </script>
 
     <!-- Template Main JS File -->

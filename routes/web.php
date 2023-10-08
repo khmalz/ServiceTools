@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\Admin\TechnicianController;
-use App\Http\Controllers\Auth\DashboardController;
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ServiceClientController;
+use App\Http\Controllers\Auth\DashboardController;
+use App\Http\Controllers\Admin\TechnicianController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,9 +23,15 @@ Route::get('/', fn () => view('home'))->name('home');
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', DashboardController::class)->name('dashboard');
 
-    Route::resource('technician', TechnicianController::class)->parameters([
-        'technician' => 'user'
-    ]);
+    Route::middleware('role:admin')->group(function () {
+        Route::resource('technician', TechnicianController::class)->parameters([
+            'technician' => 'user'
+        ]);
+    });
+
+    Route::middleware('role:client')->group(function () {
+        Route::post('/service/create', [ServiceClientController::class, 'store'])->name('service.store');
+    });
 });
 
 

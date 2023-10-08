@@ -1420,7 +1420,8 @@ section {
   padding: 10px 12px;
 }
 
-.contact .php-email-form button[type=submit] {
+.contact .php-email-form button[type=submit],
+.contact .php-email-form button[type=button] {
   background: #d9232d;
   border: 0;
   padding: 10px 24px;
