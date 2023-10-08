@@ -78,6 +78,16 @@
 
         @role('client')
             <div class="row">
+
+                @if (empty($user->client) ||
+                        (empty($user->client->gender) || empty($user->client->telephone) || empty($user->client->alamat)))
+                    <div class="col-12">
+                        <div class="alert alert-info" role="alert">
+                            Harap Lengkapi Data Akun
+                        </div>
+                    </div>
+                @endif
+
                 <div class="col-lg-12 mb-4">
                     <!-- Approach -->
                     <div class="card info-card mb-4 shadow">
@@ -86,7 +96,7 @@
 
                             <div>
                                 <a class="btn btn-primary text-primary border-0 bg-transparent"
-                                    href="{{ route('profile.edit') }}">
+                                    href="{{ route('profile.edit', $user) }}">
                                     Edit Profile
                                 </a>
                             </div>
@@ -111,9 +121,21 @@
                                         </tr>
                                         <tr>
                                             <td>
+                                                <div class="fw-semibold">Gender</div>
+                                            </td>
+                                            <td>{{ $user->client->gender ?? 'Belum Diatur' }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="fw-semibold">Telepon</div>
+                                            </td>
+                                            <td>{{ $user->client->telephone ?? 'Belum Diatur' }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
                                                 <div class="fw-semibold">Alamat</div>
                                             </td>
-                                            <td>Test</td>
+                                            <td>{{ $user->client->alamat ?? 'Belum Diatur' }}</td>
                                         </tr>
                                     </tbody>
                                 </table>

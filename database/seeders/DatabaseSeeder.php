@@ -36,13 +36,19 @@ class DatabaseSeeder extends Seeder
             $technician->assignRole('technician');
         }
 
-        $client = User::create([
+        $clientAccount = User::create([
             'name' => 'Akmal',
             'email' => 'akmal@gmail.com',
             'email_verified_at' => now(),
             'password' => bcrypt('password'),
             'remember_token' => Str::random(10)
         ]);
-        $client->assignRole('client');
+        $clientAccount->assignRole('client');
+
+        $clientAccount->client()->create([
+            'gender' => 'L',
+            'telephone' => fake('id_ID')->phoneNumber(),
+            'alamat' => fake('id_ID')->address()
+        ]);
     }
 }

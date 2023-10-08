@@ -13,7 +13,7 @@ class DashboardController extends Controller
     public function __invoke(Request $request)
     {
         if ($request->user()->hasRole('client')) {
-            $user = $request->user();
+            $user = $request->user()->load('client');
 
             return view('dashboard.index', compact('user'));
         }
