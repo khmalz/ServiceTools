@@ -16,8 +16,63 @@
                  <a class="nav-link {{ request()->routeIs('service.*') ? null : 'collapsed' }}"
                      href="{{ route('service.create') }}">
                      <i class="bi bi-send-plus"></i>
-                     <span>Request Service</span>
+                     <span>Send Request</span>
                  </a>
+             </li>
+
+             <li class="nav-heading">Service</li>
+
+             <li class="nav-item">
+                 <a class="nav-link collapsed" data-bs-target="#service-client-nav" data-bs-toggle="collapse"
+                     href="{{ url('#') }}">
+                     <i class='bx bxs-wrench'></i><span>Services</span><i class="bi bi-chevron-down ms-auto"></i>
+                 </a>
+                 <ul id="service-client-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+                     <li>
+                         <a href="{{ url('forms-elements.html') }}">
+                             <i class="bi bi-circle"></i><span>Cancel</span>
+                         </a>
+                     </li>
+                     <li>
+                         <a href="{{ url('forms-elements.html') }}">
+                             <i class="bi bi-circle"></i><span>Pending</span>
+                         </a>
+                     </li>
+                     <li>
+                         <a href="{{ url('forms-elements.html') }}">
+                             <i class="bi bi-circle"></i><span>Progress</span>
+                         </a>
+                     </li>
+                     <li>
+                         <a href="{{ url('forms-elements.html') }}">
+                             <i class="bi bi-circle"></i><span>Done</span>
+                         </a>
+                     </li>
+                 </ul>
+             </li>
+
+             <li class="nav-item">
+                 <a class="nav-link collapsed" data-bs-target="#appointment-client-nav" data-bs-toggle="collapse"
+                     href="{{ url('#') }}">
+                     <i class='bx bx-calendar-edit'></i><span>Appointments</span><i class="bi bi-chevron-down ms-auto"></i>
+                 </a>
+                 <ul id="appointment-client-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+                     <li>
+                         <a href="{{ url('forms-elements.html') }}">
+                             <i class="bi bi-circle"></i><span>Pending</span>
+                         </a>
+                     </li>
+                     <li>
+                         <a href="{{ url('forms-elements.html') }}">
+                             <i class="bi bi-circle"></i><span>Progress</span>
+                         </a>
+                     </li>
+                     <li>
+                         <a href="{{ url('forms-elements.html') }}">
+                             <i class="bi bi-circle"></i><span>Done</span>
+                         </a>
+                     </li>
+                 </ul>
              </li>
          @endrole
 
@@ -27,17 +82,12 @@
              <li class="nav-item">
                  <a class="nav-link collapsed" data-bs-target="#service-nav" data-bs-toggle="collapse"
                      href="{{ url('#') }}">
-                     <i class='bx bxs-wrench'></i><span>Service</span><i class="bi bi-chevron-down ms-auto"></i>
+                     <i class='bx bxs-wrench'></i><span>Services</span><i class="bi bi-chevron-down ms-auto"></i>
                  </a>
                  <ul id="service-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
                      <li>
                          <a href="{{ url('forms-elements.html') }}">
                              <i class="bi bi-circle"></i><span>Cancel</span>
-                         </a>
-                     </li>
-                     <li>
-                         <a href="{{ url('forms-elements.html') }}">
-                             <i class="bi bi-circle"></i><span>Waiting</span>
                          </a>
                      </li>
                      <li>
@@ -61,7 +111,7 @@
              <li class="nav-item">
                  <a class="nav-link collapsed" data-bs-target="#appointment-nav" data-bs-toggle="collapse"
                      href="{{ url('#') }}">
-                     <i class='bx bx-calendar-edit'></i><span>Appointment</span><i class="bi bi-chevron-down ms-auto"></i>
+                     <i class='bx bx-calendar-edit'></i><span>Appointments</span><i class="bi bi-chevron-down ms-auto"></i>
                  </a>
                  <ul id="appointment-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
                      <li>
