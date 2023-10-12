@@ -8,6 +8,14 @@ use Illuminate\Http\Request;
 class ServiceClientController extends Controller
 {
     /**
+     * Display form store data service from client request.
+     */
+    public function create()
+    {
+        return view('dashboard.service.create');
+    }
+
+    /**
      * Store data service from client request.
      */
     public function store(ServiceClientRequest $request)
@@ -28,6 +36,6 @@ class ServiceClientController extends Controller
             }
         }
 
-        return to_route('home')->with('success', 'Successfully created new service');
+        return to_route('service.create')->with('success', 'Successfully created new service');
     }
 }

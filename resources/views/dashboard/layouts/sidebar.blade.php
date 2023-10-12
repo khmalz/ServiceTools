@@ -11,6 +11,16 @@
              </a>
          </li>
 
+         @role('client')
+             <li class="nav-item">
+                 <a class="nav-link {{ request()->routeIs('service.*') ? null : 'collapsed' }}"
+                     href="{{ route('service.create') }}">
+                     <i class="bi bi-send-plus"></i>
+                     <span>Request Service</span>
+                 </a>
+             </li>
+         @endrole
+
          @hasanyrole('admin|technician')
              <li class="nav-heading">Laporan</li>
 

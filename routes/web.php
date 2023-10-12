@@ -30,6 +30,7 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::middleware('role:client')->group(function () {
+        Route::get('/service', [ServiceClientController::class, 'create'])->name('service.create');
         Route::post('/service/create', [ServiceClientController::class, 'store'])->name('service.store');
         Route::get('/profile/{user}', [ProfileController::class, 'edit'])->name('profile.edit');
         Route::patch('/profile/{user}', [ProfileController::class, 'update'])->name('profile.update');
