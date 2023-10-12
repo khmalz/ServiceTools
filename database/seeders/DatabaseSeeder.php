@@ -26,14 +26,15 @@ class DatabaseSeeder extends Seeder
         $admin->assignRole('admin');
 
         for ($i = 1; $i <= 8; $i++) {
-            $technician = User::create([
+            $technicianUser = User::create([
                 'name' => "Technician $i",
                 'email' => "technician$i@gmail.com",
                 'email_verified_at' => now(),
                 'password' => bcrypt('password'),
                 'remember_token' => Str::random(10)
             ]);
-            $technician->assignRole('technician');
+            $technicianUser->assignRole('technician');
+            $technicianUser->technician()->create();
         }
 
         $clientAccount = User::create([

@@ -44,6 +44,7 @@ class TechnicianController extends Controller
 
         $user->assignRole('technician');
 
+        $user->technician()->create();
         return to_route('technician.index')->with('success', 'Successfully created a new technician');
     }
 
