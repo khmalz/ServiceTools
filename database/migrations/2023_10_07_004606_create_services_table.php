@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('services', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->string('type');
             $table->enum('status', ['cancel', 'pending', 'progress', 'complete'])->default('pending');
             $table->enum('work', ['home', 'office'])->default('home');

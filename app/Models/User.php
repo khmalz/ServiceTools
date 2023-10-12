@@ -50,6 +50,12 @@ class User extends Authenticatable
     {
         return $this->hasOne(Client::class);
     }
+
+    public function technician(): HasOne
+    {
+        return $this->hasOne(Technician::class);
+    }
+
     public function services(): HasMany
     {
         return $this->hasMany(Service::class);
