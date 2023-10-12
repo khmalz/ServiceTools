@@ -1,5 +1,9 @@
 @extends('dashboard.layouts.main')
 
+@push('styles')
+    <link rel="stylesheet" href="{{ asset('admin/assets/vendor/datetime-picker/bootstrap-datetimepicker.min.css') }}">
+@endpush
+
 @section('content')
     <div class="pagetitle">
         <h1>Request Service</h1>
@@ -70,7 +74,7 @@
                                     <option value="office">Kantor</option>
                                 </select>
                             </div>
-                            <div id="alamatContainer"></div>
+                            <div id="alamatWaktuContainer"></div>
                             <div class="form-group mt-3">
                                 <textarea class="form-control" name="description" rows="5" placeholder="Description" required></textarea>
                             </div>
@@ -100,7 +104,14 @@
 @endsection
 
 @push('scripts')
+    <script src="{{ asset('admin/assets/vendor/datetime-picker/bootstrap-datetimepicker.min.js') }}"></script>
+    <script src="{{ asset('admin/assets/vendor/datetime-picker/bootstrap-datetimepicker.id.js') }}"></script>
+
     <script>
+        $(function() {
+            dateTime('#schedule')
+        });
+
         const imageInput = document.querySelector("#multipleFiles");
         const imageContainer = document.querySelector("#image-container");
 
@@ -128,6 +139,15 @@
             }
         };
 
+        function dateTime(id) {
+            $(id).datetimepicker({
+                language: 'id',
+                todayBtn: true,
+                autoclose: true,
+                format: 'yyyy-mm-dd hh:ii',
+            });
+        }
+
         function selectType(selectElement) {
             const selectedValue = $(selectElement).val();
             const typeOtherInput = $('#typeOtherContainer');
@@ -148,7 +168,7 @@
 
         function selectWork(selectElement) {
             const selectedValue = $(selectElement).val();
-            const alamatContainer = $('#alamatContainer');
+            const alamatWaktuContainer = $('#alamatWaktuContainer');
 
             if (selectedValue === 'home') {
                 const inputHtml = `
@@ -161,11 +181,16 @@
                             </div>
                         </small>
                     </div>
+                    <div class="form-group mt-3">
+                        <input name="schedule" type="datetime" min="{{ date('Y-m-d 00:00') }}"
+                            value="{{ old('schedule') }}" class="form-control" id="schedule" placeholder="Waktu" />
+                    </div>
                 `;
-                alamatContainer.html(inputHtml); // Tambahkan input ke dalam kontainer
+                alamatWaktuContainer.html(inputHtml); // Tambahkan input ke dalam kontainer
+                dateTime('#schedule')
             } else {
                 // Jika yang dipilih bukan "lainnya", hapus input
-                alamatContainer.empty(); // Hapus konten dari kontainer
+                alamatWaktuContainer.empty(); // Hapus konten dari kontainer
             }
         }
     </script>

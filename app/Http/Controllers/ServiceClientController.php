@@ -38,6 +38,12 @@ class ServiceClientController extends Controller
             }
         }
 
+        if ($request->work == 'home' && $request->has('schedule')) {
+            $service->appointment()->create([
+                'schedule' => $request->schedule
+            ]);
+        }
+
         return to_route('service.create')->with('success', 'Successfully created new service');
     }
 }
