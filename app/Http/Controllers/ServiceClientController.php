@@ -10,9 +10,11 @@ class ServiceClientController extends Controller
     /**
      * Display form store data service from client request.
      */
-    public function create()
+    public function create(Request $request)
     {
-        return view('dashboard.service.create');
+        $user = $request->user()->load('client');
+
+        return view('dashboard.service.create', compact('user'));
     }
 
     /**

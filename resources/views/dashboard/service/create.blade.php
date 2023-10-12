@@ -15,8 +15,17 @@
         <div class="row">
             <div class="col-12">
                 <div class="card">
-                    <div class="card-body">
+                    <div class="card-header d-flex justify-content-between align-items-center my-0 py-0">
                         <h5 class="card-title">Create Request</h5>
+
+                        <div>
+                            <a class="btn btn-primary text-primary border-0 bg-transparent"
+                                href="{{ route('profile.edit', $user) }}">
+                                Edit Profile
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card-body">
                         <form action="{{ route('service.store') }}" method="post" class="php-email-form mt-3"
                             enctype="multipart/form-data">
                             @csrf
@@ -25,11 +34,11 @@
                             <div class="row">
                                 <div class="col-md-6 form-group">
                                     <input type="text" readonly class="form-control" id="name"
-                                        placeholder="Your Name" disabled value="{{ auth()->user()->name }}" required>
+                                        placeholder="Your Name" disabled value="{{ $user->name }}" required>
                                 </div>
                                 <div class="col-md-6 form-group mt-md-0 mt-3">
                                     <input type="email" readonly class="form-control" id="email"
-                                        placeholder="Your Email" disabled value="{{ auth()->user()->email }}" required>
+                                        placeholder="Your Email" disabled value="{{ $user->email }}" required>
                                 </div>
                             </div>
 
@@ -55,12 +64,13 @@
                             </div>
                             <div id="typeOtherContainer"></div>
                             <div class="form-group mt-3">
-                                <select class="form-select" name="work" id="work">
+                                <select class="form-select" name="work" id="work" onchange="selectWork(this)">
                                     <option selected disabled>Pilih Tempat Perbaikan</option>
                                     <option value="home">Rumah</option>
                                     <option value="office">Kantor</option>
                                 </select>
                             </div>
+                            <div id="alamatContainer"></div>
                             <div class="form-group mt-3">
                                 <textarea class="form-control" name="description" rows="5" placeholder="Description" required></textarea>
                             </div>
@@ -107,10 +117,10 @@
 
                     // Buat div dan elemen gambar dengan template literal
                     const imageHTML = `
-                   <div class="col-md-6 col-lg-3" id="image-${i + 1}">
-                       <img src="${blob}" alt="image-${i + 1}" class="img-fluid w-100 border rounded" style="height: 200px; object-fit: cover">
-                   </div>
-               `;
+                        <div class="col-md-6 col-lg-3" id="image-${i + 1}">
+                            <img src="${blob}" alt="image-${i + 1}" class="img-fluid w-100 border rounded" style="height: 200px; object-fit: cover">
+                        </div>
+                    `;
 
                     // Tambahkan div dan elemen gambar ke dalam container
                     imageContainer.innerHTML += imageHTML;
@@ -125,14 +135,37 @@
             if (selectedValue === 'lainnya') {
                 // Jika yang dipilih adalah "lainnya", tambahkan input
                 const inputHtml = `
-               <div class="form-group mt-3">
-                   <input type="text" class="form-control" id="typeOther" name="type" placeholder="Ketikkan jenis" required>
-               </div>
-           `;
+                    <div class="form-group mt-3">
+                        <input type="text" class="form-control" id="typeOther" name="type" placeholder="Ketikkan jenis" required>
+                    </div>
+                `;
                 typeOtherInput.html(inputHtml); // Tambahkan input ke dalam kontainer
             } else {
                 // Jika yang dipilih bukan "lainnya", hapus input
                 typeOtherInput.empty(); // Hapus konten dari kontainer
+            }
+        }
+
+        function selectWork(selectElement) {
+            const selectedValue = $(selectElement).val();
+            const alamatContainer = $('#alamatContainer');
+
+            if (selectedValue === 'home') {
+                const inputHtml = `
+                    <div class="form-group mt-3">
+                        <input type="text" readonly class="form-control" id="alamat" placeholder="Alamat Belum Diisi"
+                            disabled value="{{ $user->client->alamat }}" required>
+                        <small>
+                            <div id="alamatHelpBlock" class="form-text">
+                                Update profil jika ingin mengubah
+                            </div>
+                        </small>
+                    </div>
+                `;
+                alamatContainer.html(inputHtml); // Tambahkan input ke dalam kontainer
+            } else {
+                // Jika yang dipilih bukan "lainnya", hapus input
+                alamatContainer.empty(); // Hapus konten dari kontainer
             }
         }
     </script>
