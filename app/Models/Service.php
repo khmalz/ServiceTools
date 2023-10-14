@@ -34,4 +34,11 @@ class Service extends Model
     {
         return $this->hasOne(Appointment::class);
     }
+
+    public function scopeWhereStatus($query, string $status1, ?string $status2 = null)
+    {
+        return $query->where('status', $status1)->when($status2, function ($query) use ($status2) {
+            $query->orWhere('status', $status2);
+        });
+    }
 }

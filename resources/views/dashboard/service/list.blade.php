@@ -6,11 +6,11 @@
 
 @section('content')
     <div class="pagetitle">
-        <h1>Technician</h1>
+        <h1>Service</h1>
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-                <li class="breadcrumb-item active">Technician</li>
+                <li class="breadcrumb-item active">Service</li>
             </ol>
         </nav>
     </div>
@@ -22,10 +22,7 @@
 
                 <div class="card">
                     <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <h5 class="card-title">Technician Accounts</h5>
-                            <a href="{{ route('technician.create') }}" class="btn btn-success">Add Technician</a>
-                        </div>
+                        <h5 class="card-title">List Service</h5>
                         <!-- Table with stripped rows -->
                         <table class="table" id="dataTable">
                             <thead>
@@ -33,50 +30,40 @@
                                     <th scope="col">No</th>
                                     <th scope="col">Name</th>
                                     <th scope="col">Email</th>
-                                    <th scope="col">Start Date</th>
+                                    <th scope="col">Work</th>
+                                    <th scope="col">Order Date</th>
+                                    <th scope="col">Status</th>
                                     <th scope="col">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($technicians as $technician)
+                                @foreach ($services as $service)
                                     <tr>
                                         <th scope="row">{{ $loop->iteration }}</th>
-                                        <td>{{ $technician->name }}</td>
-                                        <td>{{ $technician->email }}</td>
-                                        <td>{{ $technician->created_at->format('d F Y') }}</td>
+                                        <td>{{ $service->user->name }}</td>
+                                        <td>{{ $service->user->email }}</td>
+                                        <td class="text-capitalize">{{ $service->work }}</td>
+                                        <td>{{ $service->created_at->format('d F Y') }}</td>
+                                        @php
+                                            $statusClass = '';
+                                            if ($service->status == 'cancel') {
+                                                $statusClass = 'danger';
+                                            } elseif ($service->status == 'pending') {
+                                                $statusClass = 'warning';
+                                            } elseif ($service->status == 'progress') {
+                                                $statusClass = 'info';
+                                            } else {
+                                                $statusClass = 'success';
+                                            }
+                                        @endphp
+                                        <td><span class="badge bg-{{ $statusClass }}">{{ $service->status }}</span></td>
                                         <td>
-                                            <a class="btn btn-info btn-sm"
-                                                href="{{ route('technician.edit', $technician->id) }}">
-                                                <i class='bx bxs-pencil'></i>
-                                                Edit
+                                            <a class="btn btn-info btn-sm" href="{{ route('service.show', $service->id) }}">
+                                                <i class='bx bxs-info-circle'></i>
+                                                Show
                                             </a>
-                                            <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
-                                                data-bs-target="#modalDelete{{ $technician->id }}">
-                                                <i class='bx bxs-trash-alt'></i>
-                                                Delete
-                                            </button>
                                         </td>
                                     </tr>
-                                    <div class="modal fade" id="modalDelete{{ $technician->id }}" tabindex="-1"
-                                        aria-labelledby="modalDeleteLabel" aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-centered">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="modalDeleteLabel">Apakah Kamu Yakin?</h5>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary"
-                                                        data-dismiss="modal">Cancel</button>
-                                                    <form action="{{ route('technician.destroy', $technician->id) }}"
-                                                        method="POST" class="d-inline">
-                                                        @csrf
-                                                        @method('delete')
-                                                        <button type="submit" class="btn btn-danger">Delete</button>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                 @endforeach
                             </tbody>
                         </table>

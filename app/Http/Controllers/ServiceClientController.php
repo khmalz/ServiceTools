@@ -3,10 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ServiceClientRequest;
+use App\Models\Service;
 use Illuminate\Http\Request;
 
 class ServiceClientController extends Controller
 {
+    /**
+     * Display list service
+     */
+    public function list(Request $request)
+    {
+        $services = Service::whereBelongsTo($request->user())->with('user')->get();
+
+        return view('dashboard.service.list', compact('services'));
+    }
+
     /**
      * Display form store data service from client request.
      */
@@ -45,5 +56,13 @@ class ServiceClientController extends Controller
         }
 
         return to_route('service.create')->with('success', 'Successfully created new service');
+    }
+
+    /**
+     * Show details of a service
+     */
+    public function show(Service $service)
+    {
+        return view('dashboard.service.show', compact('service'));
     }
 }

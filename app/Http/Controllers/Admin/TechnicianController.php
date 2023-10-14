@@ -16,7 +16,7 @@ class TechnicianController extends Controller
     {
         $technicians = User::role('technician')->get();
 
-        return view('dashboard.technician.index', compact('technicians'));
+        return view('dashboard.admin.technician.index', compact('technicians'));
     }
 
     /**
@@ -24,7 +24,7 @@ class TechnicianController extends Controller
      */
     public function create()
     {
-        return view('dashboard.technician.create');
+        return view('dashboard.admin.technician.create');
     }
 
     /**
