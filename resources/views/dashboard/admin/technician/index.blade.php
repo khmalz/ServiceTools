@@ -62,11 +62,12 @@
                                             <div class="modal-dialog modal-dialog-centered">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title" id="modalDeleteLabel">Apakah Kamu Yakin?</h5>
+                                                        <h5 class="modal-title" id="modalDeleteLabel">Apakah Kamu Yakin?
+                                                        </h5>
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary"
-                                                            data-dismiss="modal">Cancel</button>
+                                                            data-bs-dismiss="modal">Cancel</button>
                                                         <form action="{{ route('technician.destroy', $technician->id) }}"
                                                             method="POST" class="d-inline">
                                                             @csrf

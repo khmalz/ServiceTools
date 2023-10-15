@@ -59,10 +59,39 @@ class ServiceClientController extends Controller
     }
 
     /**
+     * Update data service from client request.
+     */
+    public function update(Request $request, Service $service)
+    {
+        $request->validate([
+            'work' => ['required']
+        ]);
+
+        $service->update([
+            'work' => $request->work
+        ]);
+
+        if ($request->work == 'home' && $request->has('schedule')) {
+            $service->appointment()->updateOrCreate(
+                [],
+                [
+                    'schedule' => $request->schedule
+                ]
+            );
+        } else {
+            $service->appointment()->delete();
+        }
+
+        return to_route('service.show', $service)->with('success', 'Successfully updated a service order');
+    }
+
+    /**
      * Show details of a service
      */
     public function show(Service $service)
     {
+        $service->load('user.client', 'appointment', 'images');
+
         return view('dashboard.service.show', compact('service'));
     }
 }

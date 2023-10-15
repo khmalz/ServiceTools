@@ -28,8 +28,6 @@
                             <thead>
                                 <tr>
                                     <th scope="col">No</th>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Email</th>
                                     <th scope="col">Work</th>
                                     <th scope="col">Order Date</th>
                                     <th scope="col">Status</th>
@@ -40,8 +38,6 @@
                                 @foreach ($services as $service)
                                     <tr>
                                         <th scope="row">{{ $loop->iteration }}</th>
-                                        <td>{{ $service->user->name }}</td>
-                                        <td>{{ $service->user->email }}</td>
                                         <td class="text-capitalize">{{ $service->work }}</td>
                                         <td>{{ $service->created_at->format('d F Y') }}</td>
                                         @php
@@ -58,7 +54,8 @@
                                         @endphp
                                         <td><span class="badge bg-{{ $statusClass }}">{{ $service->status }}</span></td>
                                         <td>
-                                            <a class="btn btn-info btn-sm" href="{{ route('service.show', $service->id) }}">
+                                            <a class="btn btn-info btn-sm text-white"
+                                                href="{{ route('service.show', $service->id) }}">
                                                 <i class='bx bxs-info-circle'></i>
                                                 Show
                                             </a>
