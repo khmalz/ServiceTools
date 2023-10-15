@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Helpers\MixCaseULID;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -14,11 +15,24 @@ class Service extends Model
 
     protected $fillable = [
         'user_id',
+        'order_id',
         'type',
         'status',
         'work',
         'description',
     ];
+
+    /**
+     *  Setup model event hooks
+     */
+    public static function boot()
+    {
+        parent::boot();
+
+        self::creating(function ($model) {
+            $model->order_id = MixCaseULID::generate();
+        });
+    }
 
     public function user(): BelongsTo
     {

@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('services', function (Blueprint $table) {
             $table->id();
+            $table->ulid('order_id')->unique();
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->string('type');
             $table->enum('status', ['cancel', 'pending', 'progress', 'complete'])->default('pending');
