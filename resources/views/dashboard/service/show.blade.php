@@ -192,6 +192,7 @@
 
             if (selectedValue === 'home') {
                 const inputHtml = `
+                    <label for="create" class="text-muted mt-3">Create Appointment</label>
                     <div class="form-group mt-3">
                         <input type="text" readonly class="form-control" id="alamat" placeholder="Alamat Belum Diisi"
                             disabled value="{{ $service->user->client->alamat }}" required>
