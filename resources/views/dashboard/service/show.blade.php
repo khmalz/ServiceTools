@@ -79,7 +79,8 @@
                                     @if ($service->work == 'home' && $service->appointment)
                                         <tr>
                                             <td></td>
-                                            <td class="fw-semibold text-capitalize text-end"><a href="#"
+                                            <td class="fw-semibold text-capitalize text-end"><a
+                                                    href="{{ route('appointment.show', $service->appointment) }}"
                                                     class="badge text-bg-primary">See
                                                     schedule?</a></td>
                                         </tr>

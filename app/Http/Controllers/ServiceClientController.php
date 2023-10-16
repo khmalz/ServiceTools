@@ -19,6 +19,16 @@ class ServiceClientController extends Controller
     }
 
     /**
+     * Show details of a service
+     */
+    public function show(Service $service)
+    {
+        $service->load('user.client', 'appointment', 'images');
+
+        return view('dashboard.service.show', compact('service'));
+    }
+
+    /**
      * Display form store data service from client request.
      */
     public function create(Request $request)
@@ -83,15 +93,5 @@ class ServiceClientController extends Controller
         }
 
         return to_route('service.show', $service)->with('success', 'Successfully updated a service order');
-    }
-
-    /**
-     * Show details of a service
-     */
-    public function show(Service $service)
-    {
-        $service->load('user.client', 'appointment', 'images');
-
-        return view('dashboard.service.show', compact('service'));
     }
 }

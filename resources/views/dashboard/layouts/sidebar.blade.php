@@ -31,27 +31,11 @@
              </li>
 
              <li class="nav-item">
-                 <a class="nav-link collapsed" data-bs-target="#appointment-client-nav" data-bs-toggle="collapse"
-                     href="{{ url('#') }}">
-                     <i class='bx bx-calendar-edit'></i><span>Appointments</span><i class="bi bi-chevron-down ms-auto"></i>
+                 <a class="nav-link {{ request()->routeIs('appointment.list') || request()->routeIs('appointment.show') ? null : 'collapsed' }}"
+                     href="{{ route('appointment.list') }}">
+                     <i class="bx bx-calendar-edit"></i>
+                     <span>List Appointment</span>
                  </a>
-                 <ul id="appointment-client-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
-                     <li>
-                         <a href="{{ url('forms-elements.html') }}">
-                             <i class="bi bi-circle"></i><span>Pending</span>
-                         </a>
-                     </li>
-                     <li>
-                         <a href="{{ url('forms-elements.html') }}">
-                             <i class="bi bi-circle"></i><span>Progress</span>
-                         </a>
-                     </li>
-                     <li>
-                         <a href="{{ url('forms-elements.html') }}">
-                             <i class="bi bi-circle"></i><span>Done</span>
-                         </a>
-                     </li>
-                 </ul>
              </li>
          @endrole
 

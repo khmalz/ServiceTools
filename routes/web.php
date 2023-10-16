@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ServiceClientController;
 use App\Http\Controllers\Auth\DashboardController;
 use App\Http\Controllers\Admin\TechnicianController;
+use App\Http\Controllers\AppointmentClientController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,6 +36,9 @@ Route::middleware('auth')->group(function () {
         Route::post('/service/create', [ServiceClientController::class, 'store'])->name('service.store');
         Route::patch('/service/{service}', [ServiceClientController::class, 'update'])->name('service.update');
         Route::get('/service/{service}', [ServiceClientController::class, 'show'])->name('service.show');
+
+        Route::get('/appointment/list', [AppointmentClientController::class, 'list'])->name('appointment.list');
+        Route::get('/appointment/{appointment}', [AppointmentClientController::class, 'show'])->name('appointment.show');
 
         Route::get('/profile/{user}', [ProfileController::class, 'edit'])->name('profile.edit');
         Route::patch('/profile/{user}', [ProfileController::class, 'update'])->name('profile.update');

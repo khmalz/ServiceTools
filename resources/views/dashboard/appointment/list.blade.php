@@ -6,11 +6,11 @@
 
 @section('content')
     <div class="pagetitle">
-        <h1>Service</h1>
+        <h1>Appointment</h1>
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-                <li class="breadcrumb-item active">Service</li>
+                <li class="breadcrumb-item active">Appointment</li>
             </ol>
         </nav>
     </div>
@@ -22,7 +22,7 @@
 
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">List Service</h5>
+                        <h5 class="card-title">List Appointment</h5>
                         <!-- Table with stripped rows -->
                         <table class="table" id="dataTable">
                             <thead>
@@ -30,36 +30,37 @@
                                     <th scope="col">No</th>
                                     <th scope="col">Order ID</th>
                                     <th scope="col">Type</th>
-                                    <th scope="col">Work</th>
+                                    <th scope="col">Schedule Date</th>
                                     <th scope="col">Order Date</th>
                                     <th scope="col">Status</th>
                                     <th scope="col">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($services as $service)
+                                @foreach ($appointments as $appointment)
                                     <tr>
                                         <th scope="row">{{ $loop->iteration }}</th>
-                                        <td class="text-capitalize">{{ $service->order_id }}</td>
-                                        <td class="text-capitalize">{{ $service->type }}</td>
-                                        <td class="text-capitalize">{{ $service->work }}</td>
-                                        <td>{{ $service->created_at->format('d F Y') }}</td>
+                                        <td class="text-capitalize">{{ $appointment->service->order_id }}</td>
+                                        <td class="text-capitalize">{{ $appointment->service->type }}</td>
+                                        <td>{{ $appointment->schedule->format('d F Y h:i') }}</td>
+                                        <td>{{ $appointment->service->created_at->format('d F Y') }}</td>
                                         @php
                                             $statusClass = '';
-                                            if ($service->status == 'cancel') {
+                                            if ($appointment->status == 'cancel') {
                                                 $statusClass = 'danger';
-                                            } elseif ($service->status == 'pending') {
+                                            } elseif ($appointment->status == 'pending') {
                                                 $statusClass = 'warning';
-                                            } elseif ($service->status == 'progress') {
+                                            } elseif ($appointment->status == 'progress') {
                                                 $statusClass = 'info';
                                             } else {
                                                 $statusClass = 'success';
                                             }
                                         @endphp
-                                        <td><span class="badge bg-{{ $statusClass }}">{{ $service->status }}</span></td>
+                                        <td><span class="badge bg-{{ $statusClass }}">{{ $appointment->status }}</span>
+                                        </td>
                                         <td>
                                             <a class="btn btn-info btn-sm text-white"
-                                                href="{{ route('service.show', $service->id) }}">
+                                                href="{{ route('appointment.show', $appointment->id) }}">
                                                 <i class='bx bxs-info-circle'></i>
                                                 Show
                                             </a>
