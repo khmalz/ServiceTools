@@ -6,10 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Znck\Eloquent\Traits\BelongsToThrough;
 
 class Appointment extends Model
 {
-    use HasFactory;
+    use HasFactory, BelongsToThrough;
 
     protected $fillable = [
         'service_id',
@@ -20,6 +21,11 @@ class Appointment extends Model
     protected $casts = [
         'schedule' => 'datetime',
     ];
+
+    public function user()
+    {
+        return $this->belongsToThrough(User::class, Service::class);
+    }
 
     public function service(): BelongsTo
     {
