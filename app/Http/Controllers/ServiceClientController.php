@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ServiceClientRequest;
 use App\Models\Service;
+use App\Models\ServiceImage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Requests\ServiceClientRequest;
 
 class ServiceClientController extends Controller
 {
@@ -73,7 +75,7 @@ class ServiceClientController extends Controller
      */
     public function edit(Request $request, Service $service)
     {
-        $service->load('appointment', 'user.client');
+        $service->load('appointment', 'user.client', 'images');
 
         return view('dashboard.service.edit', compact('service'));
     }
@@ -85,31 +87,48 @@ class ServiceClientController extends Controller
     {
         $data = $request->validated();
 
-        $service->update($data);
+        DB::beginTransaction();
 
-        if ($request->hasFile('images')) {
-            $images = $request->file('images');
+        try {
+            $service->update($data);
 
-            foreach ($images as $image) {
-                $imagePath = $image->store('evidences');
+            $deleted = $request->img_deleted;
 
-                $service->images()->create([
-                    'path' => $imagePath,
-                ]);
+            if ($deleted) {
+                ServiceImage::destroy($deleted);
             }
-        }
 
-        if ($request->work == 'home' && $request->has('schedule')) {
-            $service->appointment()->updateOrCreate(
-                [],
-                [
-                    'schedule' => $request->schedule
-                ]
-            );
-        } else {
-            $service->appointment()->delete();
-        }
+            if ($request->hasFile('images')) {
+                $images = $request->file('images');
 
-        return to_route('service.show', $service)->with('success', 'Successfully updated a service order');
+                foreach ($images as $image) {
+                    $imagePath = $image->store('evidences');
+
+                    $service->images()->create([
+                        'path' => $imagePath,
+                    ]);
+                }
+            }
+
+            if ($request->work == 'home' && $request->has('schedule')) {
+                $service->appointment()->updateOrCreate(
+                    [],
+                    [
+                        'schedule' => $request->schedule
+                    ]
+                );
+            } else {
+                $service->appointment()->delete();
+            }
+
+            DB::commit();
+
+            return to_route('service.show', $service)->with('success', 'Successfully updated a service order');
+        } catch (\Exception $e) {
+            // Rollback database transaksi jika terjadi error
+            DB::rollback();
+
+            return back()->with('error', 'Failed to save changes: ' . $e->getMessage());
+        }
     }
 }

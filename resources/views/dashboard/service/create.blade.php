@@ -2,6 +2,31 @@
 
 @push('styles')
     <link rel="stylesheet" href="{{ asset('admin/assets/vendor/datetime-picker/bootstrap-datetimepicker.min.css') }}">
+
+    <style>
+        .delete-button {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background-color: #ccc;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            transition: all 0.4s ease;
+        }
+
+        .delete-button:hover {
+            background-color: rgb(223, 223, 223);
+            color: #000;
+        }
+    </style>
 @endpush
 
 @section('content')
@@ -87,14 +112,8 @@
                                 <div class="row" style="row-gap: 13px" id="image-container">
                                 </div>
                             </div>
-                            @if (auth()->check())
-                                <div class="mt-3 text-center"><button class="btn btn-primary" type="submit">Send</button>
-                                </div>
-                            @else
-                                <div class="mt-3 text-center"><button disabled class="btn btn-primary" type="button">Login
-                                        Terlebih
-                                        Dahulu!</button></div>
-                            @endif
+                            <div class="mt-3 text-center"><button class="btn btn-primary" type="submit">Send</button>
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -112,13 +131,20 @@
             dateTime('#schedule')
         });
 
-        const imageInput = document.querySelector("#multipleFiles");
-        const imageContainer = document.querySelector("#image-container");
+        function deleteImagePre(el, imageId) {
+            // Temukan elemen preview terdekat dengan ID yang sesuai
+            const imageDiv = $(el).closest(`#image-pre${imageId}`);
+
+            if (imageDiv) {
+                imageDiv.remove();
+            }
+        }
 
         function previewImageMultiple() {
-            // Bersihkan semua elemen gambar yang ada sebelumnya
-            imageContainer.innerHTML = "";
+            const imageInput = document.querySelector("#multipleFiles");
+            const imageContainer = $("#image-container");
 
+            imageContainer.empty()
             const files = imageInput.files;
 
             for (let i = 0; i < files.length; i++) {
@@ -126,18 +152,27 @@
                 if (file) {
                     const blob = URL.createObjectURL(file);
 
-                    // Buat div dan elemen gambar dengan template literal
+                    // Buat elemen gambar dengan template literal dan jQuery
                     const imageHTML = `
-                        <div class="col-md-6 col-lg-3" id="image-${i + 1}">
-                            <img src="${blob}" alt="image-${i + 1}" class="img-fluid w-100 border rounded" style="height: 200px; object-fit: cover">
+                        <div class="col-md-6 col-lg-3" id="image-pre${i + 1}">
+                            <div style="position: relative;">
+                                <img src="${blob}"
+                                    alt="image-pre${i + 1}"
+                                    class="img-fluid w-100 img-x rounded border"
+                                    style="height: 200px; object-fit: cover">
+                                <button type="button" class="delete-button"
+                                    onclick="deleteImagePre(this, ${i + 1})">
+                                    <i class='bx bx-x'></i>
+                                </button>
+                            </div>
                         </div>
                     `;
 
-                    // Tambahkan div dan elemen gambar ke dalam container
-                    imageContainer.innerHTML += imageHTML;
+                    // Tambahkan elemen gambar ke dalam container menggunakan jQuery
+                    imageContainer.append(imageHTML);
                 }
             }
-        };
+        }
 
         function dateTime(id) {
             $(id).datetimepicker({

@@ -2,6 +2,31 @@
 
 @push('styles')
     <link rel="stylesheet" href="{{ asset('admin/assets/vendor/datetime-picker/bootstrap-datetimepicker.min.css') }}">
+
+    <style>
+        .delete-button {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background-color: #ccc;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            transition: all 0.4s ease;
+        }
+
+        .delete-button:hover {
+            background-color: rgb(223, 223, 223);
+            color: #000;
+        }
+    </style>
 @endpush
 
 @section('content')
@@ -94,24 +119,32 @@
                             <div class="form-group mt-3">
                                 <textarea class="form-control" name="description" rows="5" placeholder="Description" required>{{ old('description', $service->description) }}</textarea>
                             </div>
+                            <div id="deleted-id-image" hidden></div>
                             <div class="mt-3">
-                                <label for="formFileMultiple" class="form-label">Image <span class="text-danger">(not
-                                        stable yet)</span></label>
+                                <label for="formFileMultiple" class="form-label">Image (optional)</label>
                                 <input onchange="previewImageMultiple()" name="images[]" class="form-control" type="file"
                                     id="multipleFiles" multiple>
                             </div>
                             <div class="mt-3">
                                 <div class="row" style="row-gap: 13px" id="image-container">
+                                    @foreach ($service->images as $image)
+                                        <div class="col-md-6 col-lg-3" id="image-{{ $image->id }}">
+                                            <div style="position: relative;">
+                                                <img src="{{ asset('images/' . $image->path) }}"
+                                                    alt="image-{{ $image->id }}"
+                                                    class="img-fluid w-100 img-x rounded border"
+                                                    style="height: 200px; object-fit: cover">
+                                                <button type="button" class="delete-button"
+                                                    onclick="deleteImage(this,{{ $image->id }})">
+                                                    <i class='bx bx-x'></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    @endforeach
                                 </div>
                             </div>
-                            @if (auth()->check())
-                                <div class="mt-3 text-center"><button class="btn btn-primary" type="submit">Send</button>
-                                </div>
-                            @else
-                                <div class="mt-3 text-center"><button disabled class="btn btn-primary" type="button">Login
-                                        Terlebih
-                                        Dahulu!</button></div>
-                            @endif
+                            <div class="mt-3 text-center"><button class="btn btn-primary" type="submit">Send</button>
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -134,12 +167,38 @@
             dateTime('#schedule')
         });
 
-        const imageInput = document.querySelector("#multipleFiles");
-        const imageContainer = document.querySelector("#image-container");
+        function deleteImage(el, imageId) {
+            // Temukan elemen terdekat dengan ID yang sesuai
+            const confirmDelete = confirm("Apakah Anda yakin ingin menghapus gambar ini?");
+
+            if (confirmDelete) {
+                const imageDiv = $(el).closest(`#image-${imageId}`);
+
+                if (imageDiv) {
+                    imageDiv.remove();
+
+                    const deletedImageInput = `
+                        <input type="text" name="img_deleted[]" value="${imageId}">
+                    `;
+
+                    // Tambahkan input teks ke dalam div "deleted-id-image"
+                    $("#deleted-id-image").append(deletedImageInput);
+                }
+            }
+        }
+
+        function deleteImagePre(el, imageId) {
+            // Temukan elemen preview terdekat dengan ID yang sesuai
+            const imageDiv = $(el).closest(`#image-pre${imageId}`);
+
+            if (imageDiv) {
+                imageDiv.remove();
+            }
+        }
 
         function previewImageMultiple() {
-            // Bersihkan semua elemen gambar yang ada sebelumnya
-            imageContainer.innerHTML = "";
+            const imageInput = document.querySelector("#multipleFiles");
+            const imageContainer = $("#image-container");
 
             const files = imageInput.files;
 
@@ -148,18 +207,27 @@
                 if (file) {
                     const blob = URL.createObjectURL(file);
 
-                    // Buat div dan elemen gambar dengan template literal
+                    // Buat elemen gambar dengan template literal dan jQuery
                     const imageHTML = `
-                        <div class="col-md-6 col-lg-3" id="image-${i + 1}">
-                            <img src="${blob}" alt="image-${i + 1}" class="img-fluid w-100 border rounded" style="height: 200px; object-fit: cover">
+                        <div class="col-md-6 col-lg-3" id="image-pre${i + 1}">
+                            <div style="position: relative;">
+                                <img src="${blob}"
+                                    alt="image-pre${i + 1}"
+                                    class="img-fluid w-100 img-x rounded border"
+                                    style="height: 200px; object-fit: cover">
+                                <button type="button" class="delete-button"
+                                    onclick="deleteImagePre(this, ${i + 1})">
+                                    <i class='bx bx-x'></i>
+                                </button>
+                            </div>
                         </div>
                     `;
 
-                    // Tambahkan div dan elemen gambar ke dalam container
-                    imageContainer.innerHTML += imageHTML;
+                    // Tambahkan elemen gambar ke dalam container menggunakan jQuery
+                    imageContainer.append(imageHTML);
                 }
             }
-        };
+        }
 
         function dateTime(id) {
             $(id).datetimepicker({
@@ -204,7 +272,7 @@
                         </small>
                     </div>
                     <div class="form-group mt-3">
-                        <input name="schedule" type="datetime" min="{{ date('Y-m-d 00:00') }}"
+                        <input name="schedule" type="datetime" step="60" min="{{ date('Y-m-d 00:00') }}" autocomplete="off"
                             value="{{ old('schedule', $service->appointment?->schedule) }}" class="form-control" id="schedule" placeholder="Waktu" />
                     </div>
                 `;

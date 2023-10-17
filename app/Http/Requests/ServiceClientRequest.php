@@ -27,6 +27,7 @@ class ServiceClientRequest extends FormRequest
             'description' => ['required', 'string', 'max:191'],
             'images' => ['nullable', 'array'],
             'images.*' => ['nullable', 'file', 'image', 'mimes:png,jpg,jpeg', 'max:5120'],
+            'img_deleted' => ['nullable', 'array'],
         ];
     }
 }
