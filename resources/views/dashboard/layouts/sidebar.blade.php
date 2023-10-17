@@ -13,7 +13,7 @@
 
          @role('client')
              <li class="nav-item">
-                 <a class="nav-link {{ request()->routeIs('service.create') ? null : 'collapsed' }}"
+                 <a class="nav-link {{ request()->routeIs('service.create') || request()->routeIs('service.edit') ? null : 'collapsed' }}"
                      href="{{ route('service.create') }}">
                      <i class="bi bi-send-plus"></i>
                      <span>Send Request</span>
