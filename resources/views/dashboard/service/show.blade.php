@@ -21,13 +21,20 @@
             <div class="col-12">
 
                 <div class="card">
-                    <div class="card-header">
-                        <h5 class="card-title mb-0 pb-0">Order Detail | #{{ $service->order_id }}</h5>
-                        <small>
-                            <p class="text-muted m-0 p-0">Order Date :
-                                <span class="fw-semibold">{{ $service->created_at->format('d F Y') }}</span>
-                            </p>
-                        </small>
+                    <div class="card-header d-flex align-items-center justify-content-between">
+                        <div>
+                            <h5 class="card-title mb-0 pb-0">Order Detail | #{{ $service->order_id }}</h5>
+                            <small>
+                                <p class="text-muted m-0 p-0">Order Date :
+                                    <span class="fw-semibold">{{ $service->created_at->format('d F Y') }}</span>
+                                </p>
+                            </small>
+                        </div>
+                        <div>
+                            <a class="btn btn-info btn-sm text-white" href="{{ route('service.edit', $service->id) }}">
+                                Update Order
+                            </a>
+                        </div>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -117,103 +124,9 @@
                                 </div>
                             </div>
                         @endif
-                        <div class="row mb-3">
-                            <div class="col-12">
-                                <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal"
-                                    data-bs-target="#modalChangeStatus{{ $service->id }}">
-                                    Change Work
-                                </button>
-                                <div class="modal fade" id="modalChangeStatus{{ $service->id }}" tabindex="-1"
-                                    aria-labelledby="modalChangeStatusLabel" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title text-dark" id="modalChangeStatusLabel">Change Work
-                                                </h5>
-                                            </div>
-                                            <form action="{{ route('service.update', $service->id) }}" method="POST"
-                                                class="d-inline">
-                                                @csrf
-                                                @method('patch')
-                                                <div class="modal-body">
-                                                    <div class="form-group">
-                                                        <label for="statusSelect" class="text-dark">Work:</label>
-                                                        <select class="form-control" id="workSelect" name="work"
-                                                            onchange="selectWork(this)">
-                                                            <option
-                                                                {{ old('work', $service->work) == 'home' ? 'selected' : null }}
-                                                                value="home">Home</option>
-                                                            <option
-                                                                {{ old('work', $service->work) == 'office' ? 'selected' : null }}
-                                                                value="office">Office</option>
-                                                        </select>
-                                                    </div>
-                                                    <div id="alamatWaktuContainer">
-                                                    </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary"
-                                                        data-bs-dismiss="modal">Cancel</button>
-                                                    <button type="submit" class="btn btn-primary">Change Work</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 @endsection
-
-@push('scripts')
-    <script src="{{ asset('admin/assets/vendor/datetime-picker/bootstrap-datetimepicker.min.js') }}"></script>
-    <script src="{{ asset('admin/assets/vendor/datetime-picker/bootstrap-datetimepicker.id.js') }}"></script>
-
-    <script>
-        $(document).ready(function() {
-            selectWork("#workSelect")
-        })
-
-        function dateTime(id) {
-            $(id).datetimepicker({
-                language: 'id',
-                todayBtn: true,
-                autoclose: true,
-                format: 'yyyy-mm-dd hh:ii',
-            });
-        }
-
-        function selectWork(selectElement) {
-            const selectedValue = $(selectElement).val();
-            const alamatWaktuContainer = $('#alamatWaktuContainer');
-
-            if (selectedValue === 'home') {
-                const inputHtml = `
-                    <label for="create" class="text-muted mt-3">Create Appointment</label>
-                    <div class="form-group mt-3">
-                        <input type="text" readonly class="form-control" id="alamat" placeholder="Alamat Belum Diisi"
-                            disabled value="{{ $service->user->client->alamat }}" required>
-                        <small>
-                            <div id="alamatHelpBlock" class="form-text">
-                                Update profil jika ingin mengubah
-                            </div>
-                        </small>
-                    </div>
-                    <div class="form-group mt-3">
-                        <input name="schedule" type="datetime" min="{{ date('Y-m-d 00:00') }}"
-                            value="{{ old('schedule', $service->appointment?->schedule) }}" class="form-control" id="schedule" placeholder="Waktu" />
-                    </div>
-                `;
-                alamatWaktuContainer.html(inputHtml); // Tambahkan input ke dalam kontainer
-                dateTime('#schedule')
-            } else {
-                // Jika yang dipilih bukan "lainnya", hapus input
-                alamatWaktuContainer.empty(); // Hapus konten dari kontainer
-            }
-        }
-    </script>
-@endpush

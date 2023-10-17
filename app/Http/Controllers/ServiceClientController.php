@@ -69,17 +69,35 @@ class ServiceClientController extends Controller
     }
 
     /**
+     * Display form edit data service from client request.
+     */
+    public function edit(Request $request, Service $service)
+    {
+        $service->load('appointment', 'user.client');
+
+        return view('dashboard.service.edit', compact('service'));
+    }
+
+    /**
      * Update data service from client request.
      */
-    public function update(Request $request, Service $service)
+    public function update(ServiceClientRequest $request, Service $service)
     {
-        $request->validate([
-            'work' => ['required']
-        ]);
+        $data = $request->validated();
 
-        $service->update([
-            'work' => $request->work
-        ]);
+        $service->update($data);
+
+        if ($request->hasFile('images')) {
+            $images = $request->file('images');
+
+            foreach ($images as $image) {
+                $imagePath = $image->store('evidences');
+
+                $service->images()->create([
+                    'path' => $imagePath,
+                ]);
+            }
+        }
 
         if ($request->work == 'home' && $request->has('schedule')) {
             $service->appointment()->updateOrCreate(
