@@ -187,6 +187,8 @@
             }
         }
 
+        const dt = new DataTransfer();
+
         function deleteImagePre(el, imageId) {
             // Temukan elemen preview terdekat dengan ID yang sesuai
             const imageDiv = $(el).closest(`#image-pre${imageId}`);
@@ -194,6 +196,14 @@
             if (imageDiv) {
                 imageDiv.remove();
             }
+
+            let name = imageDiv.find('img').data('name');
+            for (let i = 0; i < dt.items.length; i++) {
+                if (name === dt.items[i].getAsFile().name) {
+                    dt.items.remove(i);
+                }
+            }
+            document.getElementById('multipleFiles').files = dt.files;
         }
 
         function previewImageMultiple() {
@@ -203,30 +213,51 @@
             const files = imageInput.files;
 
             for (let i = 0; i < files.length; i++) {
+                let duplicate = false;
                 const file = files[i];
+
                 if (file) {
-                    const blob = URL.createObjectURL(file);
 
-                    // Buat elemen gambar dengan template literal dan jQuery
-                    const imageHTML = `
-                        <div class="col-md-6 col-lg-3" id="image-pre${i + 1}">
-                            <div style="position: relative;">
-                                <img src="${blob}"
-                                    alt="image-pre${i + 1}"
-                                    class="img-fluid w-100 img-x rounded border"
-                                    style="height: 200px; object-fit: cover">
-                                <button type="button" class="delete-button"
-                                    onclick="deleteImagePre(this, ${i + 1})">
-                                    <i class='bx bx-x'></i>
-                                </button>
+                    for (let i = 0; i < dt.items.length; i++) {
+                        if (file.name === dt.items[i].getAsFile().name) {
+                            duplicate = true;
+                            break; // Keluar dari loop ketika ada file duplikat
+                        } else {
+                            duplicate = false
+                        }
+                    }
+
+                    if (!duplicate) {
+                        dt.items.add(file);
+
+                        const blob = URL.createObjectURL(file);
+
+                        // Buat elemen gambar dengan template literal dan jQuery
+                        const imageHTML = `
+                            <div class="col-md-6 col-lg-3" id="image-pre${i}">
+                                <div style="position: relative;">
+                                    <img src="${blob}"
+                                        alt="image-pre${i}"
+                                        data-name="${file.name}"
+                                        class="img-fluid w-100 img-x rounded border"
+                                        style="height: 200px; object-fit: cover">
+                                    <button type="button" class="delete-button"
+                                        onclick="deleteImagePre(this, ${i})">
+                                        <i class='bx bx-x'></i>
+                                    </button>
+                                </div>
                             </div>
-                        </div>
-                    `;
+                        `;
 
-                    // Tambahkan elemen gambar ke dalam container menggunakan jQuery
-                    imageContainer.append(imageHTML);
+                        // Tambahkan elemen gambar ke dalam container menggunakan jQuery
+                        imageContainer.append(imageHTML);
+                    } else {
+                        alert('Tidak bisa upload image yang sama')
+                    }
                 }
             }
+
+            imageInput.files = dt.files;
         }
 
         function dateTime(id) {
