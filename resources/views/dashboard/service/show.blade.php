@@ -30,11 +30,13 @@
                                 </p>
                             </small>
                         </div>
-                        <div>
-                            <a class="btn btn-info btn-sm text-white" href="{{ route('service.edit', $service->id) }}">
-                                Update Order
-                            </a>
-                        </div>
+                        @role('client')
+                            <div>
+                                <a class="btn btn-info btn-sm text-white" href="{{ route('service.edit', $service->id) }}">
+                                    Update Order
+                                </a>
+                            </div>
+                        @endrole
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">

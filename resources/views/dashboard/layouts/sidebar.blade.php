@@ -54,7 +54,7 @@
                          </a>
                      </li>
                      <li>
-                         <a href="{{ url('forms-elements.html') }}">
+                         <a href="{{ route('admin.service.pending') }}">
                              <i class="bi bi-circle"></i><span>Pending</span>
                          </a>
                      </li>
@@ -65,7 +65,7 @@
                      </li>
                      <li>
                          <a href="{{ url('forms-elements.html') }}">
-                             <i class="bi bi-circle"></i><span>Done</span>
+                             <i class="bi bi-circle"></i><span>Complete</span>
                          </a>
                      </li>
                  </ul>
@@ -89,7 +89,7 @@
                      </li>
                      <li>
                          <a href="{{ url('forms-elements.html') }}">
-                             <i class="bi bi-circle"></i><span>Done</span>
+                             <i class="bi bi-circle"></i><span>Complete</span>
                          </a>
                      </li>
                  </ul>

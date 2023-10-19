@@ -16,14 +16,4 @@ class AppointmentClientController extends Controller
 
         return view('dashboard.appointment.list', compact('appointments'));
     }
-
-    /**
-     * Show details of a appointment
-     */
-    public function show(Appointment $appointment)
-    {
-        $appointment->load('service.user.client', 'service.images');
-
-        return view('dashboard.appointment.show', compact('appointment'));
-    }
 }

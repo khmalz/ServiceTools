@@ -37,13 +37,13 @@
                                         <td>
                                             <div class="fw-semibold">Name</div>
                                         </td>
-                                        <td class="fw-semibold text-end">{{ $appointment->user->name }}</td>
+                                        <td class="fw-semibold text-end">{{ $appointment->service->user->name }}</td>
                                     </tr>
                                     <tr>
                                         <td>
                                             <div class="fw-semibold">Email</div>
                                         </td>
-                                        <td class="fw-semibold text-end">{{ $appointment->user->email }}</td>
+                                        <td class="fw-semibold text-end">{{ $appointment->service->user->email }}</td>
                                     </tr>
                                     @php
                                         $statusClass = '';
@@ -84,9 +84,17 @@
                         <div class="row mb-4">
                             <div class="col-12">
                                 <div class="text-dark text-capitalize fw-bold mb-2">Technician</div>
+                                <a class="btn btn-info btn-sm mb-3 text-white"
+                                    href="{{ route('admin.appointment.technician', $appointment) }}">
+                                    Add/Update Technician
+                                </a>
                                 <ul class="list-group">
-                                    <li class="list-group-item">1. Technician 1</li>
-                                    <li class="list-group-item">2. Technician 2</li>
+                                    @forelse ($appointment->technicians as $technician)
+                                        <li class="list-group-item">{{ $loop->iteration }}. {{ $technician->user->name }}
+                                        </li>
+                                    @empty
+                                        <li class="list-group-item">Not Technician</li>
+                                    @endforelse
                                 </ul>
                             </div>
                         </div>
