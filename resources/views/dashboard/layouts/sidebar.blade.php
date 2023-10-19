@@ -43,28 +43,34 @@
              <li class="nav-heading">Laporan</li>
 
              <li class="nav-item">
-                 <a class="nav-link collapsed" data-bs-target="#service-nav" data-bs-toggle="collapse"
-                     href="{{ url('#') }}">
+                 <a class="nav-link {{ request()->routeIs('admin.service.*') || request()->routeIs('service.show') ? null : 'collapsed' }}"
+                     data-bs-target="#service-nav" data-bs-toggle="collapse" href="{{ url('#') }}">
                      <i class='bx bxs-wrench'></i><span>Services</span><i class="bi bi-chevron-down ms-auto"></i>
                  </a>
-                 <ul id="service-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+                 <ul id="service-nav"
+                     class="nav-content {{ request()->routeIs('admin.service.*') || request()->routeIs('service.show') ? 'show' : null }} collapse"
+                     data-bs-parent="#sidebar-nav">
                      <li>
-                         <a href="{{ url('forms-elements.html') }}">
+                         <a href="{{ route('admin.service.cancel') }}"
+                             class="{{ request()->routeIs('admin.service.cancel') ? 'active' : null }}">
                              <i class="bi bi-circle"></i><span>Cancel</span>
                          </a>
                      </li>
                      <li>
-                         <a href="{{ route('admin.service.pending') }}">
+                         <a href="{{ route('admin.service.pending') }}"
+                             class="{{ request()->routeIs('admin.service.pending') ? 'active' : null }}">
                              <i class="bi bi-circle"></i><span>Pending</span>
                          </a>
                      </li>
                      <li>
-                         <a href="{{ url('forms-elements.html') }}">
+                         <a href="{{ route('admin.service.progress') }}"
+                             class="{{ request()->routeIs('admin.service.progress') ? 'active' : null }}">
                              <i class="bi bi-circle"></i><span>Progress</span>
                          </a>
                      </li>
                      <li>
-                         <a href="{{ url('forms-elements.html') }}">
+                         <a href="{{ route('admin.service.complete') }}"
+                             class="{{ request()->routeIs('admin.service.complete') ? 'active' : null }}">
                              <i class="bi bi-circle"></i><span>Complete</span>
                          </a>
                      </li>

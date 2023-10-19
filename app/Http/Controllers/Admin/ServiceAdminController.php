@@ -13,7 +13,9 @@ class ServiceAdminController extends Controller
      */
     public function cancel()
     {
-        //
+        $services = Service::whereStatus('cancel')->with('user')->get();
+
+        return view('dashboard.admin.service.cancel', compact('services'));
     }
 
     /**
@@ -31,7 +33,9 @@ class ServiceAdminController extends Controller
      */
     public function progress()
     {
-        //
+        $services = Service::whereStatus('progress')->with('user')->get();
+
+        return view('dashboard.admin.service.progress', compact('services'));
     }
 
     /**
@@ -39,7 +43,9 @@ class ServiceAdminController extends Controller
      */
     public function complete()
     {
-        //
+        $services = Service::whereStatus('complete')->with('user')->get();
+
+        return view('dashboard.admin.service.complete', compact('services'));
     }
 
     /**
@@ -71,7 +77,15 @@ class ServiceAdminController extends Controller
      */
     public function update(Request $request, Service $service)
     {
-        //
+        $request->validate([
+            'status' => ['required']
+        ]);
+
+        $service->update([
+            'status' => $request->status
+        ]);
+
+        return to_route("admin.service.$request->status")->with('success', 'Successfully update status a order service');
     }
 
     /**

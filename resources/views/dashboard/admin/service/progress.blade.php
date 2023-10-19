@@ -22,7 +22,7 @@
 
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">List Service Pending</h5>
+                        <h5 class="card-title">List Service Progress</h5>
                         <!-- Table with stripped rows -->
                         <table class="table" id="dataTable">
                             <thead>

@@ -39,7 +39,6 @@ Route::middleware('auth')->group(function () {
             Route::post('/appointment/{appointment}/technician', [AppointmentAdminController::class, 'store']);
         });
 
-
         Route::resource('technician', TechnicianController::class)->parameters([
             'technician' => 'user'
         ]);
