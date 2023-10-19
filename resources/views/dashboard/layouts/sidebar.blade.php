@@ -78,23 +78,28 @@
              </li>
 
              <li class="nav-item">
-                 <a class="nav-link collapsed" data-bs-target="#appointment-nav" data-bs-toggle="collapse"
-                     href="{{ url('#') }}">
+                 <a class="nav-link {{ request()->routeIs('admin.appoointment.*') || request()->routeIs('appoointment.show') ? null : 'collapsed' }}"
+                     data-bs-target="#appointment-nav" data-bs-toggle="collapse">
                      <i class='bx bx-calendar-edit'></i><span>Appointments</span><i class="bi bi-chevron-down ms-auto"></i>
                  </a>
-                 <ul id="appointment-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+                 <ul id="appointment-nav"
+                     class="nav-content {{ request()->routeIs('admin.appointment.*') || request()->routeIs('appointment.show') ? 'show' : null }} collapse"
+                     data-bs-parent="#sidebar-nav">
                      <li>
-                         <a href="{{ url('forms-elements.html') }}">
+                         <a href="{{ route('admin.appointment.pending') }}"
+                             class="{{ request()->routeIs('admin.appointment.pending') ? 'active' : null }}">
                              <i class="bi bi-circle"></i><span>Pending</span>
                          </a>
                      </li>
                      <li>
-                         <a href="{{ url('forms-elements.html') }}">
+                         <a href="{{ route('admin.appointment.progress') }}"
+                             class="{{ request()->routeIs('admin.appointment.progress') ? 'active' : null }}">
                              <i class="bi bi-circle"></i><span>Progress</span>
                          </a>
                      </li>
                      <li>
-                         <a href="{{ url('forms-elements.html') }}">
+                         <a href="{{ route('admin.appointment.complete') }}"
+                             class="{{ request()->routeIs('admin.appointment.complete') ? 'active' : null }}">
                              <i class="bi bi-circle"></i><span>Complete</span>
                          </a>
                      </li>

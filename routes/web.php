@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\ServiceAdminController;
-use App\Http\Controllers\AppointmentAdminController;
+use App\Http\Controllers\Admin\AppointmentAdminController;
 use App\Http\Controllers\AppointmentShowController;
 use App\Http\Controllers\ServiceShowController;
 use Illuminate\Support\Facades\Route;
@@ -38,6 +38,10 @@ Route::middleware('auth')->group(function () {
             Route::get('/appointment/{appointment}/technician', [AppointmentAdminController::class, 'create'])->name('appointment.technician');
             Route::post('/appointment/{appointment}/technician', [AppointmentAdminController::class, 'store']);
         });
+        Route::get('admin/appointment/pending', [AppointmentAdminController::class, 'pending'])->name('admin.appointment.pending');
+        Route::get('admin/appointment/progress', [AppointmentAdminController::class, 'progress'])->name('admin.appointment.progress');
+        Route::get('admin/appointment/complete', [AppointmentAdminController::class, 'complete'])->name('admin.appointment.complete');
+        Route::patch('/admin/appointment/{appointment}', [AppointmentAdminController::class, 'update'])->name('admin.appointment.update');
 
         Route::resource('technician', TechnicianController::class)->parameters([
             'technician' => 'user'
