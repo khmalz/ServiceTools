@@ -12,9 +12,15 @@ class AppointmentAdminController extends Controller
     /**
      * Display a listing of pending's status order appointment.
      */
-    public function pending()
+    public function pending(Request $request)
     {
-        $appointments = Appointment::whereStatus('pending')->with('service.user')->get();
+        $user  = $request->user();
+
+        $appointments = Appointment::whereStatus('pending')->with('service.user')->when($user->hasRole('technician'), function ($query) use ($user) {
+            $query->whereHas('technicians', function ($q) use ($user) {
+                $q->where('user_id', $user->id);
+            });
+        })->get();
 
         return view('dashboard.admin.appointment.pending', compact('appointments'));
     }
@@ -22,9 +28,15 @@ class AppointmentAdminController extends Controller
     /**
      * Display a listing of progress's status order appointment.
      */
-    public function progress()
+    public function progress(Request $request)
     {
-        $appointments = Appointment::whereStatus('progress')->with('service.user')->get();
+        $user  = $request->user();
+
+        $appointments = Appointment::whereStatus('progress')->with('service.user')->when($user->hasRole('technician'), function ($query) use ($user) {
+            $query->whereHas('technicians', function ($q) use ($user) {
+                $q->where('user_id', $user->id);
+            });
+        })->get();
 
         return view('dashboard.admin.appointment.progress', compact('appointments'));
     }
@@ -32,9 +44,15 @@ class AppointmentAdminController extends Controller
     /**
      * Display a listing of complete's status order appointment.
      */
-    public function complete()
+    public function complete(Request $request)
     {
-        $appointments = Appointment::whereStatus('complete')->with('service.user')->get();
+        $user  = $request->user();
+
+        $appointments = Appointment::whereStatus('complete')->with('service.user')->when($user->hasRole('technician'), function ($query) use ($user) {
+            $query->whereHas('technicians', function ($q) use ($user) {
+                $q->where('user_id', $user->id);
+            });
+        })->get();
 
         return view('dashboard.admin.appointment.complete', compact('appointments'));
     }

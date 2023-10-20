@@ -37,11 +37,11 @@ Route::middleware('auth')->group(function () {
             Route::get('/appointment/{appointment}/technician', [AppointmentAdminController::class, 'create'])->name('appointment.technician');
             Route::resource('service', ServiceAdminController::class)->except('index', 'show', 'destroy');
             Route::post('/appointment/{appointment}/technician', [AppointmentAdminController::class, 'store']);
-            Route::get('admin/appointment/pending', [AppointmentAdminController::class, 'pending'])->name('admin.appointment.pending');
         });
+        Route::get('admin/appointment/pending', [AppointmentAdminController::class, 'pending'])->name('admin.appointment.pending');
         Route::get('admin/appointment/progress', [AppointmentAdminController::class, 'progress'])->name('admin.appointment.progress');
         Route::get('admin/appointment/complete', [AppointmentAdminController::class, 'complete'])->name('admin.appointment.complete');
-        Route::patch('/admin/appointment/{appointment}', [AppointmentAdminController::class, 'update'])->name('admin.appointment.update');
+        Route::patch('admin/appointment/{appointment}', [AppointmentAdminController::class, 'update'])->name('admin.appointment.update');
 
         Route::middleware('role:admin')->group(function () {
             Route::resource('technician', TechnicianController::class)->parameters([

@@ -77,14 +77,16 @@
                         </div>
                     </div>
                     <div class="card-footer">
-                        @role('admin')
+                        @hasanyrole('admin|technician')
                             <div class="row mb-4">
                                 <div class="col-12">
                                     <div class="text-dark text-capitalize fw-bold mb-2">Technician</div>
-                                    <a class="btn btn-info btn-sm mb-3 text-white"
-                                        href="{{ route('admin.appointment.technician', $appointment) }}">
-                                        Add/Update Technician
-                                    </a>
+                                    @role('admin')
+                                        <a class="btn btn-info btn-sm mb-3 text-white"
+                                            href="{{ route('admin.appointment.technician', $appointment) }}">
+                                            Add/Update Technician
+                                        </a>
+                                    @endrole
                                     <ul class="list-group">
                                         @forelse ($appointment->technicians as $technician)
                                             <li class="list-group-item">{{ $loop->iteration }}. {{ $technician->user->name }}
@@ -95,7 +97,7 @@
                                     </ul>
                                 </div>
                             </div>
-                        @endrole
+                        @endhasanyrole
                         <div class="row mb-4">
                             <div class="col-12">
                                 <div class="text-dark text-capitalize fw-bold mb-2">Description</div>
