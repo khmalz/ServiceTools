@@ -121,4 +121,44 @@ class ServiceClientController extends Controller
             return back()->with('error', 'Failed to save changes: ' . $e->getMessage());
         }
     }
+
+    /**
+     * Cancel data service from client request.
+     */
+    public function cancel(Request $request, Service $service)
+    {
+        abort_if($service->user_id != $request->user()->id, 403);
+
+        $request->validate([
+            'cancel' => ['required']
+        ]);
+
+        $service->update([
+            'status' => "cancel"
+        ]);
+
+        if ($service->appointment) {
+            $service->appointment()->delete();
+        }
+
+        return to_route("service.show", $service)->with('success', 'Successfully cancel a order service');
+    }
+
+    /**
+     * Active data service from client request.
+     */
+    public function active(Request $request, Service $service)
+    {
+        abort_if($service->user_id != $request->user()->id, 403);
+
+        $request->validate([
+            'active' => ['required']
+        ]);
+
+        $service->update([
+            'status' => "pending"
+        ]);
+
+        return to_route("service.show", $service)->with('success', 'Successfully active a order service');
+    }
 }

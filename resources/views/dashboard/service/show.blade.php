@@ -31,11 +31,13 @@
                             </small>
                         </div>
                         @role('client')
-                            <div>
-                                <a class="btn btn-info btn-sm text-white" href="{{ route('service.edit', $service->id) }}">
-                                    Update Order
-                                </a>
-                            </div>
+                            @if ($service->status != 'cancel')
+                                <div>
+                                    <a class="btn btn-info btn-sm text-white" href="{{ route('service.edit', $service->id) }}">
+                                        Update Order
+                                    </a>
+                                </div>
+                            @endif
                         @endrole
                     </div>
                     <div class="card-body">
@@ -93,12 +95,83 @@
                                                     class="badge text-bg-primary">See
                                                     schedule?</a></td>
                                         </tr>
+                                    @elseif($service->work == 'home' && empty($service->appointment))
+                                        <tr>
+                                            <td></td>
+                                            <td class="fw-semibold text-capitalize text-end"><a
+                                                    href="{{ route('appointment.create', $service) }}"
+                                                    class="badge text-bg-primary">Make a
+                                                    schedule?</a></td>
+                                        </tr>
                                     @endif
                                 </tbody>
                             </table>
                         </div>
                     </div>
                     <div class="card-footer">
+                        @if ($service->status == 'pending')
+                            <div class="row mb-2">
+                                <div class="col-12">
+                                    <button class="btn btn-sm btn-danger text-white" data-bs-toggle="modal"
+                                        data-bs-target="#modalCancel{{ $service->id }}">
+                                        Cancel Order
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="modal fade" id="modalCancel{{ $service->id }}" tabindex="-1"
+                                aria-labelledby="modalCancelLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title text-dark" id="modalCancelLabel">Apakah Kamu Yakin?
+                                            </h5>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Cancel</button>
+                                            <form action="{{ route('service.cancel', $service->id) }}" method="POST"
+                                                class="d-inline">
+                                                @csrf
+                                                @method('patch')
+                                                <input type="hidden" name="cancel" value="true">
+                                                <button type="submit" class="btn btn-danger">Cancel Order</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @elseif($service->status == 'cancel')
+                            <div class="row mb-2">
+                                <div class="col-12">
+                                    <button class="btn btn-sm btn-primary text-white" data-bs-toggle="modal"
+                                        data-bs-target="#modalActive{{ $service->id }}">
+                                        Active Order
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="modal fade" id="modalActive{{ $service->id }}" tabindex="-1"
+                                aria-labelledby="modalActiveLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title text-dark" id="modalActiveLabel">Apakah Kamu Yakin?
+                                            </h5>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Cancel</button>
+                                            <form action="{{ route('service.active', $service->id) }}" method="POST"
+                                                class="d-inline">
+                                                @csrf
+                                                @method('patch')
+                                                <input type="hidden" name="active" value="true">
+                                                <button type="submit" class="btn btn-primary">Active Order</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
                         <div class="row mb-4">
                             <div class="col-12">
                                 <div class="text-dark text-capitalize fw-bold mb-2">Description</div>

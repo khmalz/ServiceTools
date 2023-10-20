@@ -81,23 +81,25 @@
                         </div>
                     </div>
                     <div class="card-footer">
-                        <div class="row mb-4">
-                            <div class="col-12">
-                                <div class="text-dark text-capitalize fw-bold mb-2">Technician</div>
-                                <a class="btn btn-info btn-sm mb-3 text-white"
-                                    href="{{ route('admin.appointment.technician', $appointment) }}">
-                                    Add/Update Technician
-                                </a>
-                                <ul class="list-group">
-                                    @forelse ($appointment->technicians as $technician)
-                                        <li class="list-group-item">{{ $loop->iteration }}. {{ $technician->user->name }}
-                                        </li>
-                                    @empty
-                                        <li class="list-group-item">Not Technician</li>
-                                    @endforelse
-                                </ul>
+                        @role('admin')
+                            <div class="row mb-4">
+                                <div class="col-12">
+                                    <div class="text-dark text-capitalize fw-bold mb-2">Technician</div>
+                                    <a class="btn btn-info btn-sm mb-3 text-white"
+                                        href="{{ route('admin.appointment.technician', $appointment) }}">
+                                        Add/Update Technician
+                                    </a>
+                                    <ul class="list-group">
+                                        @forelse ($appointment->technicians as $technician)
+                                            <li class="list-group-item">{{ $loop->iteration }}. {{ $technician->user->name }}
+                                            </li>
+                                        @empty
+                                            <li class="list-group-item">Not Technician</li>
+                                        @endforelse
+                                    </ul>
+                                </div>
                             </div>
-                        </div>
+                        @endrole
                         <div class="row mb-4">
                             <div class="col-12">
                                 <div class="text-dark text-capitalize fw-bold mb-2">Description</div>

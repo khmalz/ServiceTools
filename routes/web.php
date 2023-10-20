@@ -50,9 +50,13 @@ Route::middleware('auth')->group(function () {
 
     Route::middleware('role:client')->group(function () {
         Route::get('/service/list', [ServiceClientController::class, 'list'])->name('service.list');
+        Route::patch('/service/{service}/cancel', [ServiceClientController::class, 'cancel'])->name('service.cancel');
+        Route::patch('/service/{service}/active', [ServiceClientController::class, 'active'])->name('service.active');
         Route::resource('service', ServiceClientController::class)->except('index', 'show', 'destroy');
 
         Route::get('/appointment/list', [AppointmentClientController::class, 'list'])->name('appointment.list');
+        Route::get('/appointment/{service}/create', [AppointmentClientController::class, 'create'])->name('appointment.create');
+        Route::post('/appointment/{service}', [AppointmentClientController::class, 'store'])->name('appointment.store');
 
         Route::get('/profile/{user}', [ProfileController::class, 'edit'])->name('profile.edit');
         Route::patch('/profile/{user}', [ProfileController::class, 'update'])->name('profile.update');
