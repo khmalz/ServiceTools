@@ -109,69 +109,71 @@
                         </div>
                     </div>
                     <div class="card-footer">
-                        @if ($service->status == 'pending')
-                            <div class="row mb-2">
-                                <div class="col-12">
-                                    <button class="btn btn-sm btn-danger text-white" data-bs-toggle="modal"
-                                        data-bs-target="#modalCancel{{ $service->id }}">
-                                        Cancel Order
-                                    </button>
+                        @role('client')
+                            @if ($service->status == 'pending')
+                                <div class="row mb-2">
+                                    <div class="col-12">
+                                        <button class="btn btn-sm btn-danger text-white" data-bs-toggle="modal"
+                                            data-bs-target="#modalCancel{{ $service->id }}">
+                                            Cancel Order
+                                        </button>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="modal fade" id="modalCancel{{ $service->id }}" tabindex="-1"
-                                aria-labelledby="modalCancelLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title text-dark" id="modalCancelLabel">Apakah Kamu Yakin?
-                                            </h5>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary"
-                                                data-bs-dismiss="modal">Cancel</button>
-                                            <form action="{{ route('service.cancel', $service->id) }}" method="POST"
-                                                class="d-inline">
-                                                @csrf
-                                                @method('patch')
-                                                <input type="hidden" name="cancel" value="true">
-                                                <button type="submit" class="btn btn-danger">Cancel Order</button>
-                                            </form>
+                                <div class="modal fade" id="modalCancel{{ $service->id }}" tabindex="-1"
+                                    aria-labelledby="modalCancelLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title text-dark" id="modalCancelLabel">Apakah Kamu Yakin?
+                                                </h5>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">Cancel</button>
+                                                <form action="{{ route('service.cancel', $service->id) }}" method="POST"
+                                                    class="d-inline">
+                                                    @csrf
+                                                    @method('patch')
+                                                    <input type="hidden" name="cancel" value="true">
+                                                    <button type="submit" class="btn btn-danger">Cancel Order</button>
+                                                </form>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        @elseif($service->status == 'cancel')
-                            <div class="row mb-2">
-                                <div class="col-12">
-                                    <button class="btn btn-sm btn-primary text-white" data-bs-toggle="modal"
-                                        data-bs-target="#modalActive{{ $service->id }}">
-                                        Active Order
-                                    </button>
+                            @elseif($service->status == 'cancel')
+                                <div class="row mb-2">
+                                    <div class="col-12">
+                                        <button class="btn btn-sm btn-primary text-white" data-bs-toggle="modal"
+                                            data-bs-target="#modalActive{{ $service->id }}">
+                                            Active Order
+                                        </button>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="modal fade" id="modalActive{{ $service->id }}" tabindex="-1"
-                                aria-labelledby="modalActiveLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title text-dark" id="modalActiveLabel">Apakah Kamu Yakin?
-                                            </h5>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary"
-                                                data-bs-dismiss="modal">Cancel</button>
-                                            <form action="{{ route('service.active', $service->id) }}" method="POST"
-                                                class="d-inline">
-                                                @csrf
-                                                @method('patch')
-                                                <input type="hidden" name="active" value="true">
-                                                <button type="submit" class="btn btn-primary">Active Order</button>
-                                            </form>
+                                <div class="modal fade" id="modalActive{{ $service->id }}" tabindex="-1"
+                                    aria-labelledby="modalActiveLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title text-dark" id="modalActiveLabel">Apakah Kamu Yakin?
+                                                </h5>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">Cancel</button>
+                                                <form action="{{ route('service.active', $service->id) }}" method="POST"
+                                                    class="d-inline">
+                                                    @csrf
+                                                    @method('patch')
+                                                    <input type="hidden" name="active" value="true">
+                                                    <button type="submit" class="btn btn-primary">Active Order</button>
+                                                </form>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        @endif
+                            @endif
+                        @endrole
                         <div class="row mb-4">
                             <div class="col-12">
                                 <div class="text-dark text-capitalize fw-bold mb-2">Description</div>

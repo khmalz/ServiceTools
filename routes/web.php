@@ -28,24 +28,26 @@ Route::get('/', fn () => view('home'))->name('home');
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', DashboardController::class)->name('dashboard');
 
-    Route::middleware('role:admin')->group(function () {
+    Route::middleware('role:admin|technician')->group(function () {
         Route::get('admin/service/cancel', [ServiceAdminController::class, 'cancel'])->name('admin.service.cancel');
         Route::get('admin/service/pending', [ServiceAdminController::class, 'pending'])->name('admin.service.pending');
         Route::get('admin/service/progress', [ServiceAdminController::class, 'progress'])->name('admin.service.progress');
         Route::get('admin/service/complete', [ServiceAdminController::class, 'complete'])->name('admin.service.complete');
         Route::prefix('admin')->as('admin.')->group(function () {
-            Route::resource('service', ServiceAdminController::class)->except('index', 'show', 'destroy');
             Route::get('/appointment/{appointment}/technician', [AppointmentAdminController::class, 'create'])->name('appointment.technician');
+            Route::resource('service', ServiceAdminController::class)->except('index', 'show', 'destroy');
             Route::post('/appointment/{appointment}/technician', [AppointmentAdminController::class, 'store']);
+            Route::get('admin/appointment/pending', [AppointmentAdminController::class, 'pending'])->name('admin.appointment.pending');
         });
-        Route::get('admin/appointment/pending', [AppointmentAdminController::class, 'pending'])->name('admin.appointment.pending');
         Route::get('admin/appointment/progress', [AppointmentAdminController::class, 'progress'])->name('admin.appointment.progress');
         Route::get('admin/appointment/complete', [AppointmentAdminController::class, 'complete'])->name('admin.appointment.complete');
         Route::patch('/admin/appointment/{appointment}', [AppointmentAdminController::class, 'update'])->name('admin.appointment.update');
 
-        Route::resource('technician', TechnicianController::class)->parameters([
-            'technician' => 'user'
-        ]);
+        Route::middleware('role:admin')->group(function () {
+            Route::resource('technician', TechnicianController::class)->parameters([
+                'technician' => 'user'
+            ]);
+        });
     });
 
     Route::middleware('role:client')->group(function () {

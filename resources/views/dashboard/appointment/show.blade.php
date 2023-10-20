@@ -1,9 +1,5 @@
 @extends('dashboard.layouts.main')
 
-@push('styles')
-    <link rel="stylesheet" href="{{ asset('admin/assets/vendor/datetime-picker/bootstrap-datetimepicker.min.css') }}">
-@endpush
-
 @section('content')
     <div class="pagetitle">
         <h1>Appointment</h1>
@@ -133,8 +129,3 @@
         </div>
     </section>
 @endsection
-
-@push('scripts')
-    <script src="{{ asset('admin/assets/vendor/datetime-picker/bootstrap-datetimepicker.min.js') }}"></script>
-    <script src="{{ asset('admin/assets/vendor/datetime-picker/bootstrap-datetimepicker.id.js') }}"></script>
-@endpush
