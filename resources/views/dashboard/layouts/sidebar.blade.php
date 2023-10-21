@@ -107,7 +107,8 @@
              </li>
 
              <li class="nav-item">
-                 <a class="nav-link collapsed" href="{{ url('users-profile.html') }}">
+                 <a class="nav-link {{ request()->routeIs('admin.activity') ? null : 'collapsed' }}"
+                     href="{{ route('admin.activity') }}">
                      <i class='bx bx-history'></i>
                      <span>Activity</span>
                  </a>
