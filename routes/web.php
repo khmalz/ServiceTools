@@ -35,11 +35,7 @@ Route::middleware('auth')->group(function () {
         Route::get('admin/service/pending', [ServiceAdminController::class, 'pending'])->name('admin.service.pending');
         Route::get('admin/service/progress', [ServiceAdminController::class, 'progress'])->name('admin.service.progress');
         Route::get('admin/service/complete', [ServiceAdminController::class, 'complete'])->name('admin.service.complete');
-        Route::prefix('admin')->as('admin.')->group(function () {
-            Route::get('/appointment/{appointment}/technician', [AppointmentAdminController::class, 'create'])->name('appointment.technician');
-            Route::patch('service/{service}', [ServiceAdminController::class, 'update'])->name('service.update');
-            Route::post('/appointment/{appointment}/technician', [AppointmentAdminController::class, 'store']);
-        });
+        Route::patch('admin/service/{service}', [ServiceAdminController::class, 'update'])->name('admin.service.update');
         Route::get('admin/appointment/pending', [AppointmentAdminController::class, 'pending'])->name('admin.appointment.pending');
         Route::get('admin/appointment/progress', [AppointmentAdminController::class, 'progress'])->name('admin.appointment.progress');
         Route::get('admin/appointment/complete', [AppointmentAdminController::class, 'complete'])->name('admin.appointment.complete');
@@ -49,6 +45,8 @@ Route::middleware('auth')->group(function () {
         Route::post('inbox/read/{notifications?}', [InboxController::class, 'read'])->name('admin.inbox.read');
 
         Route::middleware('role:admin')->group(function () {
+            Route::get('/appointment/{appointment}/technician', [AppointmentAdminController::class, 'create'])->name('admin.appointment.technician');
+            Route::post('/appointment/{appointment}/technician', [AppointmentAdminController::class, 'store']);
             Route::resource('technician', TechnicianController::class)->parameters([
                 'technician' => 'user'
             ]);

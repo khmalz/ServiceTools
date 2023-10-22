@@ -63,56 +63,59 @@
                                         <td><span class="badge bg-{{ $statusClass }}">{{ $appointment->status }}</span>
                                         </td>
                                         <td>
-                                            <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
-                                                data-bs-target="#modalUpdate{{ $appointment->id }}">
-                                                <i class='bx bxs-pencil'></i>
-                                                Edit
-                                            </button>
+                                            @role('technician')
+                                                <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
+                                                    data-bs-target="#modalUpdate{{ $appointment->id }}">
+                                                    <i class='bx bxs-pencil'></i>
+                                                    Edit
+                                                </button>
+                                                <div class="modal fade" id="modalUpdate{{ $appointment->id }}" tabindex="-1"
+                                                    aria-labelledby="modalUpdateLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="modalUpdateLabel">Apakah Kamu Yakin?
+                                                                </h5>
+                                                            </div>
+                                                            <form
+                                                                action="{{ route('admin.appointment.update', $appointment->id) }}"
+                                                                method="POST" class="d-inline">
+                                                                @csrf
+                                                                @method('patch')
+                                                                <div class="modal-body">
+                                                                    <div class="form-group">
+                                                                        <label for="statusSelect">Status:</label>
+                                                                        <select class="form-control" id="statusSelect"
+                                                                            name="status">
+                                                                            <option
+                                                                                {{ old('status', $appointment->status) == 'pending' ? 'selected' : null }}
+                                                                                value="pending">Pending</option>
+                                                                            <option
+                                                                                {{ old('status', $appointment->status) == 'progress' ? 'selected' : null }}
+                                                                                value="progress">Progress</option>
+                                                                            <option
+                                                                                {{ old('status', $appointment->status) == 'complete' ? 'selected' : null }}
+                                                                                value="complete">Complete</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary"
+                                                                        data-bs-dismiss="modal">Cancel</button>
+                                                                    <button type="submit"
+                                                                        class="btn btn-primary">Update</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @endrole
                                             <a class="btn btn-info btn-sm text-white"
                                                 href="{{ route('appointment.show', $appointment->id) }}">
                                                 <i class='bx bxs-info-circle'></i>
                                                 Show
                                             </a>
                                         </td>
-                                        <div class="modal fade" id="modalUpdate{{ $appointment->id }}" tabindex="-1"
-                                            aria-labelledby="modalUpdateLabel" aria-hidden="true">
-                                            <div class="modal-dialog modal-dialog-centered">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="modalUpdateLabel">Apakah Kamu Yakin?
-                                                        </h5>
-                                                    </div>
-                                                    <form
-                                                        action="{{ route('admin.appointment.update', $appointment->id) }}"
-                                                        method="POST" class="d-inline">
-                                                        @csrf
-                                                        @method('patch')
-                                                        <div class="modal-body">
-                                                            <div class="form-group">
-                                                                <label for="statusSelect">Status:</label>
-                                                                <select class="form-control" id="statusSelect"
-                                                                    name="status">
-                                                                    <option
-                                                                        {{ old('status', $appointment->status) == 'pending' ? 'selected' : null }}
-                                                                        value="pending">Pending</option>
-                                                                    <option
-                                                                        {{ old('status', $appointment->status) == 'progress' ? 'selected' : null }}
-                                                                        value="progress">Progress</option>
-                                                                    <option
-                                                                        {{ old('status', $appointment->status) == 'complete' ? 'selected' : null }}
-                                                                        value="complete">Complete</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary"
-                                                                data-bs-dismiss="modal">Cancel</button>
-                                                            <button type="submit" class="btn btn-primary">Update</button>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
                                     </tr>
                                 @endforeach
                             </tbody>
