@@ -126,6 +126,18 @@
                  </a>
              </li>
          @endrole
+
+         @role('technician')
+             <li class="nav-heading">Notification</li>
+
+             <li class="nav-item">
+                 <a class="nav-link {{ request()->routeIs('admin.inbox.*') ? null : 'collapsed' }}"
+                     href="{{ route('admin.inbox.index') }}">
+                     <i class="bi bi-info-circle"></i>
+                     <span>Inbox</span>
+                 </a>
+             </li>
+         @endrole
      </ul>
 
  </aside>

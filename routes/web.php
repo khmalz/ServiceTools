@@ -1,16 +1,17 @@
 <?php
 
-use App\Http\Controllers\ActivityLogController;
-use App\Http\Controllers\Admin\ServiceAdminController;
-use App\Http\Controllers\Admin\AppointmentAdminController;
-use App\Http\Controllers\AppointmentShowController;
-use App\Http\Controllers\ServiceShowController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Admin\InboxController;
+use App\Http\Controllers\ServiceShowController;
 use App\Http\Controllers\ServiceClientController;
 use App\Http\Controllers\Auth\DashboardController;
+use App\Http\Controllers\AppointmentShowController;
 use App\Http\Controllers\Admin\TechnicianController;
+use App\Http\Controllers\Admin\ActivityLogController;
 use App\Http\Controllers\AppointmentClientController;
+use App\Http\Controllers\Admin\ServiceAdminController;
+use App\Http\Controllers\Admin\AppointmentAdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,6 +45,8 @@ Route::middleware('auth')->group(function () {
         Route::get('admin/appointment/complete', [AppointmentAdminController::class, 'complete'])->name('admin.appointment.complete');
         Route::patch('admin/appointment/{appointment}', [AppointmentAdminController::class, 'update'])->name('admin.appointment.update');
         Route::get('/admin/activity', ActivityLogController::class)->name('admin.activity');
+        Route::get('/admin/inbox', [InboxController::class, 'index'])->name('admin.inbox.index');
+        Route::post('inbox/read/{notifications?}', [InboxController::class, 'read'])->name('admin.inbox.read');
 
         Route::middleware('role:admin')->group(function () {
             Route::resource('technician', TechnicianController::class)->parameters([
