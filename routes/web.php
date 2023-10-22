@@ -43,7 +43,7 @@ Route::middleware('auth')->group(function () {
         Route::get('admin/appointment/progress', [AppointmentAdminController::class, 'progress'])->name('admin.appointment.progress');
         Route::get('admin/appointment/complete', [AppointmentAdminController::class, 'complete'])->name('admin.appointment.complete');
         Route::patch('admin/appointment/{appointment}', [AppointmentAdminController::class, 'update'])->name('admin.appointment.update');
-        Route::get('/admin/activiy', ActivityLogController::class)->name('admin.activity');
+        Route::get('/admin/activity', ActivityLogController::class)->name('admin.activity');
 
         Route::middleware('role:admin')->group(function () {
             Route::resource('technician', TechnicianController::class)->parameters([
