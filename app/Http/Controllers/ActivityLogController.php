@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Spatie\Activitylog\Models\Activity;
 
 class ActivityLogController extends Controller
 {
@@ -11,6 +12,8 @@ class ActivityLogController extends Controller
      */
     public function __invoke(Request $request)
     {
-        return view('dashboard.admin.activity');
+        $activities = Activity::with('causer', 'subject')->latest()->paginate(10);
+
+        return view('dashboard.admin.activity', compact('activities'));
     }
 }

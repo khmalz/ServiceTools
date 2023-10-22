@@ -20,64 +20,40 @@
                     <div class="card-body">
                         <h5 class="card-title">Activity</h5>
 
-                        <div class="mb-4">
-                            <p>Today</p>
-                            <div class="activity">
-                                <div class="activity-item d-flex">
-                                    <div class="activite-label">12:30 | 32m ago</div>
-                                    <i class='bi bi-circle-fill activity-badge text-success align-self-start'></i>
-                                    <div class="activity-content">
-                                        Quia quae rerum <a href="#" class="fw-bold text-dark">explicabo officiis</a>
-                                        beatae
-                                    </div>
+                        @forelse ($activities->groupBy(fn($acty) => $acty->created_at->format('d-m-Y')) as $date => $groupedActivities)
+                            <div class="mb-4">
+                                <p> {{ \App\Helpers\DateHelper::getActivityDateLabel($date) }}
+                                </p>
+                                <div class="activity">
+                                    @foreach ($groupedActivities as $activity)
+                                        <div class="activity-item d-flex">
+                                            <div class="activite-label">12:30 |
+                                                {{ $activity->created_at->format('d M Y') }}</div>
+                                            <i class='bi bi-circle-fill activity-badge text-primary align-self-start'></i>
+                                            <div class="activity-content">
+                                                <span class="fw-semibold">{{ $activity->causer->name }}</span> &raquo;
+                                                {{ $activity->description }} for ID
+                                                #{{ $activity->properties['order_id'] }}
+                                            </div>
+                                        </div>
+                                    @endforeach
                                 </div>
-                                <!-- End activity item-->
-                                <div class="activity-item d-flex">
-                                    <div class="activite-label">12:30 | 56m ago</div>
-                                    <i class='bi bi-circle-fill activity-badge text-danger align-self-start'></i>
-                                    <div class="activity-content">
-                                        Voluptatem blanditiis blanditiis eveniet
-                                    </div>
-                                </div>
-                                <!-- End activity item-->
-                                <div class="activity-item d-flex">
-                                    <div class="activite-label">12:30 | 2h ago</div>
-                                    <i class='bi bi-circle-fill activity-badge text-primary align-self-start'></i>
-                                    <div class="activity-content">
-                                        Voluptates corrupti molestias voluptatem
-                                    </div>
-                                </div>
-                                <!-- End activity item-->
-                                <div class="activity-item d-flex">
-                                    <div class="activite-label">12:30 | 1d ago</div>
-                                    <i class='bi bi-circle-fill activity-badge text-info align-self-start'></i>
-                                    <div class="activity-content">
-                                        Tempore autem saepe <a href="#" class="fw-bold text-dark">occaecati
-                                            voluptatem</a>
-                                        tempore
-                                    </div>
-                                </div>
-                                <!-- End activity item-->
-                                <div class="activity-item d-flex">
-                                    <div class="activite-label">12:30 | 2yr ago</div>
-                                    <i class='bi bi-circle-fill activity-badge text-warning align-self-start'></i>
-                                    <div class="activity-content">
-                                        Est sit eum reiciendis exercitationem
-                                    </div>
-                                </div>
-                                <!-- End activity item-->
-                                <div class="activity-item d-flex">
-                                    <div class="activite-label">12:30 | 4w ago</div>
-                                    <i class='bi bi-circle-fill activity-badge text-muted align-self-start'></i>
-                                    <div class="activity-content">
-                                        Dicta dolorem harum nulla eius. Ut quidem quidem sit quas
-                                    </div>
-                                </div>
-                                <!-- End activity item-->
+                            </div>
+                        @empty
+                            <div>
+                                <p>
+                                    No Activity
+                                </p>
+                            </div>
+                        @endforelse
+                        <div class="card-footer pb-0">
+                            <div class="d-flex flex-column justify-content-center my-2">
+                                {{ $activities->links() }}
                             </div>
                         </div>
                     </div>
                 </div>
+
             </div>
     </section>
 @endsection

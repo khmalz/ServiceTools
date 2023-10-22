@@ -49,30 +49,6 @@ class ServiceAdminController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Service $service)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, Service $service)
@@ -85,14 +61,15 @@ class ServiceAdminController extends Controller
             'status' => $request->status
         ]);
 
-        return to_route("admin.service.$request->status")->with('success', 'Successfully update status a order service');
-    }
+        activity()
+            ->performedOn($service)
+            ->causedBy($request->user())
+            ->withProperties([
+                'status' => $request->status,
+                'order_id' => $service->order_id
+            ])
+            ->log('Update Status Service Order');
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Service $service)
-    {
-        //
+        return to_route("admin.service.$request->status")->with('success', 'Successfully update status a order service');
     }
 }

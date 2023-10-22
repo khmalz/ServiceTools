@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use App\Models\Appointment;
 use App\Models\Technician;
+use App\Models\Appointment;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class AppointmentAdminController extends Controller
 {
@@ -59,7 +59,7 @@ class AppointmentAdminController extends Controller
 
     public function create(Request $request, Appointment $appointment)
     {
-        $appointment->load('technicians.user', 'appointment');
+        $appointment->load('technicians.user', 'service');
         $technicians = Technician::with('user')->whereNotIn('id', $appointment->technicians->pluck('id'))->get();
 
         return view('dashboard.admin.appointment.add_technician', compact('appointment', 'technicians'));
@@ -74,6 +74,15 @@ class AppointmentAdminController extends Controller
 
         $appointment->technicians()->sync($request->technicians);
 
+        activity()
+            ->performedOn($appointment)
+            ->causedBy($request->user())
+            ->withProperties([
+                'status' => "assign",
+                'order_id' => $appointment->service->order_id
+            ])
+            ->log('Assign Appointment Task for Technician');
+
         return to_route('appointment.show', $appointment)->with('success', 'Successfully add/update technician to order');
     }
 
@@ -86,6 +95,15 @@ class AppointmentAdminController extends Controller
         $appointment->update([
             'status' => $request->status
         ]);
+
+        activity()
+            ->performedOn($appointment)
+            ->causedBy($request->user())
+            ->withProperties([
+                'status' => $request->status,
+                'order_id' => $appointment->service->order_id
+            ])
+            ->log('Update Status Appointment Order');
 
         return to_route("admin.appointment.$request->status")->with('success', 'Successfully update status a order appointment');
     }
