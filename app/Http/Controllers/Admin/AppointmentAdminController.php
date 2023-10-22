@@ -6,6 +6,7 @@ use App\Models\Technician;
 use App\Models\Appointment;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Notifications\InboxTechnicianNotification;
 
 class AppointmentAdminController extends Controller
 {
@@ -82,6 +83,12 @@ class AppointmentAdminController extends Controller
                 'order_id' => $appointment->service->order_id
             ])
             ->log('Assign Appointment Task for Technician');
+
+        foreach ($request->technicians as $technician_id) {
+            $technician = Technician::find($technician_id);
+            $technician->user->notify(new InboxTechnicianNotification('admin', $appointment->service->id, $appointment->schedule, $appointment->status));
+        }
+
 
         return to_route('appointment.show', $appointment)->with('success', 'Successfully add/update technician to order');
     }
