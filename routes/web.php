@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\ActivityLogController;
 use App\Http\Controllers\AppointmentClientController;
 use App\Http\Controllers\Admin\ServiceAdminController;
 use App\Http\Controllers\Admin\AppointmentAdminController;
+use App\Http\Controllers\Admin\CalenderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,6 +44,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/admin/activity', ActivityLogController::class)->name('admin.activity');
         Route::get('/admin/inbox', [InboxController::class, 'index'])->name('admin.inbox.index');
         Route::post('inbox/read/{notifications?}', [InboxController::class, 'read'])->name('admin.inbox.read');
+        Route::get('/admin/calender', CalenderController::class)->name('admin.calender');
 
         Route::middleware('role:admin')->group(function () {
             Route::get('/appointment/{appointment}/technician', [AppointmentAdminController::class, 'create'])->name('admin.appointment.technician');

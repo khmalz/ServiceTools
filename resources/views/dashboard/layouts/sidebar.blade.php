@@ -113,6 +113,13 @@
                      <span>Activity</span>
                  </a>
              </li>
+             <li class="nav-item">
+                 <a class="nav-link {{ request()->routeIs('admin.calender') ? null : 'collapsed' }}"
+                     href="{{ route('admin.calender') }}">
+                     <i class='bx bxs-calendar'></i>
+                     <span>Calender</span>
+                 </a>
+             </li>
          @endhasanyrole
 
          @role('admin')
