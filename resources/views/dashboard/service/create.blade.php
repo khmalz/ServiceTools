@@ -239,7 +239,7 @@
                 const inputHtml = `
                     <div class="form-group mt-3">
                         <input type="text" readonly class="form-control" id="alamat" placeholder="Alamat Belum Diisi"
-                            disabled value="{{ $user->client->alamat }}" required>
+                            disabled value="{{ $user->client?->alamat }}" required>
                         <small>
                             <div id="alamatHelpBlock" class="form-text">
                                 Update profil jika ingin mengubah
@@ -248,7 +248,7 @@
                     </div>
                     <div class="form-group mt-3">
                         <input name="schedule" type="datetime" min="{{ date('Y-m-d 00:00') }}"
-                            value="{{ old('schedule') }}" class="form-control" id="schedule" placeholder="Waktu" />
+                            value="{{ old('schedule') }}" class="form-control" id="schedule" placeholder="Waktu" autocomplete="off" />
                     </div>
                 `;
                 alamatWaktuContainer.html(inputHtml); // Tambahkan input ke dalam kontainer
