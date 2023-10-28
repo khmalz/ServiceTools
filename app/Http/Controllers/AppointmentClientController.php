@@ -23,6 +23,10 @@ class AppointmentClientController extends Controller
      */
     public function create(Service $service)
     {
+        if ($service->appointment) {
+            return to_route('appointment.edit', $service->appointment);
+        }
+
         $service->load('user.client');
 
         return view('dashboard.appointment.create', compact('service'));
@@ -42,5 +46,31 @@ class AppointmentClientController extends Controller
         ]);
 
         return to_route('appointment.show', $service->appointment)->with('success', 'Successfully created a appointment');
+    }
+
+    /**
+     * Display form update data appointment from client request.
+     */
+    public function edit(Appointment $appointment)
+    {
+        $appointment->load('service.user.client');
+
+        return view('dashboard.appointment.edit', compact('appointment'));
+    }
+
+    /**
+     * Update data appointment from client request.
+     */
+    public function update(Request $request, Appointment $appointment)
+    {
+        $request->validate([
+            'schedule' => ['required']
+        ]);
+
+        $appointment->update([
+            'schedule' => $request->schedule
+        ]);
+
+        return to_route('appointment.show', $appointment)->with('success', 'Successfully updated a appointment');
     }
 }

@@ -70,34 +70,42 @@
                                             <div class="fw-semibold">Schedule Date</div>
                                         </td>
                                         <td class="fw-semibold text-capitalize text-end">
-                                            {{ $appointment->schedule->format('d F Y h:i') }}</td>
+                                            {{ $appointment->schedule->format('d F Y H:i') }}</td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
+                        @hasanyrole('admin|technician')
+                            <button type="button" class="btn btn-warning btn-sm mt-3 text-white" href="#">
+                                Ajukan re-sechedule
+                            </button>
+                        @else
+                            <a href="{{ route('appointment.edit', $appointment) }}"
+                                class="btn btn-warning btn-sm mt-3 text-white" href="#">
+                                Re-sechedule
+                            </a>
+                        @endhasanyrole
                     </div>
                     <div class="card-footer">
-                        @hasanyrole('admin|technician')
-                            <div class="row mb-4">
-                                <div class="col-12">
-                                    <div class="text-dark text-capitalize fw-bold mb-2">Technician</div>
-                                    @role('admin')
-                                        <a class="btn btn-info btn-sm mb-3 text-white"
-                                            href="{{ route('admin.appointment.technician', $appointment) }}">
-                                            Add/Update Technician
-                                        </a>
-                                    @endrole
-                                    <ul class="list-group">
-                                        @forelse ($appointment->technicians as $technician)
-                                            <li class="list-group-item">{{ $loop->iteration }}. {{ $technician->user->name }}
-                                            </li>
-                                        @empty
-                                            <li class="list-group-item">Not Technician</li>
-                                        @endforelse
-                                    </ul>
-                                </div>
+                        <div class="row mb-4">
+                            <div class="col-12">
+                                <div class="text-dark text-capitalize fw-bold mb-2">Technician</div>
+                                @role('admin')
+                                    <a class="btn btn-info btn-sm mb-3 text-white"
+                                        href="{{ route('admin.appointment.technician', $appointment) }}">
+                                        Add/Update Technician
+                                    </a>
+                                @endrole
+                                <ul class="list-group">
+                                    @forelse ($appointment->technicians as $technician)
+                                        <li class="list-group-item">{{ $loop->iteration }}. {{ $technician->user->name }}
+                                        </li>
+                                    @empty
+                                        <li class="list-group-item">Not Technician</li>
+                                    @endforelse
+                                </ul>
                             </div>
-                        @endhasanyrole
+                        </div>
                         <div class="row mb-4">
                             <div class="col-12">
                                 <div class="text-dark text-capitalize fw-bold mb-2">Description</div>

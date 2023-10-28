@@ -46,7 +46,7 @@
                                         <td class="text-capitalize">{{ $appointment->service->user->name }}</td>
                                         <td class="text-capitalize">{{ $appointment->service->user->email }}</td>
                                         <td class="text-capitalize">{{ $appointment->service->type }}</td>
-                                        <td>{{ $appointment->schedule->format('d F Y h:i') }}</td>
+                                        <td>{{ $appointment->schedule->format('d F Y H:i') }}</td>
                                         <td>{{ $appointment->service->created_at->format('d F Y') }}</td>
                                         @php
                                             $statusClass = '';

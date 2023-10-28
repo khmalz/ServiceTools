@@ -42,7 +42,7 @@
                                         <th scope="row">{{ $loop->iteration }}</th>
                                         <td class="text-capitalize">{{ $appointment->service->order_id }}</td>
                                         <td class="text-capitalize">{{ $appointment->service->type }}</td>
-                                        <td>{{ $appointment->schedule->format('d F Y h:i') }}</td>
+                                        <td>{{ $appointment->schedule->format('d F Y H:i') }}</td>
                                         <td>{{ $appointment->service->created_at->format('d F Y') }}</td>
                                         @php
                                             $statusClass = '';

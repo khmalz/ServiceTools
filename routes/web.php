@@ -64,6 +64,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/appointment/list', [AppointmentClientController::class, 'list'])->name('appointment.list');
         Route::get('/appointment/{service}/create', [AppointmentClientController::class, 'create'])->name('appointment.create');
         Route::post('/appointment/{service}', [AppointmentClientController::class, 'store'])->name('appointment.store');
+        Route::get('/appointment/{appointment}/edit', [AppointmentClientController::class, 'edit'])->name('appointment.edit');
+        Route::patch('/appointment/{appointment}', [AppointmentClientController::class, 'update'])->name('appointment.update');
 
         Route::get('/profile/{user}', [ProfileController::class, 'edit'])->name('profile.edit');
         Route::patch('/profile/{user}', [ProfileController::class, 'update'])->name('profile.update');

@@ -34,7 +34,7 @@
                                 </div>
                                 <div class="col-md-6 form-group mt-md-0 mt-3">
                                     <input type="text" readonly class="form-control" id="schedule"
-                                        placeholder="Schedule" value="{{ $appointment->schedule->format('d F Y h:i') }}"
+                                        placeholder="Schedule" value="{{ $appointment->schedule->format('d F Y H:i') }}"
                                         disabled required>
                                 </div>
                             </div>
