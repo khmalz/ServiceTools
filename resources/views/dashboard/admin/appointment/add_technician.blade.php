@@ -33,7 +33,7 @@
                                         required>
                                 </div>
                                 <div class="col-md-6 form-group mt-md-0 mt-3">
-                                    <input type="email" readonly class="form-control" id="email"
+                                    <input type="text" readonly class="form-control" id="schedule"
                                         placeholder="Schedule" value="{{ $appointment->schedule->format('d F Y h:i') }}"
                                         disabled required>
                                 </div>
@@ -41,16 +41,25 @@
 
                             <label for="request" class="form-label fw-semibold">Technician</label>
                             <div class="form-group">
-                                <select class="form-select" name="technicians[]" id="multiple-select-field"
-                                    data-placeholder="Choose Technician" multiple>
+                                <select class="form-select @error('technicians') is-invalid @enderror" name="technicians[]"
+                                    id="multiple-select-field" data-placeholder="Choose Technician" multiple>
                                     @foreach ($appointment->technicians as $technician)
-                                        <option value="{{ $technician->id }}" selected>{{ $technician->user->name }}
+                                        <option value="{{ $technician->id }}" selected>{{ $technician->user->name }} -
+                                            Technician terpilih
                                         </option>
                                     @endforeach
                                     @foreach ($technicians as $technician)
-                                        <option value="{{ $technician->id }}">{{ $technician->user->name }}</option>
+                                        <option {{ $technician->disabled ? 'disabled' : null }}
+                                            value="{{ $technician->id }}">
+                                            {{ $technician->user->name }}
+                                            {{ $technician->disabled ? '- Ada jadwal bertabrakan' : null }}</option>
                                     @endforeach
                                 </select>
+                                @error('technicians')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                             </div>
                             <div class="mt-3 text-center"><button class="btn btn-primary" type="submit">Send</button>
                             </div>

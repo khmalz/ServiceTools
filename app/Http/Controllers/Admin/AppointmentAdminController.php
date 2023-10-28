@@ -7,6 +7,7 @@ use App\Models\Appointment;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Notifications\InboxTechnicianNotification;
+use Illuminate\Support\Carbon;
 
 class AppointmentAdminController extends Controller
 {
@@ -61,7 +62,23 @@ class AppointmentAdminController extends Controller
     public function create(Request $request, Appointment $appointment)
     {
         $appointment->load('technicians.user', 'service');
-        $technicians = Technician::with('user')->whereNotIn('id', $appointment->technicians->pluck('id'))->get();
+        $technicians = Technician::with('user', 'appointments:id,schedule')->whereNotIn('id', $appointment->technicians->pluck('id'))->get();
+
+        $schedule = $appointment->schedule;
+        $startTime = $schedule->subHours(3);
+        $endTime = $schedule->addHours(3);
+
+        // Lakukan perulangan untuk setiap Technician
+        foreach ($technicians as $technician) {
+            // Lakukan pengecekan apakah Technician memiliki jadwal yang berdekatan
+            $isConflict = $technician->appointments->contains(function ($appointmentItem) use ($startTime, $endTime) {
+                $apptTime = Carbon::parse($appointmentItem->schedule);
+                return $apptTime->copy()->subHours(3)->isBefore($endTime) && $apptTime->copy()->addHours(3)->isAfter($startTime);
+            });
+
+            // Jika ada konflik, tandai Technician sebagai nonaktif
+            $technician->disabled = $isConflict;
+        }
 
         return view('dashboard.admin.appointment.add_technician', compact('appointment', 'technicians'));
     }
@@ -69,7 +86,26 @@ class AppointmentAdminController extends Controller
     public function store(Request $request, Appointment $appointment)
     {
         $request->validate([
-            'technicians' => ['required', 'array', 'min:1'],
+            'technicians' => [
+                'required', 'array', 'min:1',
+                function ($attribute, $value, $fail) use ($appointment) {
+                    // Pengecekan rentang waktu 3 jam sebelum dan sesudah
+                    $startTime = $appointment->schedule->copy()->subHours(3);
+                    $endTime = $appointment->schedule->copy()->addHours(3);
+                    $conflict = Technician::whereIn('id', $value)
+                        ->whereHas('appointments', function ($query) use ($startTime, $endTime) {
+                            $query->where(function ($query) use ($startTime, $endTime) {
+                                $query->where('schedule', '>=', $startTime)
+                                    ->where('schedule', '<=', $endTime);
+                            });
+                        })
+                        ->count();
+
+                    if ($conflict > 0) {
+                        $fail('Choose a technician who is available within 3 hours before and after the scheduled appointment.');
+                    }
+                },
+            ],
             'technicians.*' => ['string']
         ]);
 
@@ -88,7 +124,6 @@ class AppointmentAdminController extends Controller
             $technician = Technician::find($technician_id);
             $technician->user->notify(new InboxTechnicianNotification('admin', $appointment->service->id, $appointment->schedule, $appointment->status));
         }
-
 
         return to_route('appointment.show', $appointment)->with('success', 'Successfully add/update technician to order');
     }
