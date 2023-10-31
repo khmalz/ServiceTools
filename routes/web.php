@@ -13,6 +13,7 @@ use App\Http\Controllers\AppointmentClientController;
 use App\Http\Controllers\Admin\ServiceAdminController;
 use App\Http\Controllers\Admin\AppointmentAdminController;
 use App\Http\Controllers\Admin\CalenderController;
+use App\Http\Controllers\NotificationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,6 +50,7 @@ Route::middleware('auth')->group(function () {
         Route::middleware('role:admin')->group(function () {
             Route::get('/appointment/{appointment}/technician', [AppointmentAdminController::class, 'create'])->name('admin.appointment.technician');
             Route::post('/appointment/{appointment}/technician', [AppointmentAdminController::class, 'store']);
+            Route::post('/appointment/{appointment}/reschedule', [AppointmentAdminController::class, 'reschedule'])->name('admin.appointment.reschedule');
             Route::resource('technician', TechnicianController::class)->parameters([
                 'technician' => 'user'
             ]);
@@ -66,6 +68,9 @@ Route::middleware('auth')->group(function () {
         Route::post('/appointment/{service}', [AppointmentClientController::class, 'store'])->name('appointment.store');
         Route::get('/appointment/{appointment}/edit', [AppointmentClientController::class, 'edit'])->name('appointment.edit');
         Route::patch('/appointment/{appointment}', [AppointmentClientController::class, 'update'])->name('appointment.update');
+
+        Route::get('/notification', [NotificationController::class, 'index'])->name('notification.index');
+        Route::post('notification/read/{notifications?}', [NotificationController::class, 'read'])->name('notification.read');
 
         Route::get('/profile/{user}', [ProfileController::class, 'edit'])->name('profile.edit');
         Route::patch('/profile/{user}', [ProfileController::class, 'update'])->name('profile.update');

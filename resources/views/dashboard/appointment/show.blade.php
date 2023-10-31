@@ -75,16 +75,21 @@
                                 </tbody>
                             </table>
                         </div>
-                        @hasanyrole('admin|technician')
-                            <button type="button" class="btn btn-warning btn-sm mt-3 text-white" href="#">
-                                Ajukan re-sechedule
-                            </button>
-                        @else
+                        @role('admin')
+                            <form action="{{ route('admin.appointment.reschedule', $appointment) }}" method="POST">
+                                @csrf
+                                <input type="hidden" name="reschedule" value="true">
+                                <button type="submit" class="btn btn-warning btn-sm mt-3 text-white" href="#">
+                                    Ajukan re-schedule
+                                </button>
+                            </form>
+                        @endrole
+                        @role('client')
                             <a href="{{ route('appointment.edit', $appointment) }}"
                                 class="btn btn-warning btn-sm mt-3 text-white" href="#">
                                 Re-sechedule
                             </a>
-                        @endhasanyrole
+                        @endrole
                     </div>
                     <div class="card-footer">
                         <div class="row mb-4">

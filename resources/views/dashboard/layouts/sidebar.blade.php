@@ -37,6 +37,16 @@
                      <span>List Appointment</span>
                  </a>
              </li>
+
+             <li class="nav-heading">Notification</li>
+
+             <li class="nav-item">
+                 <a class="nav-link {{ request()->routeIs('notification*') ? null : 'collapsed' }}"
+                     href="{{ route('notification.index') }}">
+                     <i class="bi bi-info-circle"></i>
+                     <span>Inbox</span>
+                 </a>
+             </li>
          @endrole
 
          @hasanyrole('admin|technician')

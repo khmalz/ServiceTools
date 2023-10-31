@@ -7,6 +7,7 @@ use App\Models\Appointment;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Notifications\InboxTechnicianNotification;
+use App\Notifications\RescheduleNotification;
 use Illuminate\Support\Carbon;
 
 class AppointmentAdminController extends Controller
@@ -148,5 +149,16 @@ class AppointmentAdminController extends Controller
             ->log('Update Status Appointment Order');
 
         return to_route("admin.appointment.$request->status")->with('success', 'Successfully update status a order appointment');
+    }
+
+    public function reschedule(Request $request,  Appointment $appointment)
+    {
+        $request->validate([
+            'reschedule' => ['required']
+        ]);
+
+        $request->user()->notify(new RescheduleNotification('client', $appointment->id, $appointment->user->id));
+
+        return to_route('appointment.show', $appointment)->with('success', 'Successfully proposed resechedule an appointment');
     }
 }
