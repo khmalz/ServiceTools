@@ -13,7 +13,7 @@ class AppointmentClientController extends Controller
      */
     public function list(Request $request)
     {
-        $appointments = Appointment::with('service.user.client')->get();
+        $appointments = Appointment::whereRelation('service', 'user_id', $request->user()->id)->with('service.user.client')->get();
 
         return view('dashboard.appointment.list', compact('appointments'));
     }
