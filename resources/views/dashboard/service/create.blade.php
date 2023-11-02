@@ -73,35 +73,62 @@
 
                             <label for="request" class="form-label fw-semibold mt-4">Request</label>
                             <div class="form-group">
-                                <select class="form-select" name="type" id="type" onchange="selectType(this)">
+                                <select class="form-select @error('type') is-invalid @enderror" name="type"
+                                    id="selectType" onchange="selectTypeChange(this)" data-old-type="{{ old('type') }}">
                                     <option selected disabled>Pilih Jenis Elektronik</option>
-                                    <option value="tv">TV</option>
-                                    <option value="kulkas">Kulkas</option>
-                                    <option value="ac">AC</option>
-                                    <option value="kamera">Kamera</option>
-                                    <option value="speaker">Speaker</option>
-                                    <option value="oven">Oven</option>
-                                    <option value="mesin cuci">Mesin cuci</option>
-                                    <option value="drone">Drone</option>
-                                    <option value="radio">Radio</option>
-                                    <option value="hp/tablet">Hp/Tablet</option>
-                                    <option value="laptop">Laptop</option>
-                                    <option value="komputer">Komputer</option>
-                                    <option value="playstation">Playstation</option>
-                                    <option value="lainnya">Lainnya</option>
+                                    <option {{ old('type') == 'tv' ? 'selected' : null }} value="tv">TV</option>
+                                    <option {{ old('type') == 'kulkas' ? 'selected' : null }} value="kulkas">Kulkas</option>
+                                    <option {{ old('type') == 'ac' ? 'selected' : null }} value="ac">AC</option>
+                                    <option {{ old('type') == 'kamera' ? 'selected' : null }} value="kamera">Kamera
+                                    </option>
+                                    <option {{ old('type') == 'speaker' ? 'selected' : null }} value="speaker">Speaker
+                                    </option>
+                                    <option {{ old('type') == 'oven' ? 'selected' : null }} value="oven">Oven</option>
+                                    <option {{ old('type') == 'mesin cuci' ? 'selected' : null }} value="mesin cuci">Mesin
+                                        cuci</option>
+                                    <option {{ old('type') == 'drone' ? 'selected' : null }} value="drone">Drone</option>
+                                    <option {{ old('type') == 'radio' ? 'selected' : null }} value="radio">Radio</option>
+                                    <option {{ old('type') == 'hp/tablet' ? 'selected' : null }} value="hp/tablet">
+                                        Hp/Tablet</option>
+                                    <option {{ old('type') == 'laptop' ? 'selected' : null }} value="laptop">Laptop
+                                    </option>
+                                    <option {{ old('type') == 'komputer' ? 'selected' : null }} value="komputer">Komputer
+                                    </option>
+                                    <option {{ old('type') == 'playstation' ? 'selected' : null }} value="playstation">
+                                        Playstation</option>
+                                    <option {{ old('type') == 'lainnya' ? 'selected' : null }} value="lainnya">Lainnya
+                                    </option>
                                 </select>
+                                @error('type')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                             </div>
                             <div id="typeOtherContainer"></div>
                             <div class="form-group mt-3">
-                                <select class="form-select" name="work" id="work" onchange="selectWork(this)">
+                                <select class="form-select @error('work') is-invalid @enderror" name="work"
+                                    id="selectWork" data-old-work="{{ old('work') }}" onchange="selectWorkChange(this)">
                                     <option selected disabled>Pilih Tempat Perbaikan</option>
-                                    <option value="home">Rumah</option>
-                                    <option value="office">Kantor</option>
+                                    <option {{ old('work') == 'home' ? 'selected' : null }} value="home">Rumah</option>
+                                    <option {{ old('work') == 'office' ? 'selected' : null }} value="office">Kantor
+                                    </option>
                                 </select>
+                                @error('work')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                             </div>
                             <div id="alamatWaktuContainer"></div>
                             <div class="form-group mt-3">
-                                <textarea class="form-control" name="description" rows="5" placeholder="Description" required></textarea>
+                                <textarea class="form-control @error('description') is-invalid @enderror" name="description" rows="5"
+                                    placeholder="Description">{{ old('description') }}</textarea>
+                                @error('description')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                             </div>
                             <div class="mt-3">
                                 <label for="formFileMultiple" class="form-label">Image (optional)</label>
@@ -129,6 +156,16 @@
     <script>
         $(function() {
             dateTime('#schedule')
+
+            const selectedOldType = $('#selectType').data('old-type');
+            if (selectedOldType) {
+                $('#selectType').trigger('change');
+            }
+
+            const selectedOldWork = $("#selectWork").data('old-work');
+            if (selectedOldWork) {
+                $("#selectWork").trigger('change');
+            }
         });
 
         const dt = new DataTransfer();
@@ -213,7 +250,7 @@
             });
         }
 
-        function selectType(selectElement) {
+        function selectTypeChange(selectElement) {
             const selectedValue = $(selectElement).val();
             const typeOtherInput = $('#typeOtherContainer');
 
@@ -231,7 +268,7 @@
             }
         }
 
-        function selectWork(selectElement) {
+        function selectWorkChange(selectElement) {
             const selectedValue = $(selectElement).val();
             const alamatWaktuContainer = $('#alamatWaktuContainer');
 
@@ -248,7 +285,12 @@
                     </div>
                     <div class="form-group mt-3">
                         <input name="schedule" type="datetime" min="{{ date('Y-m-d 00:00') }}"
-                            value="{{ old('schedule') }}" class="form-control" id="schedule" placeholder="Waktu" autocomplete="off" />
+                            value="{{ old('schedule') }}" class="form-control @error('schedule') is-invalid @enderror" id="schedule" placeholder="Waktu" autocomplete="off" />
+                            @error('schedule')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                     </div>
                 `;
                 alamatWaktuContainer.html(inputHtml); // Tambahkan input ke dalam kontainer

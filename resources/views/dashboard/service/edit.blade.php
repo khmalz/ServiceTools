@@ -74,7 +74,9 @@
 
                             <label for="request" class="form-label fw-semibold mt-4">Request</label>
                             <div class="form-group">
-                                <select class="form-select" name="type" id="type" onchange="selectType(this)">
+                                <select class="form-select @error('type') is-invalid @enderror" name="type"
+                                    id="selectType" data-old-type="{{ old('type', $service->type) }}"
+                                    onchange="selectTypeChange(this)">
                                     <option selected disabled>Pilih Jenis Elektronik</option>
                                     <option {{ old('type', $service->type) == 'tv' ? 'selected' : '' }} value="tv">TV
                                     </option>
@@ -105,15 +107,29 @@
                                     <option {{ old('type', $service->type) == 'lainnya' ? 'selected' : '' }}
                                         value="lainnya">Lainnya</option>
                                 </select>
+                                @error('type')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                             </div>
                             <div id="typeOtherContainer"></div>
                             <div class="form-group mt-3">
-                                <select class="form-select" name="work" id="workSelect"
-                                    data-select-work="{{ old('work', $service->work) }}" onchange="selectWork(this)">
+                                <select class="form-select @error('work') is-invalid @enderror" name="work"
+                                    id="selectWork" data-old-work="{{ old('work', $service->work) }}"
+                                    onchange="selectWorkChange(this)">
                                     <option selected disabled>Pilih Tempat Perbaikan</option>
-                                    <option value="home">Rumah</option>
-                                    <option value="office">Kantor</option>
+                                    <option {{ old('work', $service->work) == 'home' ? 'selected' : null }} value="home">
+                                        Rumah</option>
+                                    <option {{ old('work', $service->work) == 'office' ? 'selected' : null }}
+                                        value="office">Kantor
+                                    </option>
                                 </select>
+                                @error('work')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                             </div>
                             <div id="alamatWaktuContainer"></div>
                             <div class="form-group mt-3">
@@ -159,9 +175,14 @@
 
     <script>
         $(function() {
-            let selectedMetode = $("#workSelect").data('select-work');
-            if (selectedMetode) {
-                $("#workSelect").val(selectedMetode).trigger('change');
+            const selectedOldType = $('#selectType').data('old-type');
+            if (selectedOldType) {
+                $('#selectType').trigger('change');
+            }
+
+            const selectedOldWork = $("#selectWork").data('old-work');
+            if (selectedOldWork) {
+                $("#selectWork").trigger('change');
             }
 
             dateTime('#schedule')
@@ -269,7 +290,7 @@
             });
         }
 
-        function selectType(selectElement) {
+        function selectTypeChange(selectElement) {
             const selectedValue = $(selectElement).val();
             const typeOtherInput = $('#typeOtherContainer');
 
@@ -287,7 +308,7 @@
             }
         }
 
-        function selectWork(selectElement) {
+        function selectWorkChange(selectElement) {
             const selectedValue = $(selectElement).val();
             const alamatWaktuContainer = $('#alamatWaktuContainer');
 
@@ -304,7 +325,12 @@
                     </div>
                     <div class="form-group mt-3">
                         <input name="schedule" type="datetime" step="60" min="{{ date('Y-m-d 00:00') }}" autocomplete="off"
-                            value="{{ old('schedule', $service->appointment?->schedule) }}" class="form-control" id="schedule" placeholder="Waktu" />
+                            value="{{ old('schedule', $service->appointment?->schedule) }}" class="form-control @error('schedule') is-invalid @enderror" id="schedule" placeholder="Waktu" />
+                        @error('schedule')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
                 `;
                 alamatWaktuContainer.html(inputHtml); // Tambahkan input ke dalam kontainer
