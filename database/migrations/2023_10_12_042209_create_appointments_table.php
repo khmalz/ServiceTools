@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('service_id')->constrained('services')->cascadeOnDelete();
             $table->dateTime('schedule');
             $table->enum('status', ['pending', 'progress', 'complete'])->default('pending');
+            $table->dateTime('propose_reschedule')->nullable();
             $table->timestamps();
         });
     }

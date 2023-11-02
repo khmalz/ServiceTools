@@ -157,6 +157,10 @@ class AppointmentAdminController extends Controller
             'reschedule' => ['required']
         ]);
 
+        $appointment->update([
+            'propose_reschedule' => now()
+        ]);
+
         $request->user()->notify(new RescheduleNotification('client', $appointment->id, $appointment->user->id));
 
         return to_route('appointment.show', $appointment)->with('success', 'Successfully proposed resechedule an appointment');

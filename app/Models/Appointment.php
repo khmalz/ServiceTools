@@ -16,10 +16,12 @@ class Appointment extends Model
         'service_id',
         'schedule',
         'status',
+        'propose_reschedule'
     ];
 
     protected $casts = [
         'schedule' => 'datetime',
+        'propose_reschedule' => 'datetime'
     ];
 
     public function user()

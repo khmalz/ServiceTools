@@ -76,13 +76,15 @@
                             </table>
                         </div>
                         @role('admin')
-                            <form action="{{ route('admin.appointment.reschedule', $appointment) }}" method="POST">
-                                @csrf
-                                <input type="hidden" name="reschedule" value="true">
-                                <button type="submit" class="btn btn-warning btn-sm mt-3 text-white" href="#">
-                                    Ajukan re-schedule
-                                </button>
-                            </form>
+                            @if ($isReschedulePassed)
+                                <form action="{{ route('admin.appointment.reschedule', $appointment) }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="reschedule" value="true">
+                                    <button type="submit" class="btn btn-warning btn-sm mt-3 text-white" href="#">
+                                        Ajukan re-schedule
+                                    </button>
+                                </form>
+                            @endif
                         @endrole
                         @role('client')
                             <a href="{{ route('appointment.edit', $appointment) }}"
