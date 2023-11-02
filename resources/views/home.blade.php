@@ -24,7 +24,6 @@
     <link href="{{ asset('user/assets/vendor/bootstrap-icons/bootstrap-icons.min.css') }}" rel="stylesheet">
     <link href="{{ asset('user/assets/vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
     <link href="{{ asset('user/assets/vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('user/assets/vendor/remixicon/remixicon.css') }}" rel="stylesheet">
     <link href="{{ asset('user/assets/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
     <link href="{{ asset('user/assets/vendor/toastify/toastify.css') }}" rel="stylesheet">
 
@@ -179,10 +178,10 @@
                             Anda, Service Tools hadir untuk memudahkan Anda dalam menjaga kinerja alat elektronik Anda.
                         </p>
                         <ul>
-                            <li><i class="ri-check-double-line"></i>Membuat Permintaan Layanan</li>
-                            <li><i class="ri-check-double-line"></i>Penjadwalan dan Konfirmasi</li>
-                            <li><i class="ri-check-double-line"></i>Layanan Profesional</li>
-                            <li><i class="ri-check-double-line"></i>Pembayaran Mudah</li>
+                            <li><i class="bx bx-check-double"></i>Membuat Permintaan Layanan</li>
+                            <li><i class="bx bx-check-double"></i>Penjadwalan dan Konfirmasi</li>
+                            <li><i class="bx bx-check-double"></i>Layanan Profesional</li>
+                            <li><i class="bx bx-check-double"></i>Pembayaran Mudah</li>
                         </ul>
                     </div>
                 </div>
