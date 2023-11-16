@@ -78,6 +78,14 @@
                                                     id="yourPassword" required>
                                                 <div class="invalid-feedback">Please enter your password.</div>
                                             </div>
+                                            <div class="col-12 mt-2">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" id="showPassword">
+                                                    <label class="form-check-label" for="showPassword">
+                                                        Show Password
+                                                    </label>
+                                                </div>
+                                            </div>
                                         </div>
 
                                         <div class="col-12">
@@ -104,11 +112,23 @@
             class="bi bi-arrow-up-short"></i></a>
 
     <!-- Vendor JS Files -->
+    <script src="{{ asset('user/assets/vendor/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('user/assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
     <!-- Template Main JS File -->
     <script src="{{ asset('admin/assets/js/main.js') }}"></script>
 
+    <script>
+        $(document).ready(function() {
+            $('#showPassword').click(function() {
+                if ($(this).is(':checked')) {
+                    $('#yourPassword').attr('type', 'text');
+                } else {
+                    $('#yourPassword').attr('type', 'password');
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>
