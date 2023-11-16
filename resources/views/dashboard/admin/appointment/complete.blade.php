@@ -109,7 +109,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                @endrolez
+                                                @endrole
                                                 <a class="btn btn-info btn-sm text-white"
                                                     href="{{ route('appointment.show', $appointment->id) }}">
                                                     <i class='bx bxs-info-circle'></i>

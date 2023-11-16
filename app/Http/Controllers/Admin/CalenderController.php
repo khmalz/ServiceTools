@@ -15,7 +15,9 @@ class CalenderController extends Controller
     {
         $events = [];
 
-        $appointments = Appointment::with('service.user.client')->get();
+        $appointments = Appointment::with('service.user.client')->whereHas('technicians', function ($query) use ($request) {
+            $query->where('technician_id', $request->user()->technician->id);
+        })->get();
 
         foreach ($appointments as $appointment) {
             $events[] = [
