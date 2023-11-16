@@ -47,9 +47,9 @@ class ProfileController extends Controller
             $request->user()->client()->updateOrcreate(
                 [],
                 [
-                    'telephone' => $data['telephone'],
-                    'gender' => $data['gender'],
-                    'alamat' => $data['alamat'],
+                    'telephone' => $data['telephone'] ?? null,
+                    'gender' => $data['gender'] ?? null,
+                    'alamat' => $data['alamat'] ?? null,
                 ]
             );
         }
