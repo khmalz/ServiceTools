@@ -3,11 +3,11 @@
 
 <head>
     <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Service Tools</title>
-    <meta content="" name="description">
-    <meta content="" name="keywords">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
 
     <!-- Favicons -->
     <link href="{{ asset('user/assets/img/favicon.png') }}" rel="icon">
@@ -34,8 +34,8 @@
 <body>
 
     @auth
-        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
+        <div class="modal fade" id="logoutModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"
+            tabindex="-1">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -47,8 +47,8 @@
                     <form action="{{ route('logout') }}" method="POST">
                         @csrf
                         <div class="modal-footer">
-                            <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Cancel</button>
-                            <button type="submit" class="btn btn-primary">Logout</button>
+                            <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">Cancel</button>
+                            <button class="btn btn-primary" type="submit">Logout</button>
                         </div>
                     </form>
                 </div>
@@ -57,14 +57,14 @@
     @endauth
 
     <!-- ======= Header ======= -->
-    <header id="header" class="fixed-top d-flex align-items-center">
+    <header class="fixed-top d-flex align-items-center" id="header">
         <div class="d-flex align-items-center container">
 
             <h1 class="logo me-auto"><a href="{{ route('home') }}">Service Tools</a></h1>
 
-            <nav id="navbar" class="navbar">
+            <nav class="navbar" id="navbar">
                 <ul>
-                    <li><a href="#hero" class="active">Home</a></li>
+                    <li><a class="active" href="#hero">Home</a></li>
                     <li><a href="#about">About</a></li>
                     <li><a href="#portfolio">Portfolio</a></li>
                     <li><a href="#contact">Contact</a></li>
@@ -75,14 +75,14 @@
                                     <a href="{{ route('dashboard') }}">{{ auth()->user()->name }}</a>
                                 </li>
                                 <li>
-                                    <a role="button" data-bs-toggle="modal" data-bs-target="#logoutModal">
+                                    <a data-bs-toggle="modal" data-bs-target="#logoutModal" role="button">
                                         Logout
                                     </a>
                                 </li>
                             </ul>
                         </li>
                     @else
-                        <li><a href="{{ route('login') }}" class="getstarted">Login</a></li>
+                        <li><a class="getstarted" href="{{ route('login') }}">Login</a></li>
                     @endauth
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
@@ -93,7 +93,7 @@
 
     <!-- ======= Hero Section ======= -->
     <section id="hero">
-        <div id="heroCarousel" data-bs-interval="5000" class="carousel slide carousel-fade" data-bs-ride="carousel">
+        <div class="carousel slide carousel-fade" id="heroCarousel" data-bs-interval="5000" data-bs-ride="carousel">
 
             <ol class="carousel-indicators" id="hero-carousel-indicators"></ol>
 
@@ -108,8 +108,8 @@
                             <p class="animate__animated animate__fadeInUp">Kami memberikan layanan servis alat
                                 elektronik yang dapat Anda andalkan. Dengan tim teknisi berkualitas, kami siap
                                 memperbaiki perangkat Anda dengan cepat dan efisienz.</p>
-                            <a href="{{ url('#about') }}"
-                                class="btn-get-started animate__animated animate__fadeInUp scrollto">Read More</a>
+                            <a class="btn-get-started animate__animated animate__fadeInUp scrollto"
+                                href="{{ url('#about') }}">Read More</a>
                         </div>
                     </div>
                 </div>
@@ -123,8 +123,8 @@
                             <p class="animate__animated animate__fadeInUp">Dari perbaikan hingga pemeliharaan berkala,
                                 kami menyediakan beragam solusi servis untuk semua jenis alat elektronik. Percayakan
                                 perangkat Anda kepada kami untuk kinerja yang optimal.</p>
-                            <a href="{{ url('#about') }}"
-                                class="btn-get-started animate__animated animate__fadeInUp scrollto">Read More</a>
+                            <a class="btn-get-started animate__animated animate__fadeInUp scrollto"
+                                href="{{ url('#about') }}">Read More</a>
                         </div>
                     </div>
                 </div>
@@ -138,19 +138,19 @@
                             <p class="animate__animated animate__fadeInUp">Kepuasan pelanggan adalah prioritas utama
                                 kami. Kami memberikan servis yang ramah pelanggan, transparan, dan berorientasi pada
                                 kebutuhan Anda. Lihatlah apa yang bisa kami lakukan untuk Anda.</p>
-                            <a href="{{ url('#about') }}"
-                                class="btn-get-started animate__animated animate__fadeInUp scrollto">Read More</a>
+                            <a class="btn-get-started animate__animated animate__fadeInUp scrollto"
+                                href="{{ url('#about') }}">Read More</a>
                         </div>
                     </div>
                 </div>
 
             </div>
 
-            <a class="carousel-control-prev" href="{{ url('#heroCarousel') }}" role="button" data-bs-slide="prev">
+            <a class="carousel-control-prev" data-bs-slide="prev" href="{{ url('#heroCarousel') }}" role="button">
                 <span class="carousel-control-prev-icon bi bi-chevron-left" aria-hidden="true"></span>
             </a>
 
-            <a class="carousel-control-next" href="{{ url('#heroCarousel') }}" role="button" data-bs-slide="next">
+            <a class="carousel-control-next" data-bs-slide="next" href="{{ url('#heroCarousel') }}" role="button">
                 <span class="carousel-control-next-icon bi bi-chevron-right" aria-hidden="true"></span>
             </a>
 
@@ -160,7 +160,7 @@
     <main id="main">
 
         <!-- ======= About Section ======= -->
-        <section id="about" class="about">
+        <section class="about" id="about">
             <div class="container">
 
                 <div class="row content">
@@ -191,13 +191,13 @@
         <!-- End About Section -->
 
         <!-- ======= Portfolio Section ======= -->
-        <section id="portfolio" class="portfolio">
+        <section class="portfolio" id="portfolio">
             <div class="container">
 
                 <div class="row">
                     <div class="col-lg-12 d-flex justify-content-center">
                         <ul id="portfolio-flters">
-                            <li data-filter="*" class="filter-active">All</li>
+                            <li class="filter-active" data-filter="*">All</li>
                             <li data-filter=".filter-work">Work</li>
                             <li data-filter=".filter-home">Home</li>
                         </ul>
@@ -208,17 +208,17 @@
 
                     <div class="col-lg-4 col-md-6 portfolio-item filter-work">
                         <div class="portfolio-wrap">
-                            <img src="{{ asset('user/assets/img/portfolio/portfolio-1.jpg') }}" class="img-fluid"
+                            <img class="img-fluid" src="{{ asset('user/assets/img/portfolio/portfolio-1.jpg') }}"
                                 alt="">
                             <div class="portfolio-info">
                                 <h4>Work 1</h4>
                                 <p>Work</p>
                                 <div class="portfolio-links">
-                                    <a href="{{ url('assets/img/portfolio/portfolio-1.jpg') }}"
-                                        data-gallery="portfolioGallery" class="portfolio-lightbox" title="Work 1"><i
+                                    <a class="portfolio-lightbox" data-gallery="portfolioGallery"
+                                        href="{{ url('assets/img/portfolio/portfolio-1.jpg') }}" title="Work 1"><i
                                             class="bx bx-plus"></i></a>
-                                    <a href="{{ url('portfolio-details.html') }}" class="portfolio-details-lightbox"
-                                        data-glightbox="type: external" title="Portfolio Details"><i
+                                    <a class="portfolio-details-lightbox" data-glightbox="type: external"
+                                        href="{{ url('portfolio-details.html') }}" title="Portfolio Details"><i
                                             class="bx bx-link"></i></a>
                                 </div>
                             </div>
@@ -227,17 +227,17 @@
 
                     <div class="col-lg-4 col-md-6 portfolio-item filter-work">
                         <div class="portfolio-wrap">
-                            <img src="{{ asset('user/assets/img/portfolio/portfolio-3.jpg') }}" class="img-fluid"
+                            <img class="img-fluid" src="{{ asset('user/assets/img/portfolio/portfolio-3.jpg') }}"
                                 alt="">
                             <div class="portfolio-info">
                                 <h4>Work 2</h4>
                                 <p>Work</p>
                                 <div class="portfolio-links">
-                                    <a href="{{ url('assets/img/portfolio/portfolio-3.jpg') }}"
-                                        data-gallery="portfolioGallery" class="portfolio-lightbox" title="Work 2"><i
+                                    <a class="portfolio-lightbox" data-gallery="portfolioGallery"
+                                        href="{{ url('assets/img/portfolio/portfolio-3.jpg') }}" title="Work 2"><i
                                             class="bx bx-plus"></i></a>
-                                    <a href="{{ url('portfolio-details.html') }}" class="portfolio-details-lightbox"
-                                        data-glightbox="type: external" title="Portfolio Details"><i
+                                    <a class="portfolio-details-lightbox" data-glightbox="type: external"
+                                        href="{{ url('portfolio-details.html') }}" title="Portfolio Details"><i
                                             class="bx bx-link"></i></a>
                                 </div>
                             </div>
@@ -246,17 +246,17 @@
 
                     <div class="col-lg-4 col-md-6 portfolio-item filter-work">
                         <div class="portfolio-wrap">
-                            <img src="{{ asset('user/assets/img/portfolio/portfolio-4.jpg') }}" class="img-fluid"
+                            <img class="img-fluid" src="{{ asset('user/assets/img/portfolio/portfolio-4.jpg') }}"
                                 alt="">
                             <div class="portfolio-info">
                                 <h4>Work 3</h4>
                                 <p>Work</p>
                                 <div class="portfolio-links">
-                                    <a href="{{ url('assets/img/portfolio/portfolio-4.jpg') }}"
-                                        data-gallery="portfolioGallery" class="portfolio-lightbox" title="Work 3"><i
+                                    <a class="portfolio-lightbox" data-gallery="portfolioGallery"
+                                        href="{{ url('assets/img/portfolio/portfolio-4.jpg') }}" title="Work 3"><i
                                             class="bx bx-plus"></i></a>
-                                    <a href="{{ url('portfolio-details.html') }}" class="portfolio-details-lightbox"
-                                        data-glightbox="type: external" title="Portfolio Details"><i
+                                    <a class="portfolio-details-lightbox" data-glightbox="type: external"
+                                        href="{{ url('portfolio-details.html') }}" title="Portfolio Details"><i
                                             class="bx bx-link"></i></a>
                                 </div>
                             </div>
@@ -265,17 +265,17 @@
 
                     <div class="col-lg-4 col-md-6 portfolio-item filter-home">
                         <div class="portfolio-wrap">
-                            <img src="{{ asset('user/assets/img/portfolio/portfolio-2.jpg') }}" class="img-fluid"
+                            <img class="img-fluid" src="{{ asset('user/assets/img/portfolio/portfolio-2.jpg') }}"
                                 alt="">
                             <div class="portfolio-info">
                                 <h4>Home 1</h4>
                                 <p>Home</p>
                                 <div class="portfolio-links">
-                                    <a href="{{ url('assets/img/portfolio/portfolio-2.jpg') }}"
-                                        data-gallery="portfolioGallery" class="portfolio-lightbox" title="Home 1"><i
+                                    <a class="portfolio-lightbox" data-gallery="portfolioGallery"
+                                        href="{{ url('assets/img/portfolio/portfolio-2.jpg') }}" title="Home 1"><i
                                             class="bx bx-plus"></i></a>
-                                    <a href="{{ url('portfolio-details.html') }}" class="portfolio-details-lightbox"
-                                        data-glightbox="type: external" title="Portfolio Details"><i
+                                    <a class="portfolio-details-lightbox" data-glightbox="type: external"
+                                        href="{{ url('portfolio-details.html') }}" title="Portfolio Details"><i
                                             class="bx bx-link"></i></a>
                                 </div>
                             </div>
@@ -284,17 +284,17 @@
 
                     <div class="col-lg-4 col-md-6 portfolio-item filter-home">
                         <div class="portfolio-wrap">
-                            <img src="{{ asset('user/assets/img/portfolio/portfolio-5.jpg') }}" class="img-fluid"
+                            <img class="img-fluid" src="{{ asset('user/assets/img/portfolio/portfolio-5.jpg') }}"
                                 alt="">
                             <div class="portfolio-info">
                                 <h4>Home 2</h4>
                                 <p>Home</p>
                                 <div class="portfolio-links">
-                                    <a href="{{ url('assets/img/portfolio/portfolio-5.jpg') }}"
-                                        data-gallery="portfolioGallery" class="portfolio-lightbox" title="Home 2"><i
+                                    <a class="portfolio-lightbox" data-gallery="portfolioGallery"
+                                        href="{{ url('assets/img/portfolio/portfolio-5.jpg') }}" title="Home 2"><i
                                             class="bx bx-plus"></i></a>
-                                    <a href="{{ url('portfolio-details.html') }}" class="portfolio-details-lightbox"
-                                        data-glightbox="type: external" title="Portfolio Details"><i
+                                    <a class="portfolio-details-lightbox" data-glightbox="type: external"
+                                        href="{{ url('portfolio-details.html') }}" title="Portfolio Details"><i
                                             class="bx bx-link"></i></a>
                                 </div>
                             </div>
@@ -303,17 +303,17 @@
 
                     <div class="col-lg-4 col-md-6 portfolio-item filter-work">
                         <div class="portfolio-wrap">
-                            <img src="{{ asset('user/assets/img/portfolio/portfolio-7.jpg') }}" class="img-fluid"
+                            <img class="img-fluid" src="{{ asset('user/assets/img/portfolio/portfolio-7.jpg') }}"
                                 alt="">
                             <div class="portfolio-info">
                                 <h4>Work 4</h4>
                                 <p>Work</p>
                                 <div class="portfolio-links">
-                                    <a href="{{ url('assets/img/portfolio/portfolio-7.jpg') }}"
-                                        data-gallery="portfolioGallery" class="portfolio-lightbox" title="Work 4"><i
+                                    <a class="portfolio-lightbox" data-gallery="portfolioGallery"
+                                        href="{{ url('assets/img/portfolio/portfolio-7.jpg') }}" title="Work 4"><i
                                             class="bx bx-plus"></i></a>
-                                    <a href="{{ url('portfolio-details.html') }}" class="portfolio-details-lightbox"
-                                        data-glightbox="type: external" title="Portfolio Details"><i
+                                    <a class="portfolio-details-lightbox" data-glightbox="type: external"
+                                        href="{{ url('portfolio-details.html') }}" title="Portfolio Details"><i
                                             class="bx bx-link"></i></a>
                                 </div>
                             </div>
@@ -322,17 +322,17 @@
 
                     <div class="col-lg-4 col-md-6 portfolio-item filter-work">
                         <div class="portfolio-wrap">
-                            <img src="{{ asset('user/assets/img/portfolio/portfolio-8.jpg') }}" class="img-fluid"
+                            <img class="img-fluid" src="{{ asset('user/assets/img/portfolio/portfolio-8.jpg') }}"
                                 alt="">
                             <div class="portfolio-info">
                                 <h4>Work 5</h4>
                                 <p>Work</p>
                                 <div class="portfolio-links">
-                                    <a href="{{ url('assets/img/portfolio/portfolio-8.jpg') }}"
-                                        data-gallery="portfolioGallery" class="portfolio-lightbox" title="Work 5"><i
+                                    <a class="portfolio-lightbox" data-gallery="portfolioGallery"
+                                        href="{{ url('assets/img/portfolio/portfolio-8.jpg') }}" title="Work 5"><i
                                             class="bx bx-plus"></i></a>
-                                    <a href="{{ url('portfolio-details.html') }}" class="portfolio-details-lightbox"
-                                        data-glightbox="type: external" title="Portfolio Details"><i
+                                    <a class="portfolio-details-lightbox" data-glightbox="type: external"
+                                        href="{{ url('portfolio-details.html') }}" title="Portfolio Details"><i
                                             class="bx bx-link"></i></a>
                                 </div>
                             </div>
@@ -341,17 +341,17 @@
 
                     <div class="col-lg-4 col-md-6 portfolio-item filter-home">
                         <div class="portfolio-wrap">
-                            <img src="{{ asset('user/assets/img/portfolio/portfolio-6.jpg') }}" class="img-fluid"
+                            <img class="img-fluid" src="{{ asset('user/assets/img/portfolio/portfolio-6.jpg') }}"
                                 alt="">
                             <div class="portfolio-info">
                                 <h4>Home 3</h4>
                                 <p>Home</p>
                                 <div class="portfolio-links">
-                                    <a href="{{ url('assets/img/portfolio/portfolio-6.jpg') }}"
-                                        data-gallery="portfolioGallery" class="portfolio-lightbox" title="Home 3"><i
+                                    <a class="portfolio-lightbox" data-gallery="portfolioGallery"
+                                        href="{{ url('assets/img/portfolio/portfolio-6.jpg') }}" title="Home 3"><i
                                             class="bx bx-plus"></i></a>
-                                    <a href="{{ url('portfolio-details.html') }}" class="portfolio-details-lightbox"
-                                        data-glightbox="type: external" title="Portfolio Details"><i
+                                    <a class="portfolio-details-lightbox" data-glightbox="type: external"
+                                        href="{{ url('portfolio-details.html') }}" title="Portfolio Details"><i
                                             class="bx bx-link"></i></a>
                                 </div>
                             </div>
@@ -360,17 +360,17 @@
 
                     <div class="col-lg-4 col-md-6 portfolio-item filter-work">
                         <div class="portfolio-wrap">
-                            <img src="{{ asset('user/assets/img/portfolio/portfolio-10.jpg') }}" class="img-fluid"
+                            <img class="img-fluid" src="{{ asset('user/assets/img/portfolio/portfolio-10.jpg') }}"
                                 alt="">
                             <div class="portfolio-info">
                                 <h4>Work 6</h4>
                                 <p>Work</p>
                                 <div class="portfolio-links">
-                                    <a href="{{ url('assets/img/portfolio/portfolio-10.jpg') }}"
-                                        data-gallery="portfolioGallery" class="portfolio-lightbox" title="Work 6"><i
+                                    <a class="portfolio-lightbox" data-gallery="portfolioGallery"
+                                        href="{{ url('assets/img/portfolio/portfolio-10.jpg') }}" title="Work 6"><i
                                             class="bx bx-plus"></i></a>
-                                    <a href="{{ url('portfolio-details.html') }}" class="portfolio-details-lightbox"
-                                        data-glightbox="type: external" title="Portfolio Details"><i
+                                    <a class="portfolio-details-lightbox" data-glightbox="type: external"
+                                        href="{{ url('portfolio-details.html') }}" title="Portfolio Details"><i
                                             class="bx bx-link"></i></a>
                                 </div>
                             </div>
@@ -379,17 +379,17 @@
 
                     <div class="col-lg-4 col-md-6 portfolio-item filter-home">
                         <div class="portfolio-wrap">
-                            <img src="{{ asset('user/assets/img/portfolio/portfolio-11.jpg') }}" class="img-fluid"
+                            <img class="img-fluid" src="{{ asset('user/assets/img/portfolio/portfolio-11.jpg') }}"
                                 alt="">
                             <div class="portfolio-info">
                                 <h4>Home 4</h4>
                                 <p>Home</p>
                                 <div class="portfolio-links">
-                                    <a href="{{ url('assets/img/portfolio/portfolio-11.jpg') }}"
-                                        data-gallery="portfolioGallery" class="portfolio-lightbox" title="Home 4"><i
+                                    <a class="portfolio-lightbox" data-gallery="portfolioGallery"
+                                        href="{{ url('assets/img/portfolio/portfolio-11.jpg') }}" title="Home 4"><i
                                             class="bx bx-plus"></i></a>
-                                    <a href="{{ url('portfolio-details.html') }}" class="portfolio-details-lightbox"
-                                        data-glightbox="type: external" title="Portfolio Details"><i
+                                    <a class="portfolio-details-lightbox" data-glightbox="type: external"
+                                        href="{{ url('portfolio-details.html') }}" title="Portfolio Details"><i
                                             class="bx bx-link"></i></a>
                                 </div>
                             </div>
@@ -398,17 +398,17 @@
 
                     <div class="col-lg-4 col-md-6 portfolio-item filter-work">
                         <div class="portfolio-wrap">
-                            <img src="{{ asset('user/assets/img/portfolio/portfolio-13.jpg') }}" class="img-fluid"
+                            <img class="img-fluid" src="{{ asset('user/assets/img/portfolio/portfolio-13.jpg') }}"
                                 alt="">
                             <div class="portfolio-info">
                                 <h4>Work 7</h4>
                                 <p>Work</p>
                                 <div class="portfolio-links">
-                                    <a href="{{ url('assets/img/portfolio/portfolio-13.jpg') }}"
-                                        data-gallery="portfolioGallery" class="portfolio-lightbox" title="Work 7"><i
+                                    <a class="portfolio-lightbox" data-gallery="portfolioGallery"
+                                        href="{{ url('assets/img/portfolio/portfolio-13.jpg') }}" title="Work 7"><i
                                             class="bx bx-plus"></i></a>
-                                    <a href="{{ url('portfolio-details.html') }}" class="portfolio-details-lightbox"
-                                        data-glightbox="type: external" title="Portfolio Details"><i
+                                    <a class="portfolio-details-lightbox" data-glightbox="type: external"
+                                        href="{{ url('portfolio-details.html') }}" title="Portfolio Details"><i
                                             class="bx bx-link"></i></a>
                                 </div>
                             </div>
@@ -417,17 +417,17 @@
 
                     <div class="col-lg-4 col-md-6 portfolio-item filter-home">
                         <div class="portfolio-wrap">
-                            <img src="{{ asset('user/assets/img/portfolio/portfolio-9.jpg') }}" class="img-fluid"
+                            <img class="img-fluid" src="{{ asset('user/assets/img/portfolio/portfolio-9.jpg') }}"
                                 alt="">
                             <div class="portfolio-info">
                                 <h4>Home 5</h4>
                                 <p>Home</p>
                                 <div class="portfolio-links">
-                                    <a href="{{ url('assets/img/portfolio/portfolio-9.jpg') }}"
-                                        data-gallery="portfolioGallery" class="portfolio-lightbox" title="Home 5"><i
+                                    <a class="portfolio-lightbox" data-gallery="portfolioGallery"
+                                        href="{{ url('assets/img/portfolio/portfolio-9.jpg') }}" title="Home 5"><i
                                             class="bx bx-plus"></i></a>
-                                    <a href="{{ url('portfolio-details.html') }}" class="portfolio-details-lightbox"
-                                        data-glightbox="type: external" title="Portfolio Details"><i
+                                    <a class="portfolio-details-lightbox" data-glightbox="type: external"
+                                        href="{{ url('portfolio-details.html') }}" title="Portfolio Details"><i
                                             class="bx bx-link"></i></a>
                                 </div>
                             </div>
@@ -436,17 +436,17 @@
 
                     <div class="col-lg-4 col-md-6 portfolio-item filter-home">
                         <div class="portfolio-wrap">
-                            <img src="{{ asset('user/assets/img/portfolio/portfolio-12.jpg') }}" class="img-fluid"
+                            <img class="img-fluid" src="{{ asset('user/assets/img/portfolio/portfolio-12.jpg') }}"
                                 alt="">
                             <div class="portfolio-info">
                                 <h4>Home 6</h4>
                                 <p>Home</p>
                                 <div class="portfolio-links">
-                                    <a href="{{ url('assets/img/portfolio/portfolio-12.jpg') }}"
-                                        data-gallery="portfolioGallery" class="portfolio-lightbox" title="Home 6"><i
+                                    <a class="portfolio-lightbox" data-gallery="portfolioGallery"
+                                        href="{{ url('assets/img/portfolio/portfolio-12.jpg') }}" title="Home 6"><i
                                             class="bx bx-plus"></i></a>
-                                    <a href="{{ url('portfolio-details.html') }}" class="portfolio-details-lightbox"
-                                        data-glightbox="type: external" title="Portfolio Details"><i
+                                    <a class="portfolio-details-lightbox" data-glightbox="type: external"
+                                        href="{{ url('portfolio-details.html') }}" title="Portfolio Details"><i
                                             class="bx bx-link"></i></a>
                                 </div>
                             </div>
@@ -460,7 +460,7 @@
         <!-- End Portfolio Section -->
 
         <!-- ======= Contact Section ======= -->
-        <section id="contact" class="contact">
+        <section class="contact" id="contact">
             <div class="container">
                 <div class="row">
 
@@ -490,19 +490,19 @@
 
                     <div class="col-lg-8 mt-lg-0 mt-5">
 
-                        <form action="" method="post" role="form" class="php-email-form">
+                        <form class="php-email-form" role="form" action="" method="post">
                             <div class="row">
                                 <div class="col-md-6 form-group">
-                                    <input type="text" name="name" class="form-control" id="name"
+                                    <input class="form-control" id="name" name="name" type="text"
                                         placeholder="Your Name" required>
                                 </div>
                                 <div class="col-md-6 form-group mt-md-0 mt-3">
-                                    <input type="email" class="form-control" name="email" id="email"
+                                    <input class="form-control" id="email" name="email" type="email"
                                         placeholder="Your Email" required>
                                 </div>
                             </div>
                             <div class="form-group mt-3">
-                                <input type="text" class="form-control" name="subject" id="subject"
+                                <input class="form-control" id="subject" name="subject" type="text"
                                     placeholder="Subject" required>
                             </div>
                             <div class="form-group mt-3">
@@ -537,9 +537,9 @@
                                 <span><strong>Email:</strong> servicetools.work@gmail.com</span>
                             </p>
                             <div class="social-links mt-3">
-                                <a href="{{ url('#') }}" class="twitter"><i class="bx bxl-twitter"></i></a>
-                                <a href="{{ url('#') }}" class="facebook"><i class="bx bxl-facebook"></i></a>
-                                <a href="{{ url('#') }}" class="instagram"><i class="bx bxl-instagram"></i></a>
+                                <a class="twitter" href="{{ url('#') }}"><i class="bx bxl-twitter"></i></a>
+                                <a class="facebook" href="{{ url('#') }}"><i class="bx bxl-facebook"></i></a>
+                                <a class="instagram" href="{{ url('#') }}"><i class="bx bxl-instagram"></i></a>
                             </div>
                         </div>
                     </div>
@@ -582,7 +582,7 @@
     </footer>
     <!-- End Footer -->
 
-    <a href="{{ url('#') }}" class="back-to-top d-flex align-items-center justify-content-center"><i
+    <a class="back-to-top d-flex align-items-center justify-content-center" href="{{ url('#') }}"><i
             class="bi bi-arrow-up-short"></i></a>
 
     <!-- Vendor JS Files -->

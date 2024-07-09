@@ -30,7 +30,7 @@ class ServiceClientRequest extends FormRequest
             'images.*' => ['nullable', 'file', 'image', 'mimes:png,jpg,jpeg', 'max:5120'],
             'img_deleted' => ['nullable', 'array'],
             'schedule' => [
-                'nullable', 'date', 'date_format:Y-m-d H:i',  // Pastikan format tanggal adalah 'Y-m-d H:i' (tahun-bulan-tanggal jam:menit)
+                'nullable', 'date', 'date_format:Y-m-d H:i:s',
                 function ($attribute, $value, $fail) {
                     $schedule = Carbon::parse($value);
                     $minTime = Carbon::parse($schedule->format('Y-m-d') . ' 08:00:00');

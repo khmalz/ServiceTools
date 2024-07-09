@@ -61,7 +61,7 @@ class TechnicianController extends Controller
      */
     public function edit(User $user)
     {
-        return view('dashboard.technician.edit', compact('user'));
+        return view('dashboard.admin.technician.edit', compact('user'));
     }
 
     /**
