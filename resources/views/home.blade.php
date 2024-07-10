@@ -215,11 +215,8 @@
                                 <p>Work</p>
                                 <div class="portfolio-links">
                                     <a class="portfolio-lightbox" data-gallery="portfolioGallery"
-                                        href="{{ url('assets/img/portfolio/portfolio-1.jpg') }}" title="Work 1"><i
-                                            class="bx bx-plus"></i></a>
-                                    <a class="portfolio-details-lightbox" data-glightbox="type: external"
-                                        href="{{ url('portfolio-details.html') }}" title="Portfolio Details"><i
-                                            class="bx bx-link"></i></a>
+                                        href="{{ url('user/assets/img/portfolio/portfolio-1.jpg') }}"
+                                        title="Work 1"><i class="bx bx-search"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -234,11 +231,8 @@
                                 <p>Work</p>
                                 <div class="portfolio-links">
                                     <a class="portfolio-lightbox" data-gallery="portfolioGallery"
-                                        href="{{ url('assets/img/portfolio/portfolio-3.jpg') }}" title="Work 2"><i
-                                            class="bx bx-plus"></i></a>
-                                    <a class="portfolio-details-lightbox" data-glightbox="type: external"
-                                        href="{{ url('portfolio-details.html') }}" title="Portfolio Details"><i
-                                            class="bx bx-link"></i></a>
+                                        href="{{ url('user/assets/img/portfolio/portfolio-3.jpg') }}"
+                                        title="Work 2"><i class="bx bx-search"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -253,11 +247,8 @@
                                 <p>Work</p>
                                 <div class="portfolio-links">
                                     <a class="portfolio-lightbox" data-gallery="portfolioGallery"
-                                        href="{{ url('assets/img/portfolio/portfolio-4.jpg') }}" title="Work 3"><i
-                                            class="bx bx-plus"></i></a>
-                                    <a class="portfolio-details-lightbox" data-glightbox="type: external"
-                                        href="{{ url('portfolio-details.html') }}" title="Portfolio Details"><i
-                                            class="bx bx-link"></i></a>
+                                        href="{{ url('user/assets/img/portfolio/portfolio-4.jpg') }}"
+                                        title="Work 3"><i class="bx bx-search"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -272,11 +263,8 @@
                                 <p>Home</p>
                                 <div class="portfolio-links">
                                     <a class="portfolio-lightbox" data-gallery="portfolioGallery"
-                                        href="{{ url('assets/img/portfolio/portfolio-2.jpg') }}" title="Home 1"><i
-                                            class="bx bx-plus"></i></a>
-                                    <a class="portfolio-details-lightbox" data-glightbox="type: external"
-                                        href="{{ url('portfolio-details.html') }}" title="Portfolio Details"><i
-                                            class="bx bx-link"></i></a>
+                                        href="{{ url('user/assets/img/portfolio/portfolio-2.jpg') }}"
+                                        title="Home 1"><i class="bx bx-search"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -291,11 +279,8 @@
                                 <p>Home</p>
                                 <div class="portfolio-links">
                                     <a class="portfolio-lightbox" data-gallery="portfolioGallery"
-                                        href="{{ url('assets/img/portfolio/portfolio-5.jpg') }}" title="Home 2"><i
-                                            class="bx bx-plus"></i></a>
-                                    <a class="portfolio-details-lightbox" data-glightbox="type: external"
-                                        href="{{ url('portfolio-details.html') }}" title="Portfolio Details"><i
-                                            class="bx bx-link"></i></a>
+                                        href="{{ url('user/assets/img/portfolio/portfolio-5.jpg') }}"
+                                        title="Home 2"><i class="bx bx-search"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -310,11 +295,8 @@
                                 <p>Work</p>
                                 <div class="portfolio-links">
                                     <a class="portfolio-lightbox" data-gallery="portfolioGallery"
-                                        href="{{ url('assets/img/portfolio/portfolio-7.jpg') }}" title="Work 4"><i
-                                            class="bx bx-plus"></i></a>
-                                    <a class="portfolio-details-lightbox" data-glightbox="type: external"
-                                        href="{{ url('portfolio-details.html') }}" title="Portfolio Details"><i
-                                            class="bx bx-link"></i></a>
+                                        href="{{ url('user/assets/img/portfolio/portfolio-7.jpg') }}"
+                                        title="Work 4"><i class="bx bx-search"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -329,11 +311,8 @@
                                 <p>Work</p>
                                 <div class="portfolio-links">
                                     <a class="portfolio-lightbox" data-gallery="portfolioGallery"
-                                        href="{{ url('assets/img/portfolio/portfolio-8.jpg') }}" title="Work 5"><i
-                                            class="bx bx-plus"></i></a>
-                                    <a class="portfolio-details-lightbox" data-glightbox="type: external"
-                                        href="{{ url('portfolio-details.html') }}" title="Portfolio Details"><i
-                                            class="bx bx-link"></i></a>
+                                        href="{{ url('user/assets/img/portfolio/portfolio-8.jpg') }}"
+                                        title="Work 5"><i class="bx bx-search"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -348,11 +327,8 @@
                                 <p>Home</p>
                                 <div class="portfolio-links">
                                     <a class="portfolio-lightbox" data-gallery="portfolioGallery"
-                                        href="{{ url('assets/img/portfolio/portfolio-6.jpg') }}" title="Home 3"><i
-                                            class="bx bx-plus"></i></a>
-                                    <a class="portfolio-details-lightbox" data-glightbox="type: external"
-                                        href="{{ url('portfolio-details.html') }}" title="Portfolio Details"><i
-                                            class="bx bx-link"></i></a>
+                                        href="{{ url('user/assets/img/portfolio/portfolio-6.jpg') }}"
+                                        title="Home 3"><i class="bx bx-search"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -367,11 +343,8 @@
                                 <p>Work</p>
                                 <div class="portfolio-links">
                                     <a class="portfolio-lightbox" data-gallery="portfolioGallery"
-                                        href="{{ url('assets/img/portfolio/portfolio-10.jpg') }}" title="Work 6"><i
-                                            class="bx bx-plus"></i></a>
-                                    <a class="portfolio-details-lightbox" data-glightbox="type: external"
-                                        href="{{ url('portfolio-details.html') }}" title="Portfolio Details"><i
-                                            class="bx bx-link"></i></a>
+                                        href="{{ url('user/assets/img/portfolio/portfolio-10.jpg') }}"
+                                        title="Work 6"><i class="bx bx-search"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -386,11 +359,8 @@
                                 <p>Home</p>
                                 <div class="portfolio-links">
                                     <a class="portfolio-lightbox" data-gallery="portfolioGallery"
-                                        href="{{ url('assets/img/portfolio/portfolio-11.jpg') }}" title="Home 4"><i
-                                            class="bx bx-plus"></i></a>
-                                    <a class="portfolio-details-lightbox" data-glightbox="type: external"
-                                        href="{{ url('portfolio-details.html') }}" title="Portfolio Details"><i
-                                            class="bx bx-link"></i></a>
+                                        href="{{ url('user/assets/img/portfolio/portfolio-11.jpg') }}"
+                                        title="Home 4"><i class="bx bx-search"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -405,11 +375,8 @@
                                 <p>Work</p>
                                 <div class="portfolio-links">
                                     <a class="portfolio-lightbox" data-gallery="portfolioGallery"
-                                        href="{{ url('assets/img/portfolio/portfolio-13.jpg') }}" title="Work 7"><i
-                                            class="bx bx-plus"></i></a>
-                                    <a class="portfolio-details-lightbox" data-glightbox="type: external"
-                                        href="{{ url('portfolio-details.html') }}" title="Portfolio Details"><i
-                                            class="bx bx-link"></i></a>
+                                        href="{{ url('user/assets/img/portfolio/portfolio-13.jpg') }}"
+                                        title="Work 7"><i class="bx bx-search"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -424,11 +391,8 @@
                                 <p>Home</p>
                                 <div class="portfolio-links">
                                     <a class="portfolio-lightbox" data-gallery="portfolioGallery"
-                                        href="{{ url('assets/img/portfolio/portfolio-9.jpg') }}" title="Home 5"><i
-                                            class="bx bx-plus"></i></a>
-                                    <a class="portfolio-details-lightbox" data-glightbox="type: external"
-                                        href="{{ url('portfolio-details.html') }}" title="Portfolio Details"><i
-                                            class="bx bx-link"></i></a>
+                                        href="{{ url('user/assets/img/portfolio/portfolio-9.jpg') }}"
+                                        title="Home 5"><i class="bx bx-search"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -443,11 +407,8 @@
                                 <p>Home</p>
                                 <div class="portfolio-links">
                                     <a class="portfolio-lightbox" data-gallery="portfolioGallery"
-                                        href="{{ url('assets/img/portfolio/portfolio-12.jpg') }}" title="Home 6"><i
-                                            class="bx bx-plus"></i></a>
-                                    <a class="portfolio-details-lightbox" data-glightbox="type: external"
-                                        href="{{ url('portfolio-details.html') }}" title="Portfolio Details"><i
-                                            class="bx bx-link"></i></a>
+                                        href="{{ url('user/assets/img/portfolio/portfolio-12.jpg') }}"
+                                        title="Home 6"><i class="bx bx-search"></i></a>
                                 </div>
                             </div>
                         </div>
