@@ -5,7 +5,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\InboxController;
 use App\Http\Controllers\ServiceShowController;
 use App\Http\Controllers\ServiceClientController;
-use App\Http\Controllers\Auth\DashboardController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AppointmentShowController;
 use App\Http\Controllers\Admin\TechnicianController;
 use App\Http\Controllers\Admin\ActivityLogController;
