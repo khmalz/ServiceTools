@@ -1,6 +1,5 @@
 # Service Tools
 
-Sebuah website untuk
 Service Tools adalah platform layanan servis alat elektronik yang dapat Anda andalkan. Aplikasi ini dirancang untuk memudahkan pelanggan dalam mereservasi servis alat elektronik, menjadwalkan kunjungan teknisi, dan mengelola permintaan servis.
 
 ## Fitur
@@ -11,7 +10,7 @@ Service Tools adalah platform layanan servis alat elektronik yang dapat Anda and
 
 ## Jalankan Secara Lokal
 
--   Pastikan sudah terinstall php 8.2+ untuk menjalankan laravel 10
+-   Pastikan sudah terinstall php 8.2+ untuk menjalankan laravel 11
 
 **Clone**
 
@@ -63,7 +62,7 @@ DB_PASSWORD=
 php artisan migrate --seed
 ```
 
-**Link Storage**
+**Link Storage** (if filesystem: public in .env)
 
 ```shell
 php artisan storage:link
@@ -84,6 +83,22 @@ contoh: `http://127.0.0.1:8000`
 ```
 APP_URL
 ```
+
+## Login Admin
+
+silahkan ke url `/login` dan login menggunakan akun dibawah ini:
+
+`email: admin@gmail.com`
+
+`password: password`
+
+## Login Teknisi
+
+silahkan ke url `/login` dan login menggunakan akun dibawah ini:
+
+`email: technician1@gmail.com`
+
+`password: password`
 
 ## Developer
 
