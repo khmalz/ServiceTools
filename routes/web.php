@@ -63,7 +63,7 @@ Route::middleware('auth')->group(function () {
                 Route::post('/reschedule', [AppointmentAdminController::class, 'reschedule'])->name('admin.appointment.reschedule');
             });
 
-            Route::resource('technician', TechnicianController::class)->parameter('technician', 'user');
+            Route::resource('technician', TechnicianController::class)->except('show')->parameter('technician', 'user');
         });
     });
 

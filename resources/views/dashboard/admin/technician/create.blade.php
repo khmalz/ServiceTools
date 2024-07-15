@@ -20,10 +20,9 @@
                         <form action="{{ route('technician.store') }}" method="POST">
                             @csrf
                             <div class="form-group mb-3">
-                                <label for="name" class="col-md-4 col-lg-3 col-form-label">Name</label>
-                                <input name="name" type="text"
-                                    class="form-control @error('name') is-invalid @enderror" id="name"
-                                    value="{{ old('name') }}">
+                                <label class="col-md-4 col-lg-3 col-form-label" for="name">Name</label>
+                                <input class="form-control @error('name') is-invalid @enderror" id="name"
+                                    name="name" type="text" value="{{ old('name') }}">
                                 @error('name')
                                     <div class="invalid-feedback">
                                         {{ $message }}
@@ -32,10 +31,9 @@
                             </div>
 
                             <div class="form-group mb-3">
-                                <label for="Email" class="col-md-4 col-lg-3 col-form-label">Email</label>
-                                <input name="email" type="email"
-                                    class="form-control @error('email') is-invalid @enderror" id="Email"
-                                    value="{{ old('email') }}">
+                                <label class="col-md-4 col-lg-3 col-form-label" for="Email">Email</label>
+                                <input class="form-control @error('email') is-invalid @enderror" id="Email"
+                                    name="email" type="email" value="{{ old('email') }}">
                                 @error('email')
                                     <div class="invalid-feedback">
                                         {{ $message }}
@@ -44,10 +42,10 @@
                             </div>
 
                             <div class="form-group mb-3">
-                                <label for="Password" class="col-md-4 col-lg-3 col-form-label">Password</label>
-                                <input name="password" type="password"
-                                    class="form-control @error('password') is-invalid @enderror" id="Password">
-                                @error('passsword')
+                                <label class="col-md-4 col-lg-3 col-form-label" for="Password">Password</label>
+                                <input class="form-control @error('password') is-invalid @enderror" id="Password"
+                                    name="password" type="password">
+                                @error('password')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
@@ -55,7 +53,7 @@
                             </div>
 
                             <div>
-                                <button type="submit" class="btn btn-primary">Save Changes</button>
+                                <button class="btn btn-primary" type="submit">Save Changes</button>
                             </div>
                         </form>
                     </div>

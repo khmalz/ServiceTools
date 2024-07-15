@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Validation\Rules;
-use App\Http\Controllers\Controller;
+use App\Actions\Admin\CreateTechnician;
+use App\Actions\Admin\DeleteTechnician;
+use App\Actions\Admin\EditTechnician;
 use App\Models\User;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\TechnicianRequest;
 
 class TechnicianController extends Controller
 {
@@ -30,30 +32,12 @@ class TechnicianController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(TechnicianRequest $request, CreateTechnician $action)
     {
-        $data = $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255'],
-            'password' => ['required', Rules\Password::defaults()],
-        ]);
+        $data = $request->validated();
+        $action->handle($data);
 
-        $data['password'] = bcrypt($data['password']);
-
-        $user = User::create($data);
-
-        $user->assignRole('technician');
-
-        $user->technician()->create();
         return to_route('technician.index')->with('success', 'Successfully created a new technician');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(User $user)
-    {
-        //
     }
 
     /**
@@ -67,21 +51,10 @@ class TechnicianController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, User $user)
+    public function update(TechnicianRequest $request, User $user, EditTechnician $action)
     {
-        $data = $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255'],
-            'password' => ['nullable', Rules\Password::defaults()],
-        ]);
-
-        if (!empty($data['password'])) {
-            $data['password'] = bcrypt($data['password']);
-        } else {
-            unset($data['password']);
-        }
-
-        $user->update($data);
+        $data = $request->validated();
+        $action->handle($user, $data);
 
         return to_route('technician.index')->with('success', 'Successfully edited a technician');
     }
@@ -89,9 +62,9 @@ class TechnicianController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(User $user)
+    public function destroy(User $user, DeleteTechnician $action)
     {
-        $user->delete();
+        $action->handle($user);
 
         return to_route('technician.index')->with('success', 'Successfully deleted a technician');
     }
