@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\ActivityLogController;
 use App\Http\Controllers\AppointmentClientController;
 use App\Http\Controllers\Admin\ServiceAdminController;
 use App\Http\Controllers\Admin\AppointmentAdminController;
+use App\Http\Controllers\Admin\AssignTechnicianController;
 use App\Http\Controllers\Admin\CalenderController;
 use App\Http\Controllers\NotificationController;
 
@@ -56,10 +57,10 @@ Route::middleware('auth')->group(function () {
         });
 
         Route::middleware('role:admin')->group(function () {
-            Route::prefix('appointment/{appointment}')->controller(AppointmentAdminController::class)->group(function () {
-                Route::get('/technician', 'create')->name('admin.appointment.technician');
-                Route::post('/technician', 'store');
-                Route::post('/reschedule', 'reschedule')->name('admin.appointment.reschedule');
+            Route::prefix('appointment/{appointment}')->group(function () {
+                Route::get('/technician', [AssignTechnicianController::class, 'index'])->name('admin.appointment.assign.technician');
+                Route::post('/technician', [AssignTechnicianController::class, 'store']);
+                Route::post('/reschedule', [AppointmentAdminController::class, 'reschedule'])->name('admin.appointment.reschedule');
             });
 
             Route::resource('technician', TechnicianController::class)->parameter('technician', 'user');

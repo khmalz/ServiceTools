@@ -79,16 +79,16 @@
                             @if ($isReschedulePassed)
                                 <form action="{{ route('admin.appointment.reschedule', $appointment) }}" method="POST">
                                     @csrf
-                                    <input type="hidden" name="reschedule" value="true">
-                                    <button type="submit" class="btn btn-warning btn-sm mt-3 text-white" href="#">
+                                    <input name="reschedule" type="hidden" value="true">
+                                    <button class="btn btn-warning btn-sm mt-3 text-white" type="submit" href="#">
                                         Ajukan re-schedule
                                     </button>
                                 </form>
                             @endif
                         @endrole
                         @role('client')
-                            <a href="{{ route('appointment.edit', $appointment) }}"
-                                class="btn btn-warning btn-sm mt-3 text-white" href="#">
+                            <a class="btn btn-warning btn-sm mt-3 text-white"
+                                href="{{ route('appointment.edit', $appointment) }}" href="#">
                                 Re-sechedule
                             </a>
                         @endrole
@@ -99,8 +99,8 @@
                                 <div class="text-dark text-capitalize fw-bold mb-2">Technician</div>
                                 @role('admin')
                                     <a class="btn btn-info btn-sm mb-3 text-white"
-                                        href="{{ route('admin.appointment.technician', $appointment) }}">
-                                        Add/Update Technician
+                                        href="{{ route('admin.appointment.assign.technician', $appointment) }}">
+                                        Assign Technician
                                     </a>
                                 @endrole
                                 <ul class="list-group">
@@ -129,10 +129,10 @@
                                         @foreach ($appointment->service->images as $image)
                                             <div class="col-md-6 col-lg-4">
                                                 <div style="width: 100%; height: 250px;">
-                                                    <img src="{{ asset('images/' . $image->path) }}"
-                                                        class="img-fluid img-thumbnail w-100 h-100 border border-2"
-                                                        style="object-fit:  cover"
-                                                        alt="gambar bukti {{ $loop->iteration }}">
+                                                    <img class="img-fluid img-thumbnail w-100 h-100 border border-2"
+                                                        src="{{ asset('images/' . $image->path) }}"
+                                                        alt="gambar bukti {{ $loop->iteration }}"
+                                                        style="object-fit:  cover">
                                                 </div>
                                             </div>
                                         @endforeach

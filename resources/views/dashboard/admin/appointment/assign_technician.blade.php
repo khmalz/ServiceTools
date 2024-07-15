@@ -1,8 +1,8 @@
 @extends('dashboard.layouts.main')
 
 @push('styles')
-    <link rel="stylesheet" href="{{ asset('admin/assets/vendor/select2-bootstrap-5/select2.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('admin/assets/vendor/select2-bootstrap-5/select2-bootstrap-5-theme.min.css') }}" />
+    <link href="{{ asset('admin/assets/vendor/select2-bootstrap-5/select2.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('admin/assets/vendor/select2-bootstrap-5/select2-bootstrap-5-theme.min.css') }}" rel="stylesheet" />
 @endpush
 
 @section('content')
@@ -21,36 +21,37 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Add/Update Technician</h5>
-                        <form action="{{ route('admin.appointment.technician', $appointment) }}" method="post"
-                            class="php-email-form">
+                        <h5 class="card-title">Assign Technician</h5>
+                        <form class="php-email-form"
+                            action="{{ route('admin.appointment.assign.technician', $appointment) }}" method="post">
                             @csrf
 
                             <div class="row mb-3">
                                 <div class="col-md-6 form-group">
-                                    <input type="text" readonly class="form-control" id="name"
-                                        placeholder="Order ID" value="{{ $appointment->service->order_id }}" disabled
-                                        required>
+                                    <input class="form-control" id="name" type="text"
+                                        value="{{ $appointment->service->order_id }}" readonly placeholder="Order ID"
+                                        disabled required>
                                 </div>
                                 <div class="col-md-6 form-group mt-md-0 mt-3">
-                                    <input type="text" readonly class="form-control" id="schedule"
-                                        placeholder="Schedule" value="{{ $appointment->schedule->format('d F Y H:i') }}"
-                                        disabled required>
+                                    <input class="form-control" id="schedule" type="text"
+                                        value="{{ $appointment->schedule->format('d F Y H:i') }}" readonly
+                                        placeholder="Schedule" disabled required>
                                 </div>
                             </div>
 
-                            <label for="request" class="form-label fw-semibold">Technician</label>
+                            <label class="form-label fw-semibold" for="request">Technician</label>
                             <div class="form-group">
-                                <select class="form-select @error('technicians') is-invalid @enderror" name="technicians[]"
-                                    id="multiple-select-field" data-placeholder="Choose Technician" multiple>
+                                <select class="form-select @error('technicians') is-invalid @enderror"
+                                    id="multiple-select-field" name="technicians[]" data-placeholder="Choose Technician"
+                                    multiple>
                                     @foreach ($appointment->technicians as $technician)
                                         <option value="{{ $technician->id }}" selected>{{ $technician->user->name }} -
                                             Technician terpilih
                                         </option>
                                     @endforeach
                                     @foreach ($technicians as $technician)
-                                        <option {{ $technician->disabled ? 'disabled' : null }}
-                                            value="{{ $technician->id }}">
+                                        <option value="{{ $technician->id }}"
+                                            {{ $technician->disabled ? 'disabled' : null }}>
                                             {{ $technician->user->name }}
                                             {{ $technician->disabled ? '- Ada jadwal bertabrakan' : null }}</option>
                                     @endforeach
