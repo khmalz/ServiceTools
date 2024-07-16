@@ -53,4 +53,9 @@ class Appointment extends Model
             $q->where('user_id', $userId);
         });
     }
+
+    public function scopeForServiceUser(Builder $query, int $userId)
+    {
+        return $query->whereRelation('service', 'user_id', $userId);
+    }
 }

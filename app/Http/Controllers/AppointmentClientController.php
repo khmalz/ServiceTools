@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Appointment;
 use App\Models\Service;
+use App\Models\Appointment;
 use Illuminate\Http\Request;
+use App\Actions\Client\CreateAppointment;
+use App\Actions\Client\UpdateAppointment;
+use App\Http\Requests\AppointmentRequest;
 
 class AppointmentClientController extends Controller
 {
@@ -13,7 +16,9 @@ class AppointmentClientController extends Controller
      */
     public function list(Request $request)
     {
-        $appointments = Appointment::whereRelation('service', 'user_id', $request->user()->id)->with('service.user.client')->get();
+        $appointments = Appointment::forServiceUser($request->user()->id)
+            ->with('service.user.client')
+            ->get();
 
         return view('dashboard.appointment.list', compact('appointments'));
     }
@@ -35,15 +40,10 @@ class AppointmentClientController extends Controller
     /**
      * Store data service from client request.
      */
-    public function store(Request $request, Service $service)
+    public function store(AppointmentRequest $request, Service $service, CreateAppointment $action)
     {
-        $request->validate([
-            'schedule' => ['required']
-        ]);
-
-        $service->appointment()->create([
-            'schedule' => $request->schedule
-        ]);
+        $data = $request->validated();
+        $action->handle($service, $data);
 
         return to_route('appointment.show', $service->appointment)->with('success', 'Successfully created a appointment');
     }
@@ -61,15 +61,10 @@ class AppointmentClientController extends Controller
     /**
      * Update data appointment from client request.
      */
-    public function update(Request $request, Appointment $appointment)
+    public function update(AppointmentRequest $request, Appointment $appointment, UpdateAppointment $action)
     {
-        $request->validate([
-            'schedule' => ['required']
-        ]);
-
-        $appointment->update([
-            'schedule' => $request->schedule
-        ]);
+        $data = $request->validated();
+        $action->handle($appointment, $data);
 
         return to_route('appointment.show', $appointment)->with('success', 'Successfully updated a appointment');
     }
