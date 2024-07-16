@@ -1,7 +1,7 @@
 @extends('dashboard.layouts.main')
 
 @push('styles')
-    <link rel="stylesheet" href="{{ asset('admin/assets/vendor/datetime-picker/bootstrap-datetimepicker.min.css') }}">
+    <link href="{{ asset('admin/assets/vendor/datetime-picker/bootstrap-datetimepicker.min.css') }}" rel="stylesheet">
 @endpush
 
 @section('content')
@@ -91,16 +91,16 @@
                                         <tr>
                                             <td></td>
                                             <td class="fw-semibold text-capitalize text-end"><a
-                                                    href="{{ route('appointment.show', $service->appointment) }}"
-                                                    class="badge text-bg-primary">See
+                                                    class="badge text-bg-primary"
+                                                    href="{{ route('appointment.show', $service->appointment) }}">See
                                                     schedule?</a></td>
                                         </tr>
-                                    @elseif($service->work == 'home' && empty($service->appointment))
+                                    @elseif($service->status != 'cancel' && $service->work == 'home' && empty($service->appointment))
                                         <tr>
                                             <td></td>
                                             <td class="fw-semibold text-capitalize text-end"><a
-                                                    href="{{ route('appointment.create', $service) }}"
-                                                    class="badge text-bg-primary">Make a
+                                                    class="badge text-bg-primary"
+                                                    href="{{ route('appointment.create', $service) }}">Make a
                                                     schedule?</a></td>
                                         </tr>
                                     @endif
@@ -119,8 +119,8 @@
                                         </button>
                                     </div>
                                 </div>
-                                <div class="modal fade" id="modalCancel{{ $service->id }}" tabindex="-1"
-                                    aria-labelledby="modalCancelLabel" aria-hidden="true">
+                                <div class="modal fade" id="modalCancel{{ $service->id }}" aria-labelledby="modalCancelLabel"
+                                    aria-hidden="true" tabindex="-1">
                                     <div class="modal-dialog modal-dialog-centered">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -128,14 +128,14 @@
                                                 </h5>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary"
-                                                    data-bs-dismiss="modal">Cancel</button>
-                                                <form action="{{ route('service.cancel', $service->id) }}" method="POST"
-                                                    class="d-inline">
+                                                <button class="btn btn-secondary" data-bs-dismiss="modal"
+                                                    type="button">Cancel</button>
+                                                <form class="d-inline" action="{{ route('service.cancel', $service->id) }}"
+                                                    method="POST">
                                                     @csrf
                                                     @method('patch')
-                                                    <input type="hidden" name="cancel" value="true">
-                                                    <button type="submit" class="btn btn-danger">Cancel Order</button>
+                                                    <input name="cancel" type="hidden" value="true">
+                                                    <button class="btn btn-danger" type="submit">Cancel Order</button>
                                                 </form>
                                             </div>
                                         </div>
@@ -150,8 +150,8 @@
                                         </button>
                                     </div>
                                 </div>
-                                <div class="modal fade" id="modalActive{{ $service->id }}" tabindex="-1"
-                                    aria-labelledby="modalActiveLabel" aria-hidden="true">
+                                <div class="modal fade" id="modalActive{{ $service->id }}" aria-labelledby="modalActiveLabel"
+                                    aria-hidden="true" tabindex="-1">
                                     <div class="modal-dialog modal-dialog-centered">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -159,14 +159,14 @@
                                                 </h5>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary"
-                                                    data-bs-dismiss="modal">Cancel</button>
-                                                <form action="{{ route('service.active', $service->id) }}" method="POST"
-                                                    class="d-inline">
+                                                <button class="btn btn-secondary" data-bs-dismiss="modal"
+                                                    type="button">Cancel</button>
+                                                <form class="d-inline" action="{{ route('service.active', $service->id) }}"
+                                                    method="POST">
                                                     @csrf
                                                     @method('patch')
-                                                    <input type="hidden" name="active" value="true">
-                                                    <button type="submit" class="btn btn-primary">Active Order</button>
+                                                    <input name="active" type="hidden" value="true">
+                                                    <button class="btn btn-primary" type="submit">Active Order</button>
                                                 </form>
                                             </div>
                                         </div>
@@ -190,10 +190,10 @@
                                         @foreach ($service->images as $image)
                                             <div class="col-md-6 col-lg-4">
                                                 <div style="width: 100%; height: 250px;">
-                                                    <img src="{{ asset('images/' . $image->path) }}"
-                                                        class="img-fluid img-thumbnail w-100 h-100 border border-2"
-                                                        style="object-fit:  cover"
-                                                        alt="gambar bukti {{ $loop->iteration }}">
+                                                    <img class="img-fluid img-thumbnail w-100 h-100 border border-2"
+                                                        src="{{ asset('images/' . $image->path) }}"
+                                                        alt="gambar bukti {{ $loop->iteration }}"
+                                                        style="object-fit:  cover">
                                                 </div>
                                             </div>
                                         @endforeach

@@ -1,7 +1,7 @@
 @extends('dashboard.layouts.main')
 
 @push('styles')
-    <link rel="stylesheet" href="{{ asset('admin/assets/vendor/datetime-picker/bootstrap-datetimepicker.min.css') }}">
+    <link href="{{ asset('admin/assets/vendor/datetime-picker/bootstrap-datetimepicker.min.css') }}" rel="stylesheet">
 
     <style>
         .delete-button {
@@ -43,6 +43,11 @@
     <section class="section" id="service">
         <div class="row">
             <div class="col-12">
+                @if (session()->has('error'))
+                    <div class="alert alert-danger" role="alert">
+                        {{ session('error') }}
+                    </div>
+                @endif
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center my-0 py-0">
                         <h5 class="card-title">Create Request</h5>
@@ -55,48 +60,48 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('service.store') }}" method="post" class="php-email-form mt-3"
+                        <form class="php-email-form mt-3" action="{{ route('service.store') }}" method="post"
                             enctype="multipart/form-data">
                             @csrf
 
-                            <label for="account" class="form-label fw-semibold">Account</label>
+                            <label class="form-label fw-semibold" for="account">Account</label>
                             <div class="row">
                                 <div class="col-md-6 form-group">
-                                    <input type="text" readonly class="form-control" id="name"
-                                        placeholder="Your Name" disabled value="{{ $user->name }}" required>
+                                    <input class="form-control" id="name" type="text" value="{{ $user->name }}"
+                                        readonly placeholder="Your Name" disabled required>
                                 </div>
                                 <div class="col-md-6 form-group mt-md-0 mt-3">
-                                    <input type="email" readonly class="form-control" id="email"
-                                        placeholder="Your Email" disabled value="{{ $user->email }}" required>
+                                    <input class="form-control" id="email" type="email" value="{{ $user->email }}"
+                                        readonly placeholder="Your Email" disabled required>
                                 </div>
                             </div>
 
-                            <label for="request" class="form-label fw-semibold mt-4">Request</label>
+                            <label class="form-label fw-semibold mt-4" for="request">Request</label>
                             <div class="form-group">
-                                <select class="form-select @error('type') is-invalid @enderror" name="type"
-                                    id="selectType" onchange="selectTypeChange(this)" data-old-type="{{ old('type') }}">
+                                <select class="form-select @error('type') is-invalid @enderror" id="selectType"
+                                    name="type" data-old-type="{{ old('type') }}" onchange="selectTypeChange(this)">
                                     <option selected disabled>Pilih Jenis Elektronik</option>
-                                    <option {{ old('type') == 'tv' ? 'selected' : null }} value="tv">TV</option>
-                                    <option {{ old('type') == 'kulkas' ? 'selected' : null }} value="kulkas">Kulkas</option>
-                                    <option {{ old('type') == 'ac' ? 'selected' : null }} value="ac">AC</option>
-                                    <option {{ old('type') == 'kamera' ? 'selected' : null }} value="kamera">Kamera
+                                    <option value="tv" {{ old('type') == 'tv' ? 'selected' : null }}>TV</option>
+                                    <option value="kulkas" {{ old('type') == 'kulkas' ? 'selected' : null }}>Kulkas</option>
+                                    <option value="ac" {{ old('type') == 'ac' ? 'selected' : null }}>AC</option>
+                                    <option value="kamera" {{ old('type') == 'kamera' ? 'selected' : null }}>Kamera
                                     </option>
-                                    <option {{ old('type') == 'speaker' ? 'selected' : null }} value="speaker">Speaker
+                                    <option value="speaker" {{ old('type') == 'speaker' ? 'selected' : null }}>Speaker
                                     </option>
-                                    <option {{ old('type') == 'oven' ? 'selected' : null }} value="oven">Oven</option>
-                                    <option {{ old('type') == 'mesin cuci' ? 'selected' : null }} value="mesin cuci">Mesin
+                                    <option value="oven" {{ old('type') == 'oven' ? 'selected' : null }}>Oven</option>
+                                    <option value="mesin cuci" {{ old('type') == 'mesin cuci' ? 'selected' : null }}>Mesin
                                         cuci</option>
-                                    <option {{ old('type') == 'drone' ? 'selected' : null }} value="drone">Drone</option>
-                                    <option {{ old('type') == 'radio' ? 'selected' : null }} value="radio">Radio</option>
-                                    <option {{ old('type') == 'hp/tablet' ? 'selected' : null }} value="hp/tablet">
+                                    <option value="drone" {{ old('type') == 'drone' ? 'selected' : null }}>Drone</option>
+                                    <option value="radio" {{ old('type') == 'radio' ? 'selected' : null }}>Radio</option>
+                                    <option value="hp/tablet" {{ old('type') == 'hp/tablet' ? 'selected' : null }}>
                                         Hp/Tablet</option>
-                                    <option {{ old('type') == 'laptop' ? 'selected' : null }} value="laptop">Laptop
+                                    <option value="laptop" {{ old('type') == 'laptop' ? 'selected' : null }}>Laptop
                                     </option>
-                                    <option {{ old('type') == 'komputer' ? 'selected' : null }} value="komputer">Komputer
+                                    <option value="komputer" {{ old('type') == 'komputer' ? 'selected' : null }}>Komputer
                                     </option>
-                                    <option {{ old('type') == 'playstation' ? 'selected' : null }} value="playstation">
+                                    <option value="playstation" {{ old('type') == 'playstation' ? 'selected' : null }}>
                                         Playstation</option>
-                                    <option {{ old('type') == 'lainnya' ? 'selected' : null }} value="lainnya">Lainnya
+                                    <option value="lainnya" {{ old('type') == 'lainnya' ? 'selected' : null }}>Lainnya
                                     </option>
                                 </select>
                                 @error('type')
@@ -107,11 +112,11 @@
                             </div>
                             <div id="typeOtherContainer"></div>
                             <div class="form-group mt-3">
-                                <select class="form-select @error('work') is-invalid @enderror" name="work"
-                                    id="selectWork" data-old-work="{{ old('work') }}" onchange="selectWorkChange(this)">
+                                <select class="form-select @error('work') is-invalid @enderror" id="selectWork"
+                                    name="work" data-old-work="{{ old('work') }}" onchange="selectWorkChange(this)">
                                     <option selected disabled>Pilih Tempat Perbaikan</option>
-                                    <option {{ old('work') == 'home' ? 'selected' : null }} value="home">Rumah</option>
-                                    <option {{ old('work') == 'office' ? 'selected' : null }} value="office">Kantor
+                                    <option value="home" {{ old('work') == 'home' ? 'selected' : null }}>Rumah</option>
+                                    <option value="office" {{ old('work') == 'office' ? 'selected' : null }}>Kantor
                                     </option>
                                 </select>
                                 @error('work')
@@ -131,12 +136,12 @@
                                 @enderror
                             </div>
                             <div class="mt-3">
-                                <label for="formFileMultiple" class="form-label">Image (optional)</label>
-                                <input onchange="previewImageMultiple()" name="images[]" class="form-control" type="file"
-                                    id="multipleFiles" multiple>
+                                <label class="form-label" for="formFileMultiple">Image (optional)</label>
+                                <input class="form-control" id="multipleFiles" name="images[]" type="file"
+                                    onchange="previewImageMultiple()" multiple>
                             </div>
                             <div class="mt-3">
-                                <div class="row" style="row-gap: 13px" id="image-container">
+                                <div class="row" id="image-container" style="row-gap: 13px">
                                 </div>
                             </div>
                             <div class="mt-3 text-center"><button class="btn btn-primary" type="submit">Send</button>

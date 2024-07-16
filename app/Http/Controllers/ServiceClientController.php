@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\Client\ActiveService;
+use App\Actions\Client\CancelService;
+use App\Http\Requests\CancelServiceRequest;
 use App\Models\Service;
-use App\Models\ServiceImage;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use App\Actions\Client\CreateService;
+use App\Actions\Client\UpdateService;
+use App\Http\Requests\ActiveServiceRequest;
 use App\Http\Requests\ServiceClientRequest;
 
 class ServiceClientController extends Controller
@@ -33,31 +37,17 @@ class ServiceClientController extends Controller
     /**
      * Store data service from client request.
      */
-    public function store(ServiceClientRequest $request)
+    public function store(ServiceClientRequest $request, CreateService $action)
     {
         $data = $request->validated();
 
-        $service = $request->user()->services()->create($data);
+        try {
+            $action->handle($request->user(), $data, $request->file('images') ?? []);
 
-        if ($request->hasFile('images')) {
-            $images = $request->file('images');
-
-            foreach ($images as $image) {
-                $imagePath = $image->store('evidences');
-
-                $service->images()->create([
-                    'path' => $imagePath,
-                ]);
-            }
+            return to_route('service.create')->with('success', 'Successfully created new service');
+        } catch (\Exception $e) {
+            return back()->with('error', $e->getMessage())->withInput();
         }
-
-        if ($request->work == 'home' && $request->has('schedule')) {
-            $service->appointment()->create([
-                'schedule' => $request->schedule
-            ]);
-        }
-
-        return to_route('service.create')->with('success', 'Successfully created new service');
     }
 
     /**
@@ -73,91 +63,42 @@ class ServiceClientController extends Controller
     /**
      * Update data service from client request.
      */
-    public function update(ServiceClientRequest $request, Service $service)
+    public function update(ServiceClientRequest $request, Service $service, UpdateService $action)
     {
         $data = $request->validated();
 
-        DB::beginTransaction();
-
         try {
-            $service->update($data);
-
-            $deleted = $request->img_deleted;
-
-            if ($deleted) {
-                ServiceImage::destroy($deleted);
-            }
-
-            if ($request->hasFile('images')) {
-                $images = $request->file('images');
-
-                foreach ($images as $image) {
-                    $imagePath = $image->store('evidences');
-
-                    $service->images()->create([
-                        'path' => $imagePath,
-                    ]);
-                }
-            }
-
-            if ($request->work == 'home' && $request->has('schedule')) {
-                $service->appointment()->updateOrCreate(
-                    [],
-                    [
-                        'schedule' => $request->schedule
-                    ]
-                );
-            } else {
-                $service->appointment()->delete();
-            }
-
-            DB::commit();
+            $action->handle($service, $data, $request->file('images') ?? []);
 
             return to_route('service.show', $service)->with('success', 'Successfully updated a service order');
         } catch (\Exception $e) {
-            // Rollback database transaksi jika terjadi error
-            DB::rollback();
-
-            return back()->with('error', 'Failed to save changes: ' . $e->getMessage());
+            return back()->with('error', $e->getMessage())->withInput();
         }
     }
 
     /**
      * Cancel data service from client request.
      */
-    public function cancel(Request $request, Service $service)
+    public function cancel(CancelServiceRequest $request, Service $service, CancelService $action)
     {
-        abort_if($service->user_id != $request->user()->id, 403);
+        $request->validated();
 
-        $request->validate([
-            'cancel' => ['required']
-        ]);
+        try {
+            $action->handle($service);
 
-        $service->update([
-            'status' => "cancel"
-        ]);
-
-        if ($service->appointment) {
-            $service->appointment()->delete();
+            return to_route("service.show", $service)->with('success', 'Successfully cancel a order service');
+        } catch (\Exception $e) {
+            return back()->with('error', $e->getMessage())->withInput();
         }
-
-        return to_route("service.show", $service)->with('success', 'Successfully cancel a order service');
     }
 
     /**
      * Active data service from client request.
      */
-    public function active(Request $request, Service $service)
+    public function active(ActiveServiceRequest $request, Service $service, ActiveService $action)
     {
-        abort_if($service->user_id != $request->user()->id, 403);
-
-        $request->validate([
-            'active' => ['required']
-        ]);
-
-        $service->update([
-            'status' => "pending"
-        ]);
+        $request->validated();
+        $action->handle($service);
 
         return to_route("service.show", $service)->with('success', 'Successfully active a order service');
     }

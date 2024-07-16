@@ -1,7 +1,7 @@
 @extends('dashboard.layouts.main')
 
 @push('styles')
-    <link rel="stylesheet" href="{{ asset('admin/assets/vendor/datetime-picker/bootstrap-datetimepicker.min.css') }}">
+    <link href="{{ asset('admin/assets/vendor/datetime-picker/bootstrap-datetimepicker.min.css') }}" rel="stylesheet">
 
     <style>
         .delete-button {
@@ -43,6 +43,11 @@
     <section class="section" id="service">
         <div class="row">
             <div class="col-12">
+                @if (session()->has('error'))
+                    <div class="alert alert-danger" role="alert">
+                        {{ session('error') }}
+                    </div>
+                @endif
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center my-0 py-0">
                         <h5 class="card-title">Edit Request</h5>
@@ -55,57 +60,62 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('service.update', $service) }}" method="post" class="php-email-form mt-3"
+                        <form class="php-email-form mt-3" action="{{ route('service.update', $service) }}" method="post"
                             enctype="multipart/form-data">
                             @csrf
                             @method('patch')
 
-                            <label for="account" class="form-label fw-semibold">Account</label>
+                            <label class="form-label fw-semibold" for="account">Account</label>
                             <div class="row">
                                 <div class="col-md-6 form-group">
-                                    <input type="text" readonly class="form-control" id="name"
-                                        placeholder="Your Name" disabled value="{{ $service->user->name }}" required>
+                                    <input class="form-control" id="name" type="text"
+                                        value="{{ $service->user->name }}" readonly placeholder="Your Name" disabled
+                                        required>
                                 </div>
                                 <div class="col-md-6 form-group mt-md-0 mt-3">
-                                    <input type="email" readonly class="form-control" id="email"
-                                        placeholder="Your Email" disabled value="{{ $service->user->email }}" required>
+                                    <input class="form-control" id="email" type="email"
+                                        value="{{ $service->user->email }}" readonly placeholder="Your Email" disabled
+                                        required>
                                 </div>
                             </div>
 
-                            <label for="request" class="form-label fw-semibold mt-4">Request</label>
+                            <label class="form-label fw-semibold mt-4" for="request">Request</label>
                             <div class="form-group">
-                                <select class="form-select @error('type') is-invalid @enderror" name="type"
-                                    id="selectType" data-old-type="{{ old('type', $service->type) }}"
+                                <select class="form-select @error('type') is-invalid @enderror" id="selectType"
+                                    name="type" data-old-type="{{ old('type', $service->type) }}"
                                     onchange="selectTypeChange(this)">
                                     <option selected disabled>Pilih Jenis Elektronik</option>
-                                    <option {{ old('type', $service->type) == 'tv' ? 'selected' : '' }} value="tv">TV
+                                    <option value="tv" {{ old('type', $service->type) == 'tv' ? 'selected' : '' }}>TV
                                     </option>
-                                    <option {{ old('type', $service->type) == 'kulkas' ? 'selected' : '' }} value="kulkas">
+                                    <option value="kulkas" {{ old('type', $service->type) == 'kulkas' ? 'selected' : '' }}>
                                         Kulkas</option>
-                                    <option {{ old('type', $service->type) == 'ac' ? 'selected' : '' }} value="ac">AC
+                                    <option value="ac" {{ old('type', $service->type) == 'ac' ? 'selected' : '' }}>AC
                                     </option>
-                                    <option {{ old('type', $service->type) == 'kamera' ? 'selected' : '' }} value="kamera">
+                                    <option value="kamera" {{ old('type', $service->type) == 'kamera' ? 'selected' : '' }}>
                                         Kamera</option>
-                                    <option {{ old('type', $service->type) == 'speaker' ? 'selected' : '' }}
-                                        value="speaker">Speaker</option>
-                                    <option {{ old('type', $service->type) == 'oven' ? 'selected' : '' }} value="oven">
+                                    <option value="speaker"
+                                        {{ old('type', $service->type) == 'speaker' ? 'selected' : '' }}>Speaker</option>
+                                    <option value="oven" {{ old('type', $service->type) == 'oven' ? 'selected' : '' }}>
                                         Oven</option>
-                                    <option {{ old('type', $service->type) == 'mesin cuci' ? 'selected' : '' }}
-                                        value="mesin cuci">Mesin cuci</option>
-                                    <option {{ old('type', $service->type) == 'drone' ? 'selected' : '' }} value="drone">
+                                    <option value="mesin cuci"
+                                        {{ old('type', $service->type) == 'mesin cuci' ? 'selected' : '' }}>Mesin cuci
+                                    </option>
+                                    <option value="drone" {{ old('type', $service->type) == 'drone' ? 'selected' : '' }}>
                                         Drone</option>
-                                    <option {{ old('type', $service->type) == 'radio' ? 'selected' : '' }} value="radio">
+                                    <option value="radio" {{ old('type', $service->type) == 'radio' ? 'selected' : '' }}>
                                         Radio</option>
-                                    <option {{ old('type', $service->type) == 'hp/tablet' ? 'selected' : '' }}
-                                        value="hp/tablet">Hp/Tablet</option>
-                                    <option {{ old('type', $service->type) == 'laptop' ? 'selected' : '' }} value="laptop">
+                                    <option value="hp/tablet"
+                                        {{ old('type', $service->type) == 'hp/tablet' ? 'selected' : '' }}>Hp/Tablet
+                                    </option>
+                                    <option value="laptop" {{ old('type', $service->type) == 'laptop' ? 'selected' : '' }}>
                                         Laptop</option>
-                                    <option {{ old('type', $service->type) == 'komputer' ? 'selected' : '' }}
-                                        value="komputer">Komputer</option>
-                                    <option {{ old('type', $service->type) == 'playstation' ? 'selected' : '' }}
-                                        value="playstation">Playstation</option>
-                                    <option {{ old('type', $service->type) == 'lainnya' ? 'selected' : '' }}
-                                        value="lainnya">Lainnya</option>
+                                    <option value="komputer"
+                                        {{ old('type', $service->type) == 'komputer' ? 'selected' : '' }}>Komputer</option>
+                                    <option value="playstation"
+                                        {{ old('type', $service->type) == 'playstation' ? 'selected' : '' }}>Playstation
+                                    </option>
+                                    <option value="lainnya"
+                                        {{ old('type', $service->type) == 'lainnya' ? 'selected' : '' }}>Lainnya</option>
                                 </select>
                                 @error('type')
                                     <div class="invalid-feedback">
@@ -115,14 +125,14 @@
                             </div>
                             <div id="typeOtherContainer"></div>
                             <div class="form-group mt-3">
-                                <select class="form-select @error('work') is-invalid @enderror" name="work"
-                                    id="selectWork" data-old-work="{{ old('work', $service->work) }}"
+                                <select class="form-select @error('work') is-invalid @enderror" id="selectWork"
+                                    name="work" data-old-work="{{ old('work', $service->work) }}"
                                     onchange="selectWorkChange(this)">
                                     <option selected disabled>Pilih Tempat Perbaikan</option>
-                                    <option {{ old('work', $service->work) == 'home' ? 'selected' : null }} value="home">
+                                    <option value="home" {{ old('work', $service->work) == 'home' ? 'selected' : null }}>
                                         Rumah</option>
-                                    <option {{ old('work', $service->work) == 'office' ? 'selected' : null }}
-                                        value="office">Kantor
+                                    <option value="office"
+                                        {{ old('work', $service->work) == 'office' ? 'selected' : null }}>Kantor
                                     </option>
                                 </select>
                                 @error('work')
@@ -137,20 +147,20 @@
                             </div>
                             <div id="deleted-id-image" hidden></div>
                             <div class="mt-3">
-                                <label for="formFileMultiple" class="form-label">Image (optional)</label>
-                                <input onchange="previewImageMultiple()" name="images[]" class="form-control" type="file"
-                                    id="multipleFiles" multiple>
+                                <label class="form-label" for="formFileMultiple">Image (optional)</label>
+                                <input class="form-control" id="multipleFiles" name="images[]" type="file"
+                                    onchange="previewImageMultiple()" multiple>
                             </div>
                             <div class="mt-3">
-                                <div class="row" style="row-gap: 13px" id="image-container">
+                                <div class="row" id="image-container" style="row-gap: 13px">
                                     @foreach ($service->images as $image)
                                         <div class="col-md-6 col-lg-3" id="image-{{ $image->id }}">
                                             <div style="position: relative;">
-                                                <img src="{{ asset('images/' . $image->path) }}"
+                                                <img class="img-fluid w-100 img-x rounded border"
+                                                    src="{{ asset('images/' . $image->path) }}"
                                                     alt="image-{{ $image->id }}"
-                                                    class="img-fluid w-100 img-x rounded border"
                                                     style="height: 200px; object-fit: cover">
-                                                <button type="button" class="delete-button"
+                                                <button class="delete-button" type="button"
                                                     onclick="deleteImage(this,{{ $image->id }})">
                                                     <i class='bx bx-x'></i>
                                                 </button>
