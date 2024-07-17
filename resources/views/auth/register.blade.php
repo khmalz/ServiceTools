@@ -37,6 +37,7 @@
                                         @enderror
                                     </div>
                                 </div>
+
                                 <div class="col-12">
                                     <label class="form-label" for="yourEmail">Email</label>
                                     <div class="input-group has-validation">
@@ -49,6 +50,7 @@
                                         @enderror
                                     </div>
                                 </div>
+
                                 <div class="col-12">
                                     <label class="form-label" for="yourPassword">Password</label>
                                     <div class="input-group has-validation">
@@ -73,7 +75,16 @@
                                 <div class="col-12">
                                     <button class="btn btn-primary w-100" type="submit">Create Account</button>
                                 </div>
+
                                 <div class="col-12">
                                     <p class="small mb-0">Already have an account? <a href="{{ route('login') }}">Log in</a>
                                     </p>
-                                </div
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+@endsection
