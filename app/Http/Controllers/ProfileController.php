@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\Client\UpdateProfile;
+use App\Http\Requests\ProfileUpdateRequest;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Validation\Rules\Password;
 
 class ProfileController extends Controller
 {
@@ -22,38 +23,16 @@ class ProfileController extends Controller
     /**
      * Update the user's profile information.
      */
-    public function update(Request $request): RedirectResponse
+    public function update(ProfileUpdateRequest $request, UpdateProfile $action): RedirectResponse
     {
-        $data = $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . $request->user()->id],
-            'password' => ['nullable', Password::defaults()],
-            'gender' => ['nullable', 'string'],
-            'telephone' => ['nullable', 'numeric', 'regex:/^(62|08)[2-9][0-9]{5,20}$/'],
-            'alamat' => ['nullable', 'string', 'max:255'],
-        ], [
-            'telephone.regex' => 'The phone number must start with 62/08',
-        ]);
+        $data = $request->validated();
+        $user = $request->user();
 
-        if (!empty($data['password'])) {
-            $data['password'] = bcrypt($data['password']);
-        } else {
-            unset($data['password']);
+        try {
+            $action->handle($user, $data);
+            return to_route('dashboard')->with('success', 'Profile-updated successfully');
+        } catch (\Exception $e) {
+            return back()->with('error', 'Failed to update user. Please try again later.');
         }
-
-        $request->user()->update($data);
-
-        if ($request->telephone || $request->gender || $request->alamat) {
-            $request->user()->client()->updateOrcreate(
-                [],
-                [
-                    'telephone' => $data['telephone'] ?? null,
-                    'gender' => $data['gender'] ?? null,
-                    'alamat' => $data['alamat'] ?? null,
-                ]
-            );
-        }
-
-        return to_route('dashboard')->with('success', 'Profile-updated successfully');
     }
 }
