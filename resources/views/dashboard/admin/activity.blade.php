@@ -20,20 +20,22 @@
                     <div class="card-body">
                         <h5 class="card-title">Activity</h5>
 
-                        @forelse ($activities->groupBy(fn($acty) => $acty->created_at->format('d-m-Y')) as $date => $groupedActivities)
+                        @forelse ($activities->groupBy(fn ($notif) => \App\Helpers\DateHelper::getActivityDateLabel($notif->created_at)) as $label => $groupedActivities)
                             <div class="mb-4">
-                                <p> {{ \App\Helpers\DateHelper::getActivityDateLabel($date) }}
+                                <p>
+                                    {{ $label }}
                                 </p>
                                 <div class="activity">
                                     @foreach ($groupedActivities as $activity)
                                         <div class="activity-item d-flex">
-                                            <div class="activite-label">12:30 |
+                                            <div class="activite-label">{{ $activity->created_at->format('H:i') }} |
                                                 {{ $activity->created_at->format('d M Y') }}</div>
                                             <i class='bi bi-circle-fill activity-badge text-primary align-self-start'></i>
                                             <div class="activity-content">
                                                 <span class="fw-semibold">{{ $activity->causer->name }}</span> &raquo;
                                                 {{ $activity->description }} for ID
-                                                #{{ $activity->properties['order_id'] }}
+                                                <span
+                                                    class="text-decoration-underline">#{{ $activity->properties['order_id'] }}</span>
                                             </div>
                                         </div>
                                     @endforeach

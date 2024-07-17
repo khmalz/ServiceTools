@@ -16,11 +16,16 @@ class DateHelper
       }
 
       $date = $date->startOfDay();
-      $diffInDays = $date->diffInDays(now()->startOfDay());
-      $label = null;
+      $diffInDays = (int) $date->diffInDays(now()->startOfDay());
 
-      $label = ($diffInDays === 0) ? 'Today' : $date->diffForHumans();
-
-      return $label;
+      if ($diffInDays <= 3) {
+         return 'Terbaru';
+      } elseif ($diffInDays <= 7) {
+         return '7 Hari Terakhir';
+      } elseif ($diffInDays <= 30) {
+         return '1 Bulan Terakhir';
+      } else {
+         return 'Lebih Lama';
+      }
    }
 }
