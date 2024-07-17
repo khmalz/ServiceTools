@@ -26,7 +26,7 @@
                                     <i class='bx bx-wrench'></i>
                                 </div>
                                 <div class="ps-3">
-                                    <h6>145</h6>
+                                    <h6>{{ $serviceCount }}</h6>
                                 </div>
                             </div>
                         </div>
@@ -44,7 +44,7 @@
                                     <i class='bx bx-calendar-edit'></i>
                                 </div>
                                 <div class="ps-3">
-                                    <h6>64</h6>
+                                    <h6>{{ $appointmentCount }}</h6>
                                 </div>
                             </div>
                         </div>
@@ -64,7 +64,7 @@
                                         <i class="bi bi-people"></i>
                                     </div>
                                     <div class="ps-3">
-                                        <h6>12</h6>
+                                        <h6>{{ $technicianCount }}</h6>
                                     </div>
                                 </div>
 

@@ -4,10 +4,11 @@ namespace App\Models;
 
 use App\Helpers\MixCaseULID;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Service extends Model
 {
@@ -49,10 +50,15 @@ class Service extends Model
         return $this->hasOne(Appointment::class);
     }
 
-    public function scopeWhereStatus($query, string $status1, ?string $status2 = null)
+    public function scopeWhereStatus(Builder $query, string $status1, ?string $status2 = null)
     {
         return $query->where('status', $status1)->when($status2, function ($query) use ($status2) {
             $query->orWhere('status', $status2);
         });
+    }
+
+    public function scopeWhereNotCancel(Builder $query)
+    {
+        $query->whereNot('status', 'cancel');
     }
 }

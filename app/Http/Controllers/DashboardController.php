@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
+use App\Models\Service;
+use App\Models\Appointment;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Models\Technician;
 
 class DashboardController extends Controller
 {
@@ -18,6 +21,10 @@ class DashboardController extends Controller
             return view('dashboard.index', compact('user'));
         }
 
-        return view('dashboard.index');
+        $serviceCount = Service::whereNotCancel()->count();
+        $appointmentCount = Appointment::count();
+        $technicianCount = Technician::count();
+
+        return view('dashboard.index', compact('serviceCount', 'appointmentCount', 'technicianCount'));
     }
 }
