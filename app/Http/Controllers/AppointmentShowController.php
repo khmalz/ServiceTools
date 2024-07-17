@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Appointment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class AppointmentShowController extends Controller
 {
@@ -12,9 +14,9 @@ class AppointmentShowController extends Controller
      */
     public function __invoke(Request $request, Appointment $appointment)
     {
-        $appointment->load('service.user.client', 'service.images', 'technicians.user');
+        Gate::denyIf(fn (User $user) => $user->hasRole('client') && $user->id != $appointment->service->user_id);
 
-        abort_if($request->user()->hasRole('client') && $appointment->service->user_id != $request->user()->id, 403);
+        $appointment->load('service.user.client', 'service.images', 'technicians.user');
 
         /**
          * Pengajuan reschedule null, boleh

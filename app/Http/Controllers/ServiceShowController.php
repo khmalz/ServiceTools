@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Service;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class ServiceShowController extends Controller
 {
@@ -12,7 +14,7 @@ class ServiceShowController extends Controller
      */
     public function __invoke(Request $request, Service $service)
     {
-        abort_if($request->user()->hasRole('client') && $service->user_id != $request->user()->id, 403);
+        Gate::denyIf(fn (User $user) => $user->hasRole('client') && $user->id != $service->user_id);
 
         $service->load('user.client', 'appointment', 'images');
 
