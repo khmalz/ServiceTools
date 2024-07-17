@@ -44,7 +44,7 @@
                                         <th scope="row">{{ $loop->iteration }}</th>
                                         <td class="text-capitalize">{{ $appointment->service->order_id }}</td>
                                         <td class="text-capitalize">{{ $appointment->service->user->name }}</td>
-                                        <td class="text-capitalize">{{ $appointment->service->user->email }}</td>
+                                        <td>{{ $appointment->service->user->email }}</td>
                                         <td class="text-capitalize">{{ $appointment->service->type }}</td>
                                         <td>{{ $appointment->schedule->format('d F Y H:i') }}</td>
                                         <td>{{ $appointment->service->created_at->format('d F Y') }}</td>
@@ -64,22 +64,22 @@
                                         </td>
                                         <td>
                                             @role('technician')
-                                                <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
-                                                    data-bs-target="#modalUpdate{{ $appointment->id }}">
+                                                <button class="btn btn-primary btn-sm" data-bs-toggle="modal"
+                                                    data-bs-target="#modalUpdate{{ $appointment->id }}" type="button">
                                                     <i class='bx bxs-pencil'></i>
                                                     Edit
                                                 </button>
-                                                <div class="modal fade" id="modalUpdate{{ $appointment->id }}" tabindex="-1"
-                                                    aria-labelledby="modalUpdateLabel" aria-hidden="true">
+                                                <div class="modal fade" id="modalUpdate{{ $appointment->id }}"
+                                                    aria-labelledby="modalUpdateLabel" aria-hidden="true" tabindex="-1">
                                                     <div class="modal-dialog modal-dialog-centered">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
                                                                 <h5 class="modal-title" id="modalUpdateLabel">Apakah Kamu Yakin?
                                                                 </h5>
                                                             </div>
-                                                            <form
+                                                            <form class="d-inline"
                                                                 action="{{ route('admin.appointment.update', $appointment->id) }}"
-                                                                method="POST" class="d-inline">
+                                                                method="POST">
                                                                 @csrf
                                                                 @method('patch')
                                                                 <div class="modal-body">
@@ -87,108 +87,105 @@
                                                                         <label for="statusSelect">Status:</label>
                                                                         <select class="form-control" id="statusSelect"
                                                                             name="status">
-                                                                            <option
-                                                                                {{ old('status', $appointment->status) == 'pending' ? 'selected' : null }}
-                                                                                value="pending">Pending</option>
-                                                                            <option
-                                                                                {{ old('status', $appointment->status) == 'progress' ? 'selected' : null }}
-                                                                                value="progress">Progress</option>
-                                                                            <option
-                                                                                {{ old('status', $appointment->status) == 'complete' ? 'selected' : null }}
-                                                                                value="complete">Complete</option>
+                                                                            <option value="pending"
+                                                                                @selected(old('status', $appointment->status) == 'pending')>Pending</option>
+                                                                            <option value="progress"
+                                                                                @selected(old('status', $appointment->status) == 'progress')>Progress</option>
+                                                                            <option value="complete"
+                                                                                @selected(old('status', $appointment->status) == 'complete')>Complete</option>
                                                                         </select>
                                                                     </div>
                                                                 </div>
                                                                 <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-secondary"
-                                                                        data-bs-dismiss="modal">Cancel</button>
-                                                                    <button type="submit"
-                                                                        class="btn btn-primary">Update</button>
+                                                                    <button class="btn btn-secondary" data-bs-dismiss="modal"
+                                                                        type="button">Cancel</button>
+                                                                    <button class="btn btn-primary"
+                                                                        type="submit">Update</button>
                                                                 </div>
                                                             </form>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                @endrole
-                                                <a class="btn btn-info btn-sm text-white"
-                                                    href="{{ route('appointment.show', $appointment->id) }}">
-                                                    <i class='bx bxs-info-circle'></i>
-                                                    Show
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
+                                            @endrole
+                                            <a class="btn btn-info btn-sm text-white"
+                                                href="{{ route('appointment.show', $appointment->id) }}">
+                                                <i class='bx bxs-info-circle'></i>
+                                                Show
+                                            </a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
 
-                        </div>
                     </div>
-
                 </div>
+
             </div>
-        </section>
-    @endsection
+        </div>
+    </section>
+@endsection
 
-    @push('scripts')
-        <script src="{{ asset('admin/assets/vendor/datatables/pdfmake/pdfmake.min.js') }}"></script>
-        <script src="{{ asset('admin/assets/vendor/datatables/pdfmake/vfs_fonts.js') }}"></script>
-        <script src="{{ asset('admin/assets/vendor/datatables/datatables.min.js') }}"></script>
+@push('scripts')
+    <script src="{{ asset('admin/assets/vendor/datatables/pdfmake/pdfmake.min.js') }}"></script>
+    <script src="{{ asset('admin/assets/vendor/datatables/pdfmake/vfs_fonts.js') }}"></script>
+    <script src="{{ asset('admin/assets/vendor/datatables/datatables.min.js') }}"></script>
 
-        <script>
-            $(document).ready(function() {
-                $("#dataTable").DataTable({
-                    "dom": 'Bfrtip',
-                    "responsive": true,
-                    "autoWidth": false,
-                    "buttons": [{
-                            extend: "copy",
-                            exportOptions: {
-                                columns: ":not(:last-child)" // Mengabaikan kolom terakhir
-                            }
-                        },
-                        {
-                            extend: "excel",
-                            exportOptions: {
-                                columns: ":not(:last-child)" // Mengabaikan kolom terakhir
-                            }
-                        },
-                        {
-                            extend: "pdf",
-                            exportOptions: {
-                                columns: ":not(:last-child)" // Mengabaikan kolom terakhir
-                            },
-                            customize: function(doc) {
-                                // Mengatur properti alignment menjadi center untuk seluruh teks dalam tabel
-                                doc.content[1].table.body.forEach(function(row) {
-                                    row.forEach(function(cell) {
-                                        cell.alignment = 'center';
-                                    });
-                                });
-
-                                // Mengatur lebar kolom agar semua kolom terlihat dalam satu halaman PDF
-                                let colWidth = 100 / doc.content[1].table.body[0].length + '%';
-
-                                doc.content[1].table.widths = Array(doc.content[1].table.body[0].length)
-                                    .fill(colWidth);
-
-                                // Menambahkan margin ke sisi kiri dan kanan
-                                doc.pageMargins = [10, 10, 10, 10];
-                            },
-                        },
-                    ],
-                    "stateSave": true,
-                    "stateDuration": 60 * 5,
-                    "language": {
-                        "infoEmpty": "No entries to show",
-                        "search": "_INPUT_",
-                        "searchPlaceholder": "Search...",
+    <script>
+        $(document).ready(function() {
+            $("#dataTable").DataTable({
+                "dom": 'Bfrtip',
+                "responsive": true,
+                "autoWidth": false,
+                "buttons": [{
+                        extend: "copy",
+                        exportOptions: {
+                            columns: ":not(:last-child)" // Mengabaikan kolom terakhir
+                        }
                     },
-                    "columnDefs": [{
-                        "searchable": false,
-                        "orderable": false,
-                        "targets": -1,
-                    }]
-                })
+                    {
+                        extend: "excel",
+                        exportOptions: {
+                            columns: ":not(:last-child)" // Mengabaikan kolom terakhir
+                        }
+                    },
+                    {
+                        extend: "pdf",
+                        exportOptions: {
+                            columns: ":not(:last-child)" // Mengabaikan kolom terakhir
+                        },
+                        customize: function(doc) {
+                            // Mengatur properti alignment menjadi center untuk seluruh teks dalam tabel
+                            doc.content[1].table.body.forEach(function(row) {
+                                row.forEach(function(cell) {
+                                    cell.alignment = 'center';
+                                });
+                            });
+
+                            // Mengatur lebar kolom agar semua kolom terlihat dalam satu halaman PDF
+                            let colWidth = 100 / doc.content[1].table.body[0].length + '%';
+
+                            doc.content[1].table.widths = Array(doc.content[1].table.body[0].length)
+                                .fill(colWidth);
+
+                            // Menambahkan margin ke sisi kiri dan kanan
+                            doc.pageMargins = [10, 10, 10, 10];
+                        },
+                    },
+                ],
+                "stateSave": true,
+                "stateDuration": 60 * 5,
+                "language": {
+                    "infoEmpty": "No entries to show",
+                    "search": "_INPUT_",
+                    "searchPlaceholder": "Search...",
+                },
+                "columnDefs": [{
+                    "searchable": false,
+                    "orderable": false,
+                    "targets": -1,
+                }]
             })
-        </script>
-    @endpush
+        })
+    </script>
+@endpush

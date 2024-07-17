@@ -44,7 +44,7 @@
                                         <th scope="row">{{ $loop->iteration }}</th>
                                         <td class="text-capitalize">{{ $appointment->service->order_id }}</td>
                                         <td class="text-capitalize">{{ $appointment->service->user->name }}</td>
-                                        <td class="text-capitalize">{{ $appointment->service->user->email }}</td>
+                                        <td>{{ $appointment->service->user->email }}</td>
                                         <td class="text-capitalize">{{ $appointment->service->type }}</td>
                                         <td>{{ $appointment->schedule->format('d F Y H:i') }}</td>
                                         <td>{{ $appointment->service->created_at->format('d F Y') }}</td>
@@ -64,22 +64,22 @@
                                         </td>
                                         <td>
                                             @role('technician')
-                                                <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
-                                                    data-bs-target="#modalUpdate{{ $appointment->id }}">
+                                                <button class="btn btn-primary btn-sm" data-bs-toggle="modal"
+                                                    data-bs-target="#modalUpdate{{ $appointment->id }}" type="button">
                                                     <i class='bx bxs-pencil'></i>
                                                     Edit
                                                 </button>
-                                                <div class="modal fade" id="modalUpdate{{ $appointment->id }}" tabindex="-1"
-                                                    aria-labelledby="modalUpdateLabel" aria-hidden="true">
+                                                <div class="modal fade" id="modalUpdate{{ $appointment->id }}"
+                                                    aria-labelledby="modalUpdateLabel" aria-hidden="true" tabindex="-1">
                                                     <div class="modal-dialog modal-dialog-centered">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
                                                                 <h5 class="modal-title" id="modalUpdateLabel">Apakah Kamu Yakin?
                                                                 </h5>
                                                             </div>
-                                                            <form
+                                                            <form class="d-inline"
                                                                 action="{{ route('admin.appointment.update', $appointment->id) }}"
-                                                                method="POST" class="d-inline">
+                                                                method="POST">
                                                                 @csrf
                                                                 @method('patch')
                                                                 <div class="modal-body">
@@ -87,23 +87,20 @@
                                                                         <label for="statusSelect">Status:</label>
                                                                         <select class="form-control" id="statusSelect"
                                                                             name="status">
-                                                                            <option
-                                                                                {{ old('status', $appointment->status) == 'pending' ? 'selected' : null }}
-                                                                                value="pending">Pending</option>
-                                                                            <option
-                                                                                {{ old('status', $appointment->status) == 'progress' ? 'selected' : null }}
-                                                                                value="progress">Progress</option>
-                                                                            <option
-                                                                                {{ old('status', $appointment->status) == 'complete' ? 'selected' : null }}
-                                                                                value="complete">Complete</option>
+                                                                            <option value="pending"
+                                                                                @selected(old('status', $appointment->status) == 'pending')>Pending</option>
+                                                                            <option value="progress"
+                                                                                @selected(old('status', $appointment->status) == 'progress')>Progress</option>
+                                                                            <option value="complete"
+                                                                                @selected(old('status', $appointment->status) == 'complete')>Complete</option>
                                                                         </select>
                                                                     </div>
                                                                 </div>
                                                                 <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-secondary"
-                                                                        data-bs-dismiss="modal">Cancel</button>
-                                                                    <button type="submit"
-                                                                        class="btn btn-primary">Update</button>
+                                                                    <button class="btn btn-secondary" data-bs-dismiss="modal"
+                                                                        type="button">Cancel</button>
+                                                                    <button class="btn btn-primary"
+                                                                        type="submit">Update</button>
                                                                 </div>
                                                             </form>
                                                         </div>

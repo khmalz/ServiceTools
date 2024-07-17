@@ -44,7 +44,7 @@
                                         <th scope="row">{{ $loop->iteration }}</th>
                                         <td class="text-capitalize">{{ $service->order_id }}</td>
                                         <td class="text-capitalize">{{ $service->user->name }}</td>
-                                        <td class="text-capitalize">{{ $service->user->email }}</td>
+                                        <td>{{ $service->user->email }}</td>
                                         <td class="text-capitalize">{{ $service->type }}</td>
                                         <td class="text-capitalize">{{ $service->work }}</td>
                                         <td>{{ $service->created_at->format('d F Y') }}</td>
@@ -62,8 +62,8 @@
                                         @endphp
                                         <td><span class="badge bg-{{ $statusClass }}">{{ $service->status }}</span></td>
                                         <td>
-                                            <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
-                                                data-bs-target="#modalUpdate{{ $service->id }}">
+                                            <button class="btn btn-primary btn-sm" data-bs-toggle="modal"
+                                                data-bs-target="#modalUpdate{{ $service->id }}" type="button">
                                                 <i class='bx bxs-pencil'></i>
                                                 Edit
                                             </button>
@@ -73,16 +73,17 @@
                                                 Show
                                             </a>
                                         </td>
-                                        <div class="modal fade" id="modalUpdate{{ $service->id }}" tabindex="-1"
-                                            aria-labelledby="modalUpdateLabel" aria-hidden="true">
+                                        <div class="modal fade" id="modalUpdate{{ $service->id }}"
+                                            aria-labelledby="modalUpdateLabel" aria-hidden="true" tabindex="-1">
                                             <div class="modal-dialog modal-dialog-centered">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
                                                         <h5 class="modal-title" id="modalUpdateLabel">Apakah Kamu Yakin?
                                                         </h5>
                                                     </div>
-                                                    <form action="{{ route('admin.service.update', $service->id) }}"
-                                                        method="POST" class="d-inline">
+                                                    <form class="d-inline"
+                                                        action="{{ route('admin.service.update', $service->id) }}"
+                                                        method="POST">
                                                         @csrf
                                                         @method('patch')
                                                         <div class="modal-body">
@@ -90,22 +91,19 @@
                                                                 <label for="statusSelect">Status:</label>
                                                                 <select class="form-control" id="statusSelect"
                                                                     name="status">
-                                                                    <option
-                                                                        {{ old('status', $service->status) == 'pending' ? 'selected' : null }}
-                                                                        value="pending">Pending</option>
-                                                                    <option
-                                                                        {{ old('status', $service->status) == 'progress' ? 'selected' : null }}
-                                                                        value="progress">Progress</option>
-                                                                    <option
-                                                                        {{ old('status', $service->status) == 'complete' ? 'selected' : null }}
-                                                                        value="complete">Complete</option>
+                                                                    <option value="pending" @selected(old('status', $service->status) == 'pending')>
+                                                                        Pending</option>
+                                                                    <option value="progress" @selected(old('status', $service->status) == 'progress')>
+                                                                        Progress</option>
+                                                                    <option value="complete" @selected(old('status', $service->status) == 'complete')>
+                                                                        Complete</option>
                                                                 </select>
                                                             </div>
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary"
-                                                                data-bs-dismiss="modal">Cancel</button>
-                                                            <button type="submit" class="btn btn-primary">Update</button>
+                                                            <button class="btn btn-secondary" data-bs-dismiss="modal"
+                                                                type="button">Cancel</button>
+                                                            <button class="btn btn-primary" type="submit">Update</button>
                                                         </div>
                                                     </form>
                                                 </div>

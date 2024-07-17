@@ -67,14 +67,8 @@
                                 <label class="form-label" for="name">Jenis Kelamin</label>
                                 <select class="form-select" id="gender" name="gender">
                                     <option disabled selected>Pilih Jenis Kelamin</option>
-                                    <option value="L"
-                                        {{ old('gender', $user->client?->gender) == 'Laki-laki' ? 'selected' : null }}>
-                                        Laki-laki
-                                    </option>
-                                    <option value="P"
-                                        {{ old('gender', $user->client?->gender) == 'Perempuan' ? 'selected' : null }}>
-                                        Perempuan
-                                    </option>
+                                    <option value="L" @selected(old('gender', $user->client?->gender) == 'Laki-laki')>Laki-laki</option>
+                                    <option value="P" @selected(old('gender', $user->client?->gender) == 'Perempuan')>Perempuan</option>
                                 </select>
                                 @error('gender')
                                     <div class="invalid-feedback">

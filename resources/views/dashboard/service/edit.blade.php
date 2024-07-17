@@ -85,37 +85,20 @@
                                     name="type" data-old-type="{{ old('type', $service->type) }}"
                                     onchange="selectTypeChange(this)">
                                     <option selected disabled>Pilih Jenis Elektronik</option>
-                                    <option value="tv" {{ old('type', $service->type) == 'tv' ? 'selected' : '' }}>TV
-                                    </option>
-                                    <option value="kulkas" {{ old('type', $service->type) == 'kulkas' ? 'selected' : '' }}>
-                                        Kulkas</option>
-                                    <option value="ac" {{ old('type', $service->type) == 'ac' ? 'selected' : '' }}>AC
-                                    </option>
-                                    <option value="kamera" {{ old('type', $service->type) == 'kamera' ? 'selected' : '' }}>
-                                        Kamera</option>
-                                    <option value="speaker"
-                                        {{ old('type', $service->type) == 'speaker' ? 'selected' : '' }}>Speaker</option>
-                                    <option value="oven" {{ old('type', $service->type) == 'oven' ? 'selected' : '' }}>
-                                        Oven</option>
-                                    <option value="mesin cuci"
-                                        {{ old('type', $service->type) == 'mesin cuci' ? 'selected' : '' }}>Mesin cuci
-                                    </option>
-                                    <option value="drone" {{ old('type', $service->type) == 'drone' ? 'selected' : '' }}>
-                                        Drone</option>
-                                    <option value="radio" {{ old('type', $service->type) == 'radio' ? 'selected' : '' }}>
-                                        Radio</option>
-                                    <option value="hp/tablet"
-                                        {{ old('type', $service->type) == 'hp/tablet' ? 'selected' : '' }}>Hp/Tablet
-                                    </option>
-                                    <option value="laptop" {{ old('type', $service->type) == 'laptop' ? 'selected' : '' }}>
-                                        Laptop</option>
-                                    <option value="komputer"
-                                        {{ old('type', $service->type) == 'komputer' ? 'selected' : '' }}>Komputer</option>
-                                    <option value="playstation"
-                                        {{ old('type', $service->type) == 'playstation' ? 'selected' : '' }}>Playstation
-                                    </option>
-                                    <option value="lainnya"
-                                        {{ old('type', $service->type) == 'lainnya' ? 'selected' : '' }}>Lainnya</option>
+                                    <option value="tv" @selected(old('type', $service->type) == 'tv')>TV</option>
+                                    <option value="kulkas" @selected(old('type', $service->type) == 'kulkas')>Kulkas</option>
+                                    <option value="ac" @selected(old('type', $service->type) == 'ac')>AC</option>
+                                    <option value="kamera" @selected(old('type', $service->type) == 'kamera')>Kamera</option>
+                                    <option value="speaker" @selected(old('type', $service->type) == 'speaker')>Speaker</option>
+                                    <option value="oven" @selected(old('type', $service->type) == 'oven')>Oven</option>
+                                    <option value="mesin cuci" @selected(old('type', $service->type) == 'mesin cuci')>Mesin cuci</option>
+                                    <option value="drone" @selected(old('type', $service->type) == 'drone')>Drone</option>
+                                    <option value="radio" @selected(old('type', $service->type) == 'radio')>Radio</option>
+                                    <option value="hp/tablet" @selected(old('type', $service->type) == 'hp/tablet')>Hp/Tablet</option>
+                                    <option value="laptop" @selected(old('type', $service->type) == 'laptop')>Laptop</option>
+                                    <option value="komputer" @selected(old('type', $service->type) == 'komputer')>Komputer</option>
+                                    <option value="playstation" @selected(old('type', $service->type) == 'playstation')>Playstation</option>
+                                    <option value="lainnya" @selected(old('type', $service->type) == 'lainnya')>Lainnya</option>
                                 </select>
                                 @error('type')
                                     <div class="invalid-feedback">
@@ -129,11 +112,8 @@
                                     name="work" data-old-work="{{ old('work', $service->work) }}"
                                     onchange="selectWorkChange(this)">
                                     <option selected disabled>Pilih Tempat Perbaikan</option>
-                                    <option value="home" {{ old('work', $service->work) == 'home' ? 'selected' : null }}>
-                                        Rumah</option>
-                                    <option value="office"
-                                        {{ old('work', $service->work) == 'office' ? 'selected' : null }}>Kantor
-                                    </option>
+                                    <option value="home" @selected(old('work', $service->work) == 'home')>Rumah</option>
+                                    <option value="office" @selected(old('work', $service->work) == 'office')>Kantor
                                 </select>
                                 @error('work')
                                     <div class="invalid-feedback">

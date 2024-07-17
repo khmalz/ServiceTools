@@ -81,42 +81,33 @@
                                 <select class="form-select @error('type') is-invalid @enderror" id="selectType"
                                     name="type" data-old-type="{{ old('type') }}" onchange="selectTypeChange(this)">
                                     <option selected disabled>Pilih Jenis Elektronik</option>
-                                    <option value="tv" {{ old('type') == 'tv' ? 'selected' : null }}>TV</option>
-                                    <option value="kulkas" {{ old('type') == 'kulkas' ? 'selected' : null }}>Kulkas</option>
-                                    <option value="ac" {{ old('type') == 'ac' ? 'selected' : null }}>AC</option>
-                                    <option value="kamera" {{ old('type') == 'kamera' ? 'selected' : null }}>Kamera
-                                    </option>
-                                    <option value="speaker" {{ old('type') == 'speaker' ? 'selected' : null }}>Speaker
-                                    </option>
-                                    <option value="oven" {{ old('type') == 'oven' ? 'selected' : null }}>Oven</option>
-                                    <option value="mesin cuci" {{ old('type') == 'mesin cuci' ? 'selected' : null }}>Mesin
-                                        cuci</option>
-                                    <option value="drone" {{ old('type') == 'drone' ? 'selected' : null }}>Drone</option>
-                                    <option value="radio" {{ old('type') == 'radio' ? 'selected' : null }}>Radio</option>
-                                    <option value="hp/tablet" {{ old('type') == 'hp/tablet' ? 'selected' : null }}>
-                                        Hp/Tablet</option>
-                                    <option value="laptop" {{ old('type') == 'laptop' ? 'selected' : null }}>Laptop
-                                    </option>
-                                    <option value="komputer" {{ old('type') == 'komputer' ? 'selected' : null }}>Komputer
-                                    </option>
-                                    <option value="playstation" {{ old('type') == 'playstation' ? 'selected' : null }}>
-                                        Playstation</option>
-                                    <option value="lainnya" {{ old('type') == 'lainnya' ? 'selected' : null }}>Lainnya
-                                    </option>
-                                </select>
-                                @error('type')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
+                                    <option value="tv" @selected(old('type') == 'tv')>TV</option>
+                                    <option value="kulkas" @selected(old('type') == 'kulkas')>Kulkas</option>
+                                    <option value="ac" @selected(old('type') == 'ac')>AC</option>
+                                    <option value="kamera" @selected(old('type') == 'kamera')>Kamera</option>
+                                    <option value="speaker" @selected(old('type') == 'speaker')>Speaker</option>
+                                    <option value="oven" @selected(old('type') == 'oven')>Oven</option>
+                                    <option value="mesin cuci" @selected(old('type') == 'mesin cuci')>Mesin cuci</option>
+                                    <option value="drone" @selected(old('type') == 'drone')>Drone</option>
+                                    <option value="radio" @selected(old('type') == 'radio')>Radio</option>
+                                    <option value="hp/tablet" @selected(old('type') == 'hp/tablet')>Hp/Tablet</option>
+                                    <option value="laptop" @selected(old('type') == 'laptop')>Laptop</option>
+                                    <option value="komputer" @selected(old('type') == 'komputer')>Komputer</option>
+                                    <option value="playstation" @selected(old('type') == 'playstation')>Playstation</option>
+                                    <option value="lainnya" @selected(old('type') == 'lainnya')>Lainnya</option>
+                                    @error('type')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
                             </div>
                             <div id="typeOtherContainer"></div>
                             <div class="form-group mt-3">
                                 <select class="form-select @error('work') is-invalid @enderror" id="selectWork"
                                     name="work" data-old-work="{{ old('work') }}" onchange="selectWorkChange(this)">
                                     <option selected disabled>Pilih Tempat Perbaikan</option>
-                                    <option value="home" {{ old('work') == 'home' ? 'selected' : null }}>Rumah</option>
-                                    <option value="office" {{ old('work') == 'office' ? 'selected' : null }}>Kantor
+                                    <option value="home" @selected(old('work') == 'home')>Rumah</option>
+                                    <option value="office" @selected(old('work') == 'office')>Kantor
                                     </option>
                                 </select>
                                 @error('work')

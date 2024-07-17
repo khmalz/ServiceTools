@@ -44,7 +44,7 @@
                                         <th scope="row">{{ $loop->iteration }}</th>
                                         <td class="text-capitalize">{{ $service->order_id }}</td>
                                         <td class="text-capitalize">{{ $service->user->name }}</td>
-                                        <td class="text-capitalize">{{ $service->user->email }}</td>
+                                        <td>{{ $service->user->email }}</td>
                                         <td class="text-capitalize">{{ $service->type }}</td>
                                         <td class="text-capitalize">{{ $service->work }}</td>
                                         <td>{{ $service->created_at->format('d F Y') }}</td>
