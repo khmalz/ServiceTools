@@ -15,11 +15,11 @@ class CalenderController extends Controller
     {
         $events = [];
 
-        $appointments = Appointment::with('service.user.client')->when($request->user()->hasRole('technician'), function ($query) use ($request) {
-            $query->whereHas('technicians', function ($query) use ($request) {
-                $query->where('technician_id', $request->user()->technician->id);
-            });
-        })->get();
+        $appointments = Appointment::with('service.user.client')
+            ->when($request->user()->hasRole('technician'), function ($query) use ($request) {
+                $query->forTechnicianUser($request->user()->id);
+            })
+            ->get();
 
         foreach ($appointments as $appointment) {
             $events[] = [

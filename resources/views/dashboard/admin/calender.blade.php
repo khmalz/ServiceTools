@@ -25,14 +25,14 @@
                         <div id="calendar"></div>
                     </div>
                 </div>
-                <div class="modal fade" id="eventModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                    aria-hidden="true">
+                <div class="modal fade" id="eventModal" role="dialog" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true" tabindex="-1">
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="exampleModalLabel">Event's List</h5>
                             </div>
-                            <div class="modal-body">
+                            <div class="modal-body modal-body-event">
 
                             </div>
                         </div>
@@ -70,7 +70,7 @@
                     });
 
                     if (eventsOnClickedDate.length > 0) {
-                        $('.modal-body').empty();
+                        $('.modal-body-event').empty();
 
                         // Menambahkan kartu (card) untuk setiap acara
                         eventsOnClickedDate.forEach(function(event) {
@@ -91,7 +91,7 @@
                                     </div>
                                 </div>
                                 `;
-                            $('.modal-body').append(cardHtml);
+                            $('.modal-body-event').append(cardHtml);
                         });
 
                         // Buka modal
