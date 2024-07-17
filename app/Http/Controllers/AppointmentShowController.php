@@ -14,16 +14,17 @@ class AppointmentShowController extends Controller
      */
     public function __invoke(Request $request, Appointment $appointment)
     {
-        Gate::denyIf(fn (User $user) => $user->hasRole('client') && $user->id != $appointment->service->user_id);
+        Gate::denyIf(fn (User $user) => $user->hasRole('client') && $user->id != $appointment->user->id);
 
-        $appointment->load('service.user.client', 'service.images', 'technicians.user');
+        $appointment->load('service.user.client', 'service.images', 'technicians.user:id,name');
 
         /**
          * Pengajuan reschedule null, boleh
          * Pengajuan reschedule lebih dari 24 jam, boleh
          * Pengajuan reschedule kurang dari 24 jam, tidak boleh
+         * Jika status appointment pending, tidak boleh
          */
-        $isReschedulePassed = is_null($appointment->propose_reschedule) || $appointment->propose_reschedule->diffInHours(now()) >= 24;
+        $isReschedulePassed = $appointment->status == 'pending' && (is_null($appointment->propose_reschedule) || $appointment->propose_reschedule->diffInHours(now()) >= 24);
 
         return view('dashboard.appointment.show', compact('appointment', 'isReschedulePassed'));
     }
